@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Каталог — Б/У Колясочка</title>
+  <meta name="description" content="Каталог б/у премиальных детских колясок. Bugaboo, Stokke, UPPAbaby, Cybex и другие бренды в наличии.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Page Loader -->
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-logo">Б/У Колясочка</div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Б/У<br>Колясочка</a>
+      <nav class="nav">
+        <a href="catalog.html" class="nav-link nav-link--active">Каталог</a>
+        <a href="index.html#about" class="nav-link">О магазине</a>
+        <a href="index.html#reviews" class="nav-link">Отзывы</a>
+        <a href="index.html#contact" class="nav-link">Контакты</a>
+      </nav>
+      <div class="header-actions">
+        <a href="https://wa.me/79000000000" class="btn btn-ghost btn-sm" target="_blank" rel="noopener">WhatsApp</a>
+        <button class="cart-toggle" id="cartToggle" aria-label="Корзина">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          <span class="cart-count" id="cartCount" style="display:none">0</span>
+        </button>
+        <button class="burger" id="burgerBtn" aria-label="Меню">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Закрыть">✕</button>
+    <nav class="mobile-nav">
+      <a href="catalog.html" class="mobile-nav-link">Каталог</a>
+      <a href="index.html#about" class="mobile-nav-link">О магазине</a>
+      <a href="index.html#reviews" class="mobile-nav-link">Отзывы</a>
+      <a href="index.html#contact" class="mobile-nav-link">Контакты</a>
+      <a href="https://wa.me/79000000000" class="mobile-nav-link" target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
+  </div>
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+  <!-- Catalog Page -->
+  <main class="catalog-page">
+    <div class="container">
+
+      <!-- Catalog Header -->
+      <div class="catalog-header">
+        <h1 class="catalog-title">Каталог колясок</h1>
+        <p class="catalog-subtitle" id="catalogSubtitle">Загрузка...</p>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="filter-bar" id="filterBar">
+        <div class="filter-group">
+          <span class="filter-label">Тип:</span>
+          <button class="filter-btn active" data-filter="type" data-value="">Все</button>
+          <button class="filter-btn" data-filter="type" data-value="transformer">Трансформеры</button>
+          <button class="filter-btn" data-filter="type" data-value="stroller">Прогулочные</button>
+          <button class="filter-btn" data-filter="type" data-value="twin">Для двойни</button>
+          <button class="filter-btn" data-filter="type" data-value="sport">Спортивные</button>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Состояние:</span>
+          <button class="filter-btn active" data-filter="condition" data-value="">Все</button>
+          <button class="filter-btn" data-filter="condition" data-value="likenew">Как новая</button>
+          <button class="filter-btn" data-filter="condition" data-value="excellent">Отличное</button>
+          <button class="filter-btn" data-filter="condition" data-value="good">Хорошее</button>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Сортировка:</span>
+          <button class="filter-btn active" data-sort="default">По умолчанию</button>
+          <button class="filter-btn" data-sort="price-asc">Цена ↑</button>
+          <button class="filter-btn" data-sort="price-desc">Цена ↓</button>
+        </div>
+        <button class="filter-reset" id="filterReset">Сбросить</button>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid" id="catalogGrid">
+        <!-- Filled by JS -->
+      </div>
+
+      <!-- Load More -->
+      <div class="load-more-wrapper" id="loadMoreWrapper" style="display:none">
+        <button class="btn btn-ghost btn-lg" id="loadMoreBtn">Показать ещё</button>
+      </div>
+
+      <!-- Empty State -->
+      <div class="catalog-empty" id="catalogEmpty" style="display:none">
+        <p>По вашему запросу ничего не найдено</p>
+        <button class="btn btn-ghost btn-sm" id="emptyReset">Сбросить фильтры</button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">Б/У Колясочка</div>
+          <p class="footer-tagline">Премиальные коляски<br>с историей</p>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-col-title">Каталог</h4>
+          <a href="catalog.html?type=transformer" class="footer-link">Трансформеры</a>
+          <a href="catalog.html?type=stroller" class="footer-link">Прогулочные</a>
+          <a href="catalog.html?type=twin" class="footer-link">Для двойни</a>
+          <a href="catalog.html?type=sport" class="footer-link">Спортивные</a>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-col-title">Информация</h4>
+          <a href="index.html#about" class="footer-link">О магазине</a>
+          <a href="index.html#reviews" class="footer-link">Отзывы</a>
+          <a href="index.html#contact" class="footer-link">Контакты</a>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-col-title">Связаться</h4>
+          <a href="https://wa.me/79000000000" class="footer-link" target="_blank" rel="noopener">WhatsApp</a>
+          <p class="footer-text">Ответим в течение часа</p>
+          <p class="footer-text">Пн–Вс 9:00–21:00</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2024 Б/У Колясочка. Все права защищены.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Drawer -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h3 class="cart-drawer-title">Корзина</h3>
+      <button class="cart-drawer-close" id="cartClose" aria-label="Закрыть">✕</button>
+    </div>
+    <div class="cart-drawer-body" id="cartBody">
+      <div class="cart-empty" id="cartEmpty">
+        <p>Корзина пуста</p>
+        <a href="catalog.html" class="btn btn-primary btn-sm">Перейти в каталог</a>
+      </div>
+      <div class="cart-items" id="cartItems"></div>
+    </div>
+    <div class="cart-drawer-footer" id="cartFooter" style="display:none">
+      <div class="cart-total">
+        <span>Итого:</span>
+        <span class="cart-total-price" id="cartTotal">0 ₽</span>
+      </div>
+      <button class="btn btn-primary btn-lg" id="checkoutBtn" style="width:100%">Оформить через WhatsApp</button>
+    </div>
+  </aside>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

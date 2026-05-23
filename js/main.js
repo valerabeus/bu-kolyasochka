@@ -2,6 +2,11 @@ const WHATSAPP_NUMBER = '79000000000';
 const PAGE_SIZE = 12;
 const FEATURED_IDS = [49, 2, 3];
 
+function pageUrl(path) {
+  const base = window.SITE_BASE || '/';
+  return base + path.replace(/^\//, '');
+}
+
 function formatPrice(n) {
   return n.toLocaleString('ru-RU') + ' ₽';
 }
@@ -29,7 +34,7 @@ function buildProductCard(product) {
 
   return `
     <article class="product-card" data-id="${product.id}">
-      <a href="product.html?id=${product.id}" class="product-card-link">
+      <a href="${pageUrl('product.html?id=' + product.id)}" class="product-card-link">
         <div class="product-card-img-wrap">
           <img src="${product.img}" alt="${product.name}" class="product-card-img" loading="lazy">
           ${discount ? `<span class="product-card-badge">−${discount}%</span>` : ''}
@@ -49,25 +54,6 @@ function buildProductCard(product) {
       </a>
     </article>
   `
-}
-
-function initLoader() {
-  const loader = document.getElementById('pageLoader');
-  if (!loader) return;
-
-  const hide = () => {
-    if (!loader.isConnected) return;
-    loader.classList.add('hidden');
-    setTimeout(() => loader.remove(), 400);
-  };
-
-  // Не ждём все внешние картинки — иначе экран может висеть бесконечно
-  if (document.readyState === 'complete') {
-    hide();
-  } else {
-    document.addEventListener('DOMContentLoaded', hide, { once: true });
-    setTimeout(hide, 1500);
-  }
 }
 
 function initHeader() {
@@ -113,10 +99,10 @@ function initBottomNav() {
 
   nav.innerHTML = `
     <div class="bottom-nav-inner">
-      <a href="index.html" class="bottom-nav-item${page === 'home' ? ' active' : ''}">
+      <a href="${pageUrl('index.html')}" class="bottom-nav-item${page === 'home' ? ' active' : ''}">
         <span>🏠</span><span>Главная</span>
       </a>
-      <a href="catalog.html" class="bottom-nav-item${page === 'catalog' ? ' active' : ''}">
+      <a href="${pageUrl('catalog.html')}" class="bottom-nav-item${page === 'catalog' ? ' active' : ''}">
         <span>📋</span><span>Каталог</span>
       </a>
       <a href="${waUrl}" class="bottom-nav-item" target="_blank" rel="noopener">
@@ -308,7 +294,7 @@ function initProductPage() {
   const product = PRODUCTS.find(p => p.id === id);
 
   if (!product) {
-    layout.innerHTML = '<p style="padding:4rem 0;text-align:center;color:var(--gray)">Коляска не найдена. <a href="catalog.html" style="color:var(--gold)">Вернуться в каталог</a></p>';
+    layout.innerHTML = '<p style="padding:4rem 0;text-align:center;color:var(--gray)">Коляска не найдена. <a href="' + pageUrl('catalog.html') + '" style="color:var(--gold)">Вернуться в каталог</a></p>';
     return;
   }
 
@@ -408,13 +394,20 @@ function bindAddToCart(container) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  initLoader();
-  initHeader();
-  initMobileMenu();
-  initBottomNav();
-  initIndexPage();
-  initCatalogPage();
-  initProductPage();
+  try {
+    initHeader();
+    initMobileMenu();
+    initBottomNav();
+    initIndexPage();
+    initCatalogPage();
+    initProductPage();
+  } catch (err) {
+    console.error('Ошибка инициализации сайта:', err);
+    const grid = document.getElementById('catalogGrid') || document.getElementById('featuredGrid');
+    if (grid && !grid.children.length) {
+      grid.innerHTML = '<p style="padding:2rem;color:var(--gray);grid-column:1/-1">Не удалось загрузить каталог. Обновите страницу (Ctrl+F5).</p>';
+    }
+  }
 });
 
 window.updateBottomCartCount = updateBottomCartCount;

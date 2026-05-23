@@ -1,3 +1,14 @@
+function placeholderImage(label) {
+  const safe = String(label).replace(/[<>&"']/g, '').slice(0, 36);
+  const svg =
+    '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600">' +
+    '<rect fill="#111111" width="600" height="600"/>' +
+    '<text x="300" y="300" fill="#C9A96E" font-family="system-ui,sans-serif" font-size="16" text-anchor="middle" dominant-baseline="middle">' +
+    safe +
+    '</text></svg>';
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+}
+
 const PRODUCTS = [
   { id: 1, name: "Bugaboo Cameleon 3+", brand: "Bugaboo", type: "transformer", condition: "good", price: 45000, newPrice: 110000, color: "Чёрный", year: 2021, img: "https://placehold.co/600x600/111111/C9A96E?text=Bugaboo+Cameleon+3%2B", desc: "Полная комплектация: люлька, прогулочный блок, дождевик, москитная сетка. Рама в отличном состоянии, чехол чистый без пятен." },
   { id: 2, name: "Stokke Xplory V6", brand: "Stokke", type: "stroller", condition: "excellent", price: 38000, newPrice: 95000, color: "Серый", year: 2022, img: "https://placehold.co/600x600/111111/C9A96E?text=Stokke+Xplory+V6", desc: "Состояние как новая. Использовалась 6 месяцев. Все механизмы работают идеально." },
@@ -50,6 +61,10 @@ const PRODUCTS = [
   { id: 49, name: "Bugaboo Fox 3", brand: "Bugaboo", type: "transformer", condition: "likenew", price: 72000, newPrice: 180000, color: "Чёрный", year: 2023, img: "https://placehold.co/600x600/111111/C9A96E?text=Bugaboo+Fox+3", desc: "Топовая модель Bugaboo 2023. Как новая." },
   { id: 50, name: "Silver Cross Dune", brand: "Silver Cross", type: "transformer", condition: "excellent", price: 56000, newPrice: 136000, color: "Серый", year: 2022, img: "https://placehold.co/600x600/111111/C9A96E?text=Silver+Cross+Dune", desc: "Роскошная британская коляска." }
 ];
+
+PRODUCTS.forEach(p => {
+  p.img = placeholderImage(p.name);
+});
 
 const CONDITIONS = { likenew: "Как новая", excellent: "Отличное", good: "Хорошее" };
 const TYPES = { stroller: "Прогулочная", transformer: "Трансформер", twin: "Для двойни", sport: "Спортивная" };

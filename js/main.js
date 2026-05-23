@@ -184,7 +184,7 @@ function initBottomNav() {
         ${navIcon('guide')}<span>Как выбрать</span>
       </a>
       <button type="button" class="bottom-nav-item" id="bottomAssistantBtn">
-        ${navIcon('bot')}<span>AI подбор</span>
+        ${navIcon('bot')}<span>Подбор</span>
       </button>
       <button type="button" class="bottom-nav-item" id="bottomCartBtn" style="position:relative">
         ${navIcon('cart')}<span>Корзина</span>

@@ -43,6 +43,8 @@ function navIcon(name) {
   const icons = {
     home: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 11.2 12 4.5l7.5 6.7v7.3a1.5 1.5 0 0 1-1.5 1.5h-3.5v-5.3h-5V20H6a1.5 1.5 0 0 1-1.5-1.5v-7.3Z"/></svg>',
     catalog: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5.5h14M5 12h14M5 18.5h14"/><path d="M4.5 4h15v16h-15z"/></svg>',
+    guide: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.8h8.2A3.8 3.8 0 0 1 18 8.6v10.6H7.8A2.8 2.8 0 0 1 5 16.4V5.8a1 1 0 0 1 1-1Z"/><path d="M9 9h5M9 13h6"/></svg>',
+    bot: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8.5h8a3 3 0 0 1 3 3v3.8a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3v-3.8a3 3 0 0 1 3-3Z"/><path d="M12 8.5V5M9.3 13h.1M14.6 13h.1M9.5 16h5"/></svg>',
     chat: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 18.4V7.5A2.5 2.5 0 0 1 7.5 5h9A2.5 2.5 0 0 1 19 7.5v5.7a2.5 2.5 0 0 1-2.5 2.5H9.2L5 18.4Z"/></svg>',
     cart: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 8h11.2l-.8 10H7.2L6.4 8Z"/><path d="M8 8a4 4 0 0 1 8 0"/></svg>'
   };
@@ -108,6 +110,7 @@ function buildProductCard(product, animIndex) {
           <span class="product-card-condition">${getConditionBadge(product.condition)}</span>
           <div class="product-card-overlay">
             <button class="btn btn-primary btn-sm add-to-cart-btn" data-id="${product.id}">В корзину</button>
+            <button class="btn btn-ghost btn-sm compare-toggle-btn" data-compare-id="${product.id}">Сравнить</button>
           </div>
         </div>
         <div class="product-card-info">
@@ -177,9 +180,12 @@ function initBottomNav() {
       <a href="${pageUrl('catalog.html')}" class="bottom-nav-item${page === 'catalog' ? ' active' : ''}">
         ${navIcon('catalog')}<span>Каталог</span>
       </a>
-      <a href="${waUrl}" class="bottom-nav-item" target="_blank" rel="noopener">
-        ${navIcon('chat')}<span>WhatsApp</span>
+      <a href="${pageUrl('kak-vybrat.html')}" class="bottom-nav-item${page === 'guide' ? ' active' : ''}">
+        ${navIcon('guide')}<span>Как выбрать</span>
       </a>
+      <button type="button" class="bottom-nav-item" id="bottomAssistantBtn">
+        ${navIcon('bot')}<span>AI подбор</span>
+      </button>
       <button type="button" class="bottom-nav-item" id="bottomCartBtn" style="position:relative">
         ${navIcon('cart')}<span>Корзина</span>
         <span class="nav-cart-count" id="bottomCartCount"></span>
@@ -188,6 +194,10 @@ function initBottomNav() {
   `;
 
   document.getElementById('bottomCartBtn')?.addEventListener('click', () => Cart.open());
+  document.getElementById('bottomAssistantBtn')?.addEventListener('click', () => {
+    if (window.CatalogAssistant) window.CatalogAssistant.open();
+    else window.open(waUrl, '_blank', 'noopener');
+  });
   document.getElementById('mobileCartToggle')?.addEventListener('click', () => Cart.open());
 }
 
@@ -221,6 +231,7 @@ function initIndexPage() {
   const grid = document.getElementById('featuredGrid');
   grid.innerHTML = featured.map((p, i) => buildProductCard(p, i)).join('');
   bindAddToCart(grid);
+  bindCompareButtons(grid);
 }
 
 let catalogState = { type: '', condition: '', sort: 'newest', page: 1 };
@@ -443,6 +454,7 @@ function renderCatalog(append = false) {
   }
 
   bindAddToCart(grid);
+  bindCompareButtons(grid);
   initMobileFilters();
   initSortPills();
   syncFilterChips();
@@ -525,6 +537,7 @@ function initProductPage() {
       <p class="product-desc">${product.desc}</p>
       <div class="product-actions">
         <button class="btn btn-primary btn-lg add-to-cart-btn" data-id="${product.id}">В корзину</button>
+        <button class="btn btn-ghost btn-lg compare-toggle-btn" data-compare-id="${product.id}">Сравнить</button>
         <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${waText}" class="btn btn-whatsapp btn-lg" target="_blank" rel="noopener">Купить в WhatsApp</a>
       </div>
       <div class="product-guarantees">
@@ -545,6 +558,7 @@ function initProductPage() {
   });
 
   bindAddToCart(layout);
+  bindCompareButtons(layout);
 
   const related = sortProducts(
     PRODUCTS.filter(p => p.type === product.type && p.id !== product.id),
@@ -557,6 +571,7 @@ function initProductPage() {
       relatedGrid.innerHTML = related.map((p, i) => buildProductCard(p, i)).join('');
       relatedSection.style.display = 'block';
       bindAddToCart(relatedGrid);
+      bindCompareButtons(relatedGrid);
     }
   }
 }
@@ -569,6 +584,11 @@ function bindAddToCart(container) {
       Cart.add(Number(btn.dataset.id));
     });
   });
+}
+
+function bindCompareButtons(container) {
+  if (!window.Compare || !container) return;
+  window.Compare.bind(container);
 }
 
 document.addEventListener('DOMContentLoaded', () => {

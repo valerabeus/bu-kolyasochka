@@ -1,5 +1,11 @@
 window.WHATSAPP_NUMBER = window.WHATSAPP_NUMBER || '79000000000';
 const WHATSAPP_NUMBER = window.WHATSAPP_NUMBER;
+const SOCIAL_LINKS = {
+  wa: 'https://wa.me/' + WHATSAPP_NUMBER,
+  tg: 'https://t.me/bukolyasochka',
+  ig: 'https://instagram.com/bukolyasochka',
+  vk: 'https://vk.com/bukolyasochka'
+};
 const PAGE_SIZE = 24;
 const FEATURED_IDS = [49, 2, 3];
 
@@ -38,6 +44,22 @@ function formatPrice(n) {
 function getConditionLabel(c) { return CONDITIONS[c] || c; }
 function getConditionBadge(c) { return getConditionLabel(c).toUpperCase(); }
 function getTypeLabel(t) { return TYPES[t] || t; }
+
+function normalizeText(value) {
+  return String(value || '').toLowerCase().replace(/ё/g, 'е').trim();
+}
+
+function socialLinksHtml(waText = '') {
+  const waHref = SOCIAL_LINKS.wa + (waText ? '?text=' + waText : '');
+  return `
+    <div class="social-links social-links--product" aria-label="Мессенджеры и соцсети">
+      <a href="${waHref}" class="social-icon social-icon--wa" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a>
+      <a href="${SOCIAL_LINKS.tg}" class="social-icon social-icon--tg" target="_blank" rel="noopener" aria-label="Telegram">TG</a>
+      <a href="${SOCIAL_LINKS.ig}" class="social-icon social-icon--ig" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+      <a href="${SOCIAL_LINKS.vk}" class="social-icon social-icon--vk" target="_blank" rel="noopener" aria-label="VK">VK</a>
+    </div>
+  `;
+}
 
 function navIcon(name) {
   const icons = {
@@ -167,7 +189,7 @@ function initBottomNav() {
   if (!nav) return;
 
   const page = document.body.dataset.page || '';
-  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}`;
+  const tgUrl = SOCIAL_LINKS.tg;
 
   nav.innerHTML = `
     <div class="bottom-nav-inner">
@@ -177,8 +199,8 @@ function initBottomNav() {
       <a href="${pageUrl('catalog.html')}" class="bottom-nav-item${page === 'catalog' ? ' active' : ''}">
         ${navIcon('catalog')}<span>Каталог</span>
       </a>
-      <a href="${waUrl}" class="bottom-nav-item" target="_blank" rel="noopener">
-        ${navIcon('chat')}<span>WhatsApp</span>
+      <a href="${tgUrl}" class="bottom-nav-item" target="_blank" rel="noopener">
+        ${navIcon('chat')}<span>Telegram</span>
       </a>
       <button type="button" class="bottom-nav-item" id="bottomCartBtn" style="position:relative">
         ${navIcon('cart')}<span>Корзина</span>
@@ -223,13 +245,14 @@ function initIndexPage() {
   bindAddToCart(grid);
 }
 
-let catalogState = { type: '', condition: '', sort: 'newest', page: 1 };
+let catalogState = { type: '', condition: '', sort: 'newest', query: '', page: 1 };
 
 function syncCatalogUrl() {
   const params = new URLSearchParams();
   if (catalogState.type) params.set('type', catalogState.type);
   if (catalogState.condition) params.set('condition', catalogState.condition);
   if (catalogState.sort && catalogState.sort !== 'newest') params.set('sort', catalogState.sort);
+  if (catalogState.query) params.set('q', catalogState.query);
   const qs = params.toString();
   const url = window.location.pathname + (qs ? '?' + qs : '');
   history.replaceState(null, '', url);
@@ -244,6 +267,21 @@ function syncFilterButtons() {
   document.querySelectorAll('[data-sort]').forEach(btn => {
     btn.classList.toggle('active', catalogState.sort === btn.dataset.sort);
   });
+  document.querySelectorAll('[data-preset]').forEach(btn => {
+    const type = btn.dataset.presetType || '';
+    const condition = btn.dataset.presetCondition || '';
+    const sort = btn.dataset.presetSort || 'newest';
+    const query = btn.dataset.presetQuery || '';
+    btn.classList.toggle(
+      'active',
+      catalogState.type === type &&
+      catalogState.condition === condition &&
+      catalogState.sort === sort &&
+      catalogState.query === query
+    );
+  });
+  const search = document.getElementById('catalogSearch');
+  if (search && search.value !== catalogState.query) search.value = catalogState.query;
 }
 
 function applyFilter(filter, value) {
@@ -260,6 +298,31 @@ function applySort(sortKey) {
   catalogState.page = 1;
   syncFilterButtons();
   syncCatalogUrl();
+  renderCatalog();
+}
+
+function applySearch(value) {
+  catalogState.query = value.trim();
+  catalogState.page = 1;
+  syncFilterButtons();
+  syncFilterChips();
+  syncCatalogUrl();
+  renderCatalog();
+}
+
+function applyPreset(btn) {
+  catalogState = {
+    type: btn.dataset.presetType || '',
+    condition: btn.dataset.presetCondition || '',
+    sort: btn.dataset.presetSort || 'newest',
+    query: btn.dataset.presetQuery || '',
+    page: 1
+  };
+  syncFilterButtons();
+  syncFilterChips();
+  syncCatalogUrl();
+  initMobileFilters();
+  initSortPills();
   renderCatalog();
 }
 
@@ -280,6 +343,12 @@ function syncFilterChips() {
       label: CONDITIONS[catalogState.condition] || catalogState.condition
     });
   }
+  if (catalogState.query) {
+    chips.push({
+      key: 'query',
+      label: 'Поиск: ' + catalogState.query
+    });
+  }
 
   if (chips.length === 0) {
     container.innerHTML = '';
@@ -297,13 +366,16 @@ function syncFilterChips() {
   `;
 
   container.querySelectorAll('[data-clear-filter]').forEach(btn => {
-    btn.addEventListener('click', () => applyFilter(btn.dataset.clearFilter, ''));
+    btn.addEventListener('click', () => {
+      if (btn.dataset.clearFilter === 'query') applySearch('');
+      else applyFilter(btn.dataset.clearFilter, '');
+    });
   });
   container.querySelector('[data-clear-all]')?.addEventListener('click', resetCatalogFilters);
 }
 
 function resetCatalogFilters() {
-  catalogState = { type: '', condition: '', sort: catalogState.sort || 'newest', page: 1 };
+  catalogState = { type: '', condition: '', sort: catalogState.sort || 'newest', query: '', page: 1 };
   syncFilterButtons();
   syncFilterChips();
   syncCatalogUrl();
@@ -362,6 +434,7 @@ function initCatalogPage() {
   const params = getParams();
   if (params.get('type')) catalogState.type = params.get('type');
   if (params.get('condition')) catalogState.condition = params.get('condition');
+  if (params.get('q')) catalogState.query = params.get('q');
   const sortParam = params.get('sort');
   if (sortParam && SORT_OPTIONS.some(([key]) => key === sortParam)) {
     catalogState.sort = sortParam;
@@ -370,9 +443,24 @@ function initCatalogPage() {
   document.querySelectorAll('.filter-bar [data-filter]').forEach(btn => {
     btn.addEventListener('click', () => applyFilter(btn.dataset.filter, btn.dataset.value));
   });
+  document.querySelectorAll('[data-preset]').forEach(btn => {
+    btn.addEventListener('click', () => applyPreset(btn));
+  });
+  document.getElementById('catalogSearch')?.addEventListener('input', e => {
+    applySearch(e.target.value);
+  });
+  document.getElementById('catalogTopReset')?.addEventListener('click', () => {
+    catalogState = { type: '', condition: '', sort: 'newest', query: '', page: 1 };
+    syncFilterButtons();
+    syncFilterChips();
+    syncCatalogUrl();
+    initMobileFilters();
+    initSortPills();
+    renderCatalog();
+  });
 
   document.getElementById('emptyReset')?.addEventListener('click', () => {
-    catalogState = { type: '', condition: '', sort: 'newest', page: 1 };
+    catalogState = { type: '', condition: '', sort: 'newest', query: '', page: 1 };
     syncFilterButtons();
     syncFilterChips();
     syncCatalogUrl();
@@ -397,6 +485,18 @@ function getFilteredProducts() {
   let list = [...PRODUCTS];
   if (catalogState.type) list = list.filter(p => p.type === catalogState.type);
   if (catalogState.condition) list = list.filter(p => p.condition === catalogState.condition);
+  if (catalogState.query) {
+    const query = normalizeText(catalogState.query);
+    list = list.filter(p => normalizeText([
+      p.name,
+      p.brand,
+      p.color,
+      p.year,
+      p.desc,
+      getTypeLabel(p.type),
+      getConditionLabel(p.condition)
+    ].join(' ')).includes(query));
+  }
   return sortProducts(list, catalogState.sort);
 }
 
@@ -520,17 +620,20 @@ function initProductPage() {
       <div class="product-highlights">
         <span>Проверено</span>
         <span>Без скрытых дефектов</span>
-        <span>Бронь в WhatsApp</span>
+        <span>Бронь в мессенджере</span>
       </div>
       <p class="product-desc">${product.desc}</p>
       <div class="product-actions">
         <button class="btn btn-primary btn-lg add-to-cart-btn" data-id="${product.id}">В корзину</button>
-        <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${waText}" class="btn btn-whatsapp btn-lg" target="_blank" rel="noopener">Купить в WhatsApp</a>
+        <div class="product-messengers">
+          <span>Связаться:</span>
+          ${socialLinksHtml(waText)}
+        </div>
       </div>
       <div class="product-guarantees">
         <div class="guarantee-item"><span class="guarantee-icon">✓</span><span>Проверено перед продажей</span></div>
         <div class="guarantee-item"><span class="guarantee-icon">✓</span><span>Честное описание состояния</span></div>
-        <div class="guarantee-item"><span class="guarantee-icon">✓</span><span>Быстрый ответ в WhatsApp</span></div>
+        <div class="guarantee-item"><span class="guarantee-icon">✓</span><span>Быстрый ответ в мессенджере</span></div>
       </div>
     </div>
   `;

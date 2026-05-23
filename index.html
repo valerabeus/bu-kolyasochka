@@ -28,7 +28,12 @@
         <a href="#contact" class="nav-link">Контакты</a>
       </nav>
       <div class="header-actions">
-        <a href="https://wa.me/79000000000" class="btn btn-ghost btn-sm" target="_blank" rel="noopener">WhatsApp</a>
+        <div class="social-links social-links--header" aria-label="Мессенджеры и соцсети">
+          <a href="https://wa.me/79000000000" class="social-icon social-icon--wa" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a>
+          <a href="https://t.me/bukolyasochka" class="social-icon social-icon--tg" target="_blank" rel="noopener" aria-label="Telegram">TG</a>
+          <a href="https://instagram.com/bukolyasochka" class="social-icon social-icon--ig" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+          <a href="https://vk.com/bukolyasochka" class="social-icon social-icon--vk" target="_blank" rel="noopener" aria-label="VK">VK</a>
+        </div>
         <button class="cart-toggle" id="cartToggle" aria-label="Корзина">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
@@ -56,8 +61,19 @@
       <a href="#reviews" class="mobile-nav-link">Отзывы</a>
       <a href="#contact" class="mobile-nav-link">Контакты</a>
     </nav>
-    <div class="mobile-menu-wa">
-      <a href="https://wa.me/79000000000" class="btn btn-whatsapp btn-sm" style="width:100%" target="_blank" rel="noopener">WhatsApp</a>
+    <div class="mobile-menu-socials">
+      <p class="mobile-filter-label">Написать нам</p>
+      <div class="social-links social-links--mobile" aria-label="Мессенджеры и соцсети">
+        <a href="https://wa.me/79000000000" class="social-icon social-icon--wa" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a>
+        <a href="https://t.me/bukolyasochka" class="social-icon social-icon--tg" target="_blank" rel="noopener" aria-label="Telegram">TG</a>
+        <a href="https://instagram.com/bukolyasochka" class="social-icon social-icon--ig" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+        <a href="https://vk.com/bukolyasochka" class="social-icon social-icon--vk" target="_blank" rel="noopener" aria-label="VK">VK</a>
+      </div>
+    </div>
+    <div class="mobile-menu-info">
+      <span>Ответим в течение часа</span>
+      <span>Пн–Вс 9:00–21:00</span>
+      <span>Поможем выбрать без переплаты</span>
     </div>
   </div>
 
@@ -74,7 +90,7 @@
       </div>
       <div class="hero-cta">
         <a href="catalog.html" class="btn btn-primary btn-lg">Смотреть каталог</a>
-        <a href="https://wa.me/79000000000" class="btn btn-ghost btn-lg" target="_blank" rel="noopener">Написать в WhatsApp</a>
+        <a href="#contact" class="btn btn-ghost btn-lg">Подобрать с экспертом</a>
       </div>
       <div class="hero-stats">
         <div class="hero-stat">
@@ -130,6 +146,44 @@
     </div>
   </div>
 
+  <section class="section section--smart">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <p class="section-kicker">Умный подбор</p>
+          <h2 class="section-title">Выберите сценарий, не модель</h2>
+        </div>
+        <a href="catalog.html" class="section-link">Открыть каталог →</a>
+      </div>
+      <div class="smart-grid">
+        <a href="catalog.html?type=stroller&sort=newest" class="smart-card smart-card--wide">
+          <span class="smart-card-num">01</span>
+          <h3>Город каждый день</h3>
+          <p>Лёгкие, манёвренные прогулочные коляски для лифта, кафе и коротких поездок.</p>
+          <span class="smart-card-link">Смотреть подборку</span>
+        </a>
+        <a href="catalog.html?condition=likenew&sort=discount-desc" class="smart-card">
+          <span class="smart-card-num">02</span>
+          <h3>Как новая</h3>
+          <p>Максимально свежие модели с сильной экономией от цены новой.</p>
+          <span class="smart-card-link">Найти идеал</span>
+        </a>
+        <a href="catalog.html?type=twin" class="smart-card">
+          <span class="smart-card-num">03</span>
+          <h3>Для двойни</h3>
+          <p>Модульные системы, тандемы и расширяемые решения под два места.</p>
+          <span class="smart-card-link">Показать варианты</span>
+        </a>
+        <a href="catalog.html?type=sport&sort=price-asc" class="smart-card smart-card--dark">
+          <span class="smart-card-num">04</span>
+          <h3>Активный ритм</h3>
+          <p>Большие колёса, устойчивая рама, прогулки по паркам и загородным маршрутам.</p>
+          <span class="smart-card-link">Выбрать ходовую</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <section class="section" id="categories">
     <div class="container">
       <div class="section-header">
@@ -169,6 +223,46 @@
               <p class="category-card-count" id="countSport">—</p>
             </div>
           </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--experience">
+    <div class="container">
+      <div class="experience-grid">
+        <div class="experience-copy">
+          <p class="section-kicker">360 overview</p>
+          <h2 class="section-title">Смотрите коляску как в шоуруме</h2>
+          <p class="experience-text">Мы показываем не только фасад: раму, колёса, текстиль, корзину, ручку и механизм складывания. Так проще понять состояние до встречи и быстрее принять решение.</p>
+          <div class="experience-points">
+            <span>Рама и амортизация</span>
+            <span>Текстиль без ретуши</span>
+            <span>Механизмы складывания</span>
+            <span>Комплектация по чек-листу</span>
+          </div>
+        </div>
+        <div class="stroller-360" aria-label="Демонстрация 360 обзора коляски">
+          <div class="stroller-stage">
+            <div class="stroller-orbit">
+              <span></span><span></span><span></span><span></span>
+            </div>
+            <div class="stroller-model">
+              <div class="stroller-canopy"></div>
+              <div class="stroller-seat"></div>
+              <div class="stroller-frame"></div>
+              <div class="stroller-wheel stroller-wheel--left"></div>
+              <div class="stroller-wheel stroller-wheel--right"></div>
+            </div>
+            <div class="hotspot hotspot--one">Текстиль</div>
+            <div class="hotspot hotspot--two">Рама</div>
+            <div class="hotspot hotspot--three">Колёса</div>
+          </div>
+          <div class="stroller-panel">
+            <span>360° inspection</span>
+            <strong>12 точек проверки</strong>
+            <p>Фото, видео и честное описание перед бронью.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -231,7 +325,7 @@
         </div>
         <div class="review-card">
           <div class="review-stars">★★★★★</div>
-          <p class="review-text">«Брала Stokke Xplory для второго ребёнка. Оформили за 20 минут в WhatsApp, привезли на следующий день.»</p>
+          <p class="review-text">«Брала Stokke Xplory для второго ребёнка. Оформили за 20 минут в мессенджере, привезли на следующий день.»</p>
           <div class="review-author">Марина К., СПб</div>
         </div>
         <div class="review-card">
@@ -248,8 +342,13 @@
       <div class="contact-cta">
         <p class="section-kicker">Персональный подбор</p>
         <h2 class="contact-title">Не нашли что искали?</h2>
-        <p class="contact-sub">Напишите нам — поможем подобрать коляску под ваши требования и бюджет</p>
-        <a href="https://wa.me/79000000000" class="btn btn-primary btn-lg" target="_blank" rel="noopener">Написать в WhatsApp</a>
+        <p class="contact-sub">Напишите в удобный мессенджер — поможем подобрать коляску под ваши требования и бюджет</p>
+        <div class="social-links social-links--cta" aria-label="Мессенджеры и соцсети">
+          <a href="https://wa.me/79000000000" class="social-icon social-icon--wa" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a>
+          <a href="https://t.me/bukolyasochka" class="social-icon social-icon--tg" target="_blank" rel="noopener" aria-label="Telegram">TG</a>
+          <a href="https://instagram.com/bukolyasochka" class="social-icon social-icon--ig" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+          <a href="https://vk.com/bukolyasochka" class="social-icon social-icon--vk" target="_blank" rel="noopener" aria-label="VK">VK</a>
+        </div>
       </div>
     </div>
   </section>
@@ -276,7 +375,12 @@
         </div>
         <div class="footer-col">
           <h4 class="footer-col-title">Связаться</h4>
-          <a href="https://wa.me/79000000000" class="footer-link" target="_blank" rel="noopener">WhatsApp</a>
+          <div class="social-links social-links--footer" aria-label="Мессенджеры и соцсети">
+            <a href="https://wa.me/79000000000" class="social-icon social-icon--wa" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a>
+            <a href="https://t.me/bukolyasochka" class="social-icon social-icon--tg" target="_blank" rel="noopener" aria-label="Telegram">TG</a>
+            <a href="https://instagram.com/bukolyasochka" class="social-icon social-icon--ig" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+            <a href="https://vk.com/bukolyasochka" class="social-icon social-icon--vk" target="_blank" rel="noopener" aria-label="VK">VK</a>
+          </div>
           <p class="footer-text">Ответим в течение часа</p>
           <p class="footer-text">Пн–Вс 9:00–21:00</p>
         </div>
@@ -305,7 +409,7 @@
         <span>Итого:</span>
         <span class="cart-total-price" id="cartTotal">0 ₽</span>
       </div>
-      <button class="btn btn-primary btn-lg" id="checkoutBtn" style="width:100%">Оформить через WhatsApp</button>
+      <button class="btn btn-primary btn-lg" id="checkoutBtn" style="width:100%">Отправить заявку</button>
     </div>
   </aside>
 

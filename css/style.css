@@ -957,6 +957,20 @@ body {
   min-height: 34px;
   display: inline-flex;
   align-items: center;
+  gap: 6px;
+}
+
+.nav-link [data-compare-count] {
+  min-width: 18px;
+  height: 18px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #11100d;
+  background: var(--gold);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0;
 }
 
 .btn-primary {

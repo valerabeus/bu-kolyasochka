@@ -549,7 +549,9 @@ function initProductPage() {
   `;
 
   layout.querySelectorAll('.product-thumb').forEach(thumb => {
-    thumb.addEventListener('click', () => {
+    thumb.addEventListener('click', event => {
+      event.preventDefault();
+      event.stopPropagation();
       layout.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active'));
       thumb.classList.add('active');
       const mainImg = document.getElementById('mainProductImg');

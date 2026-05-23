@@ -3,8 +3,12 @@ const PAGE_SIZE = 12;
 const FEATURED_IDS = [49, 2, 3];
 
 function pageUrl(path) {
-  const base = window.SITE_BASE || '/';
+  const base = window.SITE_BASE || '/bu-kolyasochka/';
   return base + path.replace(/^\//, '');
+}
+
+function escAttr(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
 function formatPrice(n) {
@@ -36,7 +40,7 @@ function buildProductCard(product) {
     <article class="product-card" data-id="${product.id}">
       <a href="${pageUrl('product.html?id=' + product.id)}" class="product-card-link">
         <div class="product-card-img-wrap">
-          <img src="${product.img}" alt="${product.name}" class="product-card-img" loading="lazy">
+          <img src="${product.img}" alt="${product.name}" class="product-card-img" loading="lazy" onerror="fixProductImg(this,'${escAttr(product.name)}')">
           ${discount ? `<span class="product-card-badge">−${discount}%</span>` : ''}
           <span class="product-card-condition">${getConditionBadge(product.condition)}</span>
           <div class="product-card-overlay">
@@ -311,12 +315,12 @@ function initProductPage() {
   layout.innerHTML = `
     <div class="product-gallery">
       <div class="product-main-img">
-        <img src="${product.img}" alt="${product.name}" id="mainProductImg">
+        <img src="${product.img}" alt="${product.name}" id="mainProductImg" onerror="fixProductImg(this,'${escAttr(product.name)}')">
       </div>
       <div class="product-thumbs">
         ${thumbs.map((src, i) => `
           <button type="button" class="product-thumb${i === 0 ? ' active' : ''}" data-src="${src}" aria-label="Фото ${i + 1}">
-            <img src="${src}" alt="">
+            <img src="${src}" alt="" onerror="fixProductImg(this,'${escAttr(product.name)}')">
           </button>
         `).join('')}
       </div>

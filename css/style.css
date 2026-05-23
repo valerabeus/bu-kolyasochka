@@ -163,11 +163,7 @@ body[data-page="catalog"] #mobileMenuFilters { display: block; }
 .hero-stat-num { font-size: 44px; font-weight: 800; line-height: 1; display: block; }
 .hero-stat-label { font-size: 11px; letter-spacing: 2px; color: var(--gray); text-transform: uppercase; margin-top: 6px; display: block; }
 .hero-visual { position: relative; overflow: hidden; background: var(--bg3); min-height: 640px; align-self: center; margin: 80px 40px 80px 0; }
-.hero-visual--placeholder {
-  background:
-    radial-gradient(ellipse at 30% 40%, rgba(201, 169, 110, 0.25) 0%, transparent 55%),
-    linear-gradient(160deg, #1a1a1a 0%, #0a0a0a 100%);
-}
+.hero-visual img { width: 100%; height: 100%; object-fit: cover; }
 .hero-visual::after {
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(135deg, rgba(201, 169, 110, 0.12) 0%, transparent 50%, rgba(0, 0, 0, 0.4) 100%);
@@ -192,10 +188,6 @@ body[data-page="catalog"] #mobileMenuFilters { display: block; }
 }
 .category-card--large { grid-row: span 2; min-height: 460px; }
 .category-card-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.5s ease; }
-.category-card-bg--transformer { background: linear-gradient(145deg, #1f1f1f, #0a0a0a); }
-.category-card-bg--stroller { background: linear-gradient(145deg, #252525, #111); }
-.category-card-bg--twin { background: linear-gradient(145deg, #1a1a22, #0a0a0a); }
-.category-card-bg--sport { background: linear-gradient(145deg, #1a221a, #0a0a0a); }
 .category-card::before {
   content: ''; position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.15) 55%, transparent 100%);

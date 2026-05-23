@@ -5,7 +5,7 @@ const CatalogAssistant = {
     if (!Array.isArray(window.PRODUCTS) && typeof PRODUCTS === 'undefined') return;
     this.createWidget();
     this.bindEvents();
-    this.say('Здравствуйте! Я подбираю коляски только из каталога Б/У Колясочка. Напишите возраст ребенка, бюджет, город/дороги и что важно: компактность, люлька, двойня или активные прогулки.');
+    this.say('Здравствуйте! Напишите возраст ребенка, бюджет, город/дороги и что важно: компактность, люлька, двойня или активные прогулки. Покажу подходящие варианты из текущего каталога.');
   },
 
   catalog() {
@@ -17,17 +17,17 @@ const CatalogAssistant = {
     const wrap = document.createElement('section');
     wrap.className = 'assistant-widget';
     wrap.id = 'assistantWidget';
-    wrap.setAttribute('aria-label', 'AI подбор коляски по каталогу');
+    wrap.setAttribute('aria-label', 'Подбор коляски по каталогу');
     wrap.innerHTML = `
       <button type="button" class="assistant-fab" id="assistantFab" aria-expanded="false">
-        <span>AI</span>
+        <span>Каталог</span>
         <strong>Подбор</strong>
       </button>
       <div class="assistant-panel" id="assistantPanel" aria-live="polite">
         <div class="assistant-head">
           <div>
-            <p>AI подборщик</p>
-            <strong>Ищет только по каталогу сайта</strong>
+            <p>Помощь с выбором</p>
+            <strong>Ищем только среди товаров сайта</strong>
           </div>
           <button type="button" class="assistant-close" id="assistantClose" aria-label="Закрыть">×</button>
         </div>
@@ -183,7 +183,7 @@ const CatalogAssistant = {
     const best = matches[0];
     const reasons = [
       `${best.name} выглядит самым близким вариантом: ${getTypeLabel(best.type).toLowerCase()}, состояние "${getConditionLabel(best.condition).toLowerCase()}", цена ${formatPrice(best.price)}.`,
-      `Я сравнил только товары из текущего каталога сайта и отсортировал их по совпадению с запросом.`
+      `Список собран только из товаров текущего каталога и отсортирован по совпадению с запросом.`
     ];
 
     if (matches.length > 1) {

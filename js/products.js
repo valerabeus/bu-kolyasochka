@@ -2,10 +2,10 @@ function placeholderImage(label) {
   const safe = String(label).replace(/[<>&"']/g, '').slice(0, 36);
   const svg =
     '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600">' +
-    '<defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#1b1915"/><stop offset="1" stop-color="#080807"/></linearGradient></defs>' +
+    '<defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#f7efe3"/><stop offset="1" stop-color="#eadfce"/></linearGradient></defs>' +
     '<rect fill="url(#g)" width="600" height="600"/>' +
-    '<circle cx="470" cy="110" r="130" fill="#D7B56D" opacity=".16"/>' +
-    '<text x="300" y="300" fill="#F1D79B" font-family="system-ui,sans-serif" font-size="16" text-anchor="middle" dominant-baseline="middle">' +
+    '<circle cx="470" cy="110" r="130" fill="#8a6a43" opacity=".10"/>' +
+    '<text x="300" y="300" fill="#7a6148" font-family="system-ui,sans-serif" font-size="16" text-anchor="middle" dominant-baseline="middle">' +
     safe +
     '</text></svg>';
   return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);

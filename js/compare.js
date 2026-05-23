@@ -102,7 +102,7 @@ const Compare = {
 
   getSummary(products) {
     if (!products.length) {
-      return 'Добавьте 2-4 коляски из каталога, и помощник кратко сравнит их по цене, состоянию и сценарию использования.';
+      return 'Добавьте 2-4 коляски из каталога, и подбор кратко сравнит их по цене, состоянию и сценарию использования.';
     }
 
     const cheapest = products.reduce((best, product) => product.price < best.price ? product : best, products[0]);

@@ -28,7 +28,12 @@
         <a href="index.html#contact" class="nav-link">Контакты</a>
       </nav>
       <div class="header-actions">
-        <a href="https://wa.me/79000000000" class="btn btn-ghost btn-sm" target="_blank" rel="noopener">WhatsApp</a>
+        <div class="social-links social-links--header" aria-label="Мессенджеры и соцсети">
+          <a href="https://wa.me/79000000000" class="social-icon social-icon--wa" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a>
+          <a href="https://t.me/bukolyasochka" class="social-icon social-icon--tg" target="_blank" rel="noopener" aria-label="Telegram">TG</a>
+          <a href="https://instagram.com/bukolyasochka" class="social-icon social-icon--ig" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+          <a href="https://vk.com/bukolyasochka" class="social-icon social-icon--vk" target="_blank" rel="noopener" aria-label="VK">VK</a>
+        </div>
         <button class="cart-toggle" id="cartToggle" aria-label="Корзина">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
@@ -56,8 +61,14 @@
       <a href="index.html#reviews" class="mobile-nav-link">Отзывы</a>
       <a href="index.html#contact" class="mobile-nav-link">Контакты</a>
     </nav>
-    <div class="mobile-menu-wa">
-      <a href="https://wa.me/79000000000" class="btn btn-whatsapp btn-sm" style="width:100%" target="_blank" rel="noopener">WhatsApp</a>
+    <div class="mobile-menu-socials">
+      <p class="mobile-filter-label">Написать нам</p>
+      <div class="social-links social-links--mobile" aria-label="Мессенджеры и соцсети">
+        <a href="https://wa.me/79000000000" class="social-icon social-icon--wa" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a>
+        <a href="https://t.me/bukolyasochka" class="social-icon social-icon--tg" target="_blank" rel="noopener" aria-label="Telegram">TG</a>
+        <a href="https://instagram.com/bukolyasochka" class="social-icon social-icon--ig" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+        <a href="https://vk.com/bukolyasochka" class="social-icon social-icon--vk" target="_blank" rel="noopener" aria-label="VK">VK</a>
+      </div>
     </div>
     <div class="mobile-menu-filters" id="mobileMenuFilters">
       <p class="mobile-menu-filters-title">Фильтры</p>
@@ -84,14 +95,28 @@
         <p class="catalog-subtitle" id="catalogSubtitle">Каталог колясок</p>
         <div class="catalog-highlights" aria-label="Преимущества каталога">
           <span>Проверенное состояние</span>
-          <span>Сортировка по цене</span>
-          <span>Быстрая бронь в WhatsApp</span>
+          <span>Поиск по бренду и цвету</span>
+          <span>Быстрая бронь в мессенджере</span>
         </div>
       </div>
     </div>
 
     <div class="filter-bar" id="filterBar">
       <div class="filter-bar-inner">
+        <div class="catalog-filter-head">
+          <label class="catalog-search" for="catalogSearch">
+            <span class="catalog-search-icon">⌕</span>
+            <input type="search" id="catalogSearch" placeholder="Поиск: Bugaboo, серый, 2022..." autocomplete="off">
+          </label>
+          <button class="catalog-filter-reset" id="catalogTopReset" type="button">Сбросить</button>
+        </div>
+        <div class="quick-presets" aria-label="Быстрые фильтры">
+          <button class="quick-preset" type="button" data-preset data-preset-type="stroller" data-preset-sort="newest">Город</button>
+          <button class="quick-preset" type="button" data-preset data-preset-condition="likenew" data-preset-sort="discount-desc">Как новая</button>
+          <button class="quick-preset" type="button" data-preset data-preset-type="twin" data-preset-sort="newest">Двойня</button>
+          <button class="quick-preset" type="button" data-preset data-preset-type="sport" data-preset-sort="price-asc">Активные</button>
+          <button class="quick-preset" type="button" data-preset data-preset-sort="discount-desc">Макс. скидка</button>
+        </div>
         <div class="filter-row">
           <span class="filter-label">Тип:</span>
           <button class="filter-btn active" data-filter="type" data-value="">Все</button>
@@ -157,7 +182,12 @@
         </div>
         <div class="footer-col">
           <h4 class="footer-col-title">Связаться</h4>
-          <a href="https://wa.me/79000000000" class="footer-link" target="_blank" rel="noopener">WhatsApp</a>
+          <div class="social-links social-links--footer" aria-label="Мессенджеры и соцсети">
+            <a href="https://wa.me/79000000000" class="social-icon social-icon--wa" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a>
+            <a href="https://t.me/bukolyasochka" class="social-icon social-icon--tg" target="_blank" rel="noopener" aria-label="Telegram">TG</a>
+            <a href="https://instagram.com/bukolyasochka" class="social-icon social-icon--ig" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+            <a href="https://vk.com/bukolyasochka" class="social-icon social-icon--vk" target="_blank" rel="noopener" aria-label="VK">VK</a>
+          </div>
           <p class="footer-text">Пн–Вс 9:00–21:00</p>
         </div>
       </div>
@@ -185,7 +215,7 @@
         <span>Итого:</span>
         <span class="cart-total-price" id="cartTotal">0 ₽</span>
       </div>
-      <button class="btn btn-primary btn-lg" id="checkoutBtn" style="width:100%">Оформить через WhatsApp</button>
+      <button class="btn btn-primary btn-lg" id="checkoutBtn" style="width:100%">Отправить заявку</button>
     </div>
   </aside>
 

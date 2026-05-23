@@ -1,4 +1,3 @@
-const WHATSAPP_NUMBER = '79000000000';
 const PAGE_SIZE = 24;
 const FEATURED_IDS = [49, 2, 3];
 

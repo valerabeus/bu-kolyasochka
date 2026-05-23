@@ -2045,6 +2045,33 @@ h2 {
   box-shadow: none;
 }
 
+.hero-visual img,
+.category-card-bg {
+  display: none;
+}
+
+.hero-visual::before {
+  content: '';
+  position: absolute;
+  inset: 34px;
+  border: 1px solid rgba(138, 106, 67, 0.18);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 70% 24%, rgba(138, 106, 67, 0.12), transparent 28%),
+    linear-gradient(135deg, rgba(255, 253, 248, 0.76), rgba(255, 253, 248, 0.22));
+}
+
+.hero-visual::after {
+  content: 'бережно проверяем каждую коляску';
+  position: absolute;
+  top: 54px;
+  left: 54px;
+  right: 54px;
+  color: var(--gold);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
 .hero-visual::after,
 .product-card-img-wrap::after,
 .product-main-img::after,
@@ -2109,6 +2136,10 @@ h2 {
   background: #efe5d7;
   border-color: var(--border);
   box-shadow: none;
+}
+
+.category-card::before {
+  opacity: 0;
 }
 
 .category-card::after {

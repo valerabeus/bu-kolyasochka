@@ -1,6 +1,6 @@
 // Cart state stored in localStorage
 const CART_KEY = 'bukolyasochka_cart';
-const WHATSAPP_NUMBER = '79000000000'; // Replace with real number
+window.WHATSAPP_NUMBER = window.WHATSAPP_NUMBER || '79000000000'; // Replace with real number
 
 const Cart = {
   items: [],
@@ -105,7 +105,7 @@ const Cart = {
     const lines = this.items.map(i => `• ${i.name} — ${formatPrice(i.price)}`).join('\n');
     const total = formatPrice(this.total());
     const text = encodeURIComponent(`Здравствуйте! Хочу купить:\n${lines}\nИтого: ${total}`);
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank', 'noopener');
+    window.open(`https://wa.me/${window.WHATSAPP_NUMBER}?text=${text}`, '_blank', 'noopener');
   },
 
   bindEvents() {

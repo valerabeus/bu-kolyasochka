@@ -1,4 +1,5 @@
-const WHATSAPP_NUMBER = '79000000000';
+window.WHATSAPP_NUMBER = window.WHATSAPP_NUMBER || '79000000000';
+const WHATSAPP_NUMBER = window.WHATSAPP_NUMBER;
 const PAGE_SIZE = 24;
 const FEATURED_IDS = [49, 2, 3];
 
@@ -37,6 +38,16 @@ function formatPrice(n) {
 function getConditionLabel(c) { return CONDITIONS[c] || c; }
 function getConditionBadge(c) { return getConditionLabel(c).toUpperCase(); }
 function getTypeLabel(t) { return TYPES[t] || t; }
+
+function navIcon(name) {
+  const icons = {
+    home: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 11.2 12 4.5l7.5 6.7v7.3a1.5 1.5 0 0 1-1.5 1.5h-3.5v-5.3h-5V20H6a1.5 1.5 0 0 1-1.5-1.5v-7.3Z"/></svg>',
+    catalog: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5.5h14M5 12h14M5 18.5h14"/><path d="M4.5 4h15v16h-15z"/></svg>',
+    chat: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 18.4V7.5A2.5 2.5 0 0 1 7.5 5h9A2.5 2.5 0 0 1 19 7.5v5.7a2.5 2.5 0 0 1-2.5 2.5H9.2L5 18.4Z"/></svg>',
+    cart: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 8h11.2l-.8 10H7.2L6.4 8Z"/><path d="M8 8a4 4 0 0 1 8 0"/></svg>'
+  };
+  return `<span class="bottom-nav-icon">${icons[name] || ''}</span>`;
+}
 
 function getParams() {
   return new URLSearchParams(window.location.search);
@@ -102,7 +113,11 @@ function buildProductCard(product, animIndex) {
         <div class="product-card-info">
           <p class="product-card-brand">${product.brand.toUpperCase()}</p>
           <h3 class="product-card-name">${product.name}</h3>
-          <p class="product-card-meta">${typeLabel} · ${product.year} · ${product.color}</p>
+          <div class="product-card-meta">
+            <span>${getTypeLabel(product.type)}</span>
+            <span>${product.year}</span>
+            <span>${product.color}</span>
+          </div>
           <div class="product-card-prices">
             <span class="product-card-price">${formatPrice(product.price)}</span>
             ${product.newPrice ? `<span class="product-card-old">${formatPrice(product.newPrice)}</span>` : ''}
@@ -157,16 +172,16 @@ function initBottomNav() {
   nav.innerHTML = `
     <div class="bottom-nav-inner">
       <a href="${pageUrl('index.html')}" class="bottom-nav-item${page === 'home' ? ' active' : ''}">
-        <span>🏠</span><span>Главная</span>
+        ${navIcon('home')}<span>Главная</span>
       </a>
       <a href="${pageUrl('catalog.html')}" class="bottom-nav-item${page === 'catalog' ? ' active' : ''}">
-        <span>📋</span><span>Каталог</span>
+        ${navIcon('catalog')}<span>Каталог</span>
       </a>
       <a href="${waUrl}" class="bottom-nav-item" target="_blank" rel="noopener">
-        <span>💬</span><span>WhatsApp</span>
+        ${navIcon('chat')}<span>WhatsApp</span>
       </a>
       <button type="button" class="bottom-nav-item" id="bottomCartBtn" style="position:relative">
-        <span>🛒</span><span>Корзина</span>
+        ${navIcon('cart')}<span>Корзина</span>
         <span class="nav-cart-count" id="bottomCartCount"></span>
       </button>
     </div>
@@ -501,6 +516,11 @@ function initProductPage() {
           <span class="product-meta-label">Год</span>
           <span class="product-meta-value">${product.year}</span>
         </div>
+      </div>
+      <div class="product-highlights">
+        <span>Проверено</span>
+        <span>Без скрытых дефектов</span>
+        <span>Бронь в WhatsApp</span>
       </div>
       <p class="product-desc">${product.desc}</p>
       <div class="product-actions">

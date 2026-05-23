@@ -7,28 +7,24 @@
   <meta name="description" content="Магазин б/у премиальных детских колясок. Bugaboo, Stokke, UPPAbaby, Cybex — тщательно проверенные коляски по честным ценам.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body data-page="home">
 
-  <!-- Page Loader -->
   <div class="page-loader" id="pageLoader">
     <div class="loader-logo">Б/У Колясочка</div>
   </div>
 
-  <!-- Header -->
   <header class="header" id="header">
     <div class="header-inner">
       <a href="index.html" class="logo">Б/У<br>Колясочка</a>
-
       <nav class="nav">
         <a href="catalog.html" class="nav-link">Каталог</a>
         <a href="#about" class="nav-link">О магазине</a>
         <a href="#reviews" class="nav-link">Отзывы</a>
         <a href="#contact" class="nav-link">Контакты</a>
       </nav>
-
       <div class="header-actions">
         <a href="https://wa.me/79000000000" class="btn btn-ghost btn-sm" target="_blank" rel="noopener">WhatsApp</a>
         <button class="cart-toggle" id="cartToggle" aria-label="Корзина">
@@ -37,7 +33,7 @@
             <line x1="3" y1="6" x2="21" y2="6"/>
             <path d="M16 10a4 4 0 01-8 0"/>
           </svg>
-          <span class="cart-count" id="cartCount" style="display:none">0</span>
+          <span class="cart-count" id="cartCount">0</span>
         </button>
         <button class="burger" id="burgerBtn" aria-label="Меню">
           <span></span><span></span><span></span>
@@ -46,22 +42,26 @@
     </div>
   </header>
 
-  <!-- Mobile Menu -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
   <div class="mobile-menu" id="mobileMenu">
-    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Закрыть">✕</button>
+    <div class="mobile-menu-head">
+      <span class="mobile-menu-title">Меню</span>
+      <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Закрыть">✕</button>
+    </div>
     <nav class="mobile-nav">
-      <a href="catalog.html" class="mobile-nav-link">Каталог</a>
+        <a href="catalog.html" class="mobile-nav-link">Каталог</a>
       <a href="#about" class="mobile-nav-link">О магазине</a>
       <a href="#reviews" class="mobile-nav-link">Отзывы</a>
       <a href="#contact" class="mobile-nav-link">Контакты</a>
-      <a href="https://wa.me/79000000000" class="mobile-nav-link" target="_blank" rel="noopener">WhatsApp</a>
     </nav>
+    <div class="mobile-menu-wa">
+      <a href="https://wa.me/79000000000" class="btn btn-whatsapp btn-sm" style="width:100%" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
   </div>
-  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 
-  <!-- Hero -->
   <section class="hero">
-    <div class="hero-content">
+    <div class="hero-accent"></div>
+    <div class="hero-body container">
       <p class="hero-label">Премиальные коляски с историей</p>
       <h1 class="hero-title">Лучшие бренды.<br>Честные цены.</h1>
       <p class="hero-sub">Bugaboo, Stokke, UPPAbaby и другие — каждая коляска проверена и готова к новой прогулке</p>
@@ -69,24 +69,26 @@
         <a href="catalog.html" class="btn btn-primary btn-lg">Смотреть каталог</a>
         <a href="https://wa.me/79000000000" class="btn btn-ghost btn-lg" target="_blank" rel="noopener">Написать в WhatsApp</a>
       </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-num">50+</span>
+          <span class="hero-stat-label">Колясок в наличии</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">15+</span>
+          <span class="hero-stat-label">Топ брендов</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">до 70%</span>
+          <span class="hero-stat-label">Экономия</span>
+        </div>
+      </div>
     </div>
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <span class="hero-stat-num">50+</span>
-        <span class="hero-stat-label">Колясок в наличии</span>
-      </div>
-      <div class="hero-stat">
-        <span class="hero-stat-num">15+</span>
-        <span class="hero-stat-label">Топ брендов</span>
-      </div>
-      <div class="hero-stat">
-        <span class="hero-stat-num">до 70%</span>
-        <span class="hero-stat-label">Экономия от новой</span>
-      </div>
+    <div class="hero-visual">
+      <img src="https://images.unsplash.com/photo-1584464491031-066326909cf2?w=1240&h=1280&fit=crop&q=80" alt="Премиальная детская коляска" loading="eager">
     </div>
   </section>
 
-  <!-- Ticker -->
   <div class="ticker">
     <div class="ticker-track" id="tickerTrack">
       <span>BUGABOO</span><span>·</span>
@@ -112,41 +114,40 @@
     </div>
   </div>
 
-  <!-- Categories -->
   <section class="section" id="categories">
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">Категории</h2>
-        <a href="catalog.html" class="btn btn-ghost btn-sm">Все коляски</a>
+        <a href="catalog.html" class="section-link">Все коляски →</a>
       </div>
       <div class="categories-grid">
         <a href="catalog.html?type=transformer" class="category-card category-card--large">
-          <div class="category-card-bg" style="background-image: url('https://placehold.co/800x900/111111/C9A96E?text=Трансформеры')"></div>
+          <div class="category-card-bg" style="background-image:url('https://images.unsplash.com/photo-1515488042361-ee00e8170dc8?w=800&h=900&fit=crop&q=80')"></div>
           <div class="category-card-content">
             <h3 class="category-card-title">Трансформеры</h3>
-            <p class="category-card-count" id="countTransformer">— позиций</p>
+            <p class="category-card-count" id="countTransformer">—</p>
           </div>
         </a>
         <div class="categories-side">
           <a href="catalog.html?type=stroller" class="category-card">
-            <div class="category-card-bg" style="background-image: url('https://placehold.co/600x400/111111/C9A96E?text=Прогулочные')"></div>
+            <div class="category-card-bg" style="background-image:url('https://images.unsplash.com/photo-1596464716127-f2a82964de44?w=600&h=400&fit=crop&q=80')"></div>
             <div class="category-card-content">
               <h3 class="category-card-title">Прогулочные</h3>
-              <p class="category-card-count" id="countStroller">— позиций</p>
+              <p class="category-card-count" id="countStroller">—</p>
             </div>
           </a>
           <a href="catalog.html?type=twin" class="category-card">
-            <div class="category-card-bg" style="background-image: url('https://placehold.co/600x400/111111/C9A96E?text=Для+двойни')"></div>
+            <div class="category-card-bg" style="background-image:url('https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=600&h=400&fit=crop&q=80')"></div>
             <div class="category-card-content">
               <h3 class="category-card-title">Для двойни</h3>
-              <p class="category-card-count" id="countTwin">— позиций</p>
+              <p class="category-card-count" id="countTwin">—</p>
             </div>
           </a>
           <a href="catalog.html?type=sport" class="category-card">
-            <div class="category-card-bg" style="background-image: url('https://placehold.co/600x400/111111/C9A96E?text=Спортивные')"></div>
+            <div class="category-card-bg" style="background-image:url('https://images.unsplash.com/photo-1555252333-9f8e92e665df?w=600&h=400&fit=crop&q=80')"></div>
             <div class="category-card-content">
               <h3 class="category-card-title">Спортивные</h3>
-              <p class="category-card-count" id="countSport">— позиций</p>
+              <p class="category-card-count" id="countSport">—</p>
             </div>
           </a>
         </div>
@@ -154,37 +155,16 @@
     </div>
   </section>
 
-  <!-- Featured Products -->
   <section class="section" id="featured">
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">Новые поступления</h2>
-        <a href="catalog.html" class="btn btn-ghost btn-sm">Весь каталог</a>
+        <a href="catalog.html" class="section-link">Весь каталог →</a>
       </div>
-      <div class="products-grid" id="featuredGrid">
-        <!-- Filled by JS -->
-      </div>
+      <div class="products-grid" id="featuredGrid"></div>
     </div>
   </section>
 
-  <!-- Promo Banner -->
-  <section class="promo-banner">
-    <div class="container">
-      <div class="promo-inner">
-        <div class="promo-text">
-          <p class="promo-label">Спецпредложение</p>
-          <h2 class="promo-title">Состояние «Как новая» — скидка до 60% от цены нового</h2>
-          <p class="promo-sub">Коляски в состоянии «как новая» использовались не более 3 месяцев. Идеальный выбор для тех, кто хочет премиум без переплаты.</p>
-          <a href="catalog.html?condition=likenew" class="btn btn-primary btn-lg">Смотреть подборку</a>
-        </div>
-        <div class="promo-image">
-          <img src="https://placehold.co/600x500/1A1A1A/C9A96E?text=Как+Новая" alt="Коляски как новые" loading="lazy">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About -->
   <section class="section" id="about">
     <div class="container">
       <div class="section-header">
@@ -194,23 +174,22 @@
         <div class="about-card">
           <div class="about-card-icon">01</div>
           <h3 class="about-card-title">Только проверенные коляски</h3>
-          <p class="about-card-text">Каждая коляска проходит осмотр перед публикацией. Мы честно описываем состояние и не скрываем дефекты.</p>
+          <p class="about-card-text">Каждая проходит осмотр. Мы честно описываем состояние и не скрываем дефекты.</p>
         </div>
         <div class="about-card">
           <div class="about-card-icon">02</div>
           <h3 class="about-card-title">Топовые бренды</h3>
-          <p class="about-card-text">Bugaboo, Stokke, UPPAbaby, Cybex — бренды, которые держат качество спустя годы использования.</p>
+          <p class="about-card-text">Bugaboo, Stokke, UPPAbaby, Cybex — держат качество спустя годы.</p>
         </div>
         <div class="about-card">
           <div class="about-card-icon">03</div>
           <h3 class="about-card-title">Быстрое оформление</h3>
-          <p class="about-card-text">Пишите в WhatsApp — ответим в течение часа, поможем с выбором и организуем доставку или самовывоз.</p>
+          <p class="about-card-text">Ответим в течение часа, поможем с выбором и организуем доставку.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Reviews -->
   <section class="section" id="reviews">
     <div class="container">
       <div class="section-header">
@@ -219,41 +198,39 @@
       <div class="reviews-grid">
         <div class="review-card">
           <div class="review-stars">★★★★★</div>
-          <p class="review-text">«Купила Bugaboo Cameleon — просто мечта! Описание полностью совпало с реальностью, коляска в отличном состоянии. Спасибо за честность!»</p>
+          <p class="review-text">«Купила Bugaboo Cameleon — просто мечта! Описание совпало с реальностью, коляска в отличном состоянии.»</p>
           <div class="review-author">Анна М., Москва</div>
         </div>
         <div class="review-card">
           <div class="review-stars">★★★★★</div>
-          <p class="review-text">«Брала Stokke Xplory для второго ребёнка. Оформили за 20 минут в WhatsApp, привезли на следующий день. Очень удобный сервис!»</p>
-          <div class="review-author">Марина К., Санкт-Петербург</div>
+          <p class="review-text">«Брала Stokke Xplory для второго ребёнка. Оформили за 20 минут в WhatsApp, привезли на следующий день.»</p>
+          <div class="review-author">Марина К., СПб</div>
         </div>
         <div class="review-card">
           <div class="review-stars">★★★★☆</div>
-          <p class="review-text">«Хорошее состояние, честные фото. Продавец подробно ответил на все вопросы. Рекомендую магазин всем молодым мамам!»</p>
+          <p class="review-text">«Хорошее состояние, честные фото. Продавец ответил на все вопросы. Рекомендую всем мамам!»</p>
           <div class="review-author">Светлана Д., Краснодар</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact / Footer CTA -->
-  <section class="section section--dark" id="contact">
+  <section class="section section--cta" id="contact">
     <div class="container">
       <div class="contact-cta">
         <h2 class="contact-title">Не нашли что искали?</h2>
-        <p class="contact-sub">Напишите нам — мы поможем подобрать коляску под ваши требования и бюджет</p>
+        <p class="contact-sub">Напишите нам — поможем подобрать коляску под ваши требования и бюджет</p>
         <a href="https://wa.me/79000000000" class="btn btn-primary btn-lg" target="_blank" rel="noopener">Написать в WhatsApp</a>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer" id="footer">
+  <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="footer-logo">Б/У Колясочка</div>
-          <p class="footer-tagline">Премиальные коляски<br>с историей</p>
+          <p class="footer-tagline">Премиальные коляски с историей</p>
         </div>
         <div class="footer-col">
           <h4 class="footer-col-title">Каталог</h4>
@@ -281,7 +258,6 @@
     </div>
   </footer>
 
-  <!-- Cart Drawer -->
   <div class="cart-overlay" id="cartOverlay"></div>
   <aside class="cart-drawer" id="cartDrawer">
     <div class="cart-drawer-header">
@@ -303,6 +279,8 @@
       <button class="btn btn-primary btn-lg" id="checkoutBtn" style="width:100%">Оформить через WhatsApp</button>
     </div>
   </aside>
+
+  <nav class="bottom-nav" id="bottomNav" aria-label="Мобильная навигация"></nav>
 
   <script src="js/products.js"></script>
   <script src="js/cart.js"></script>

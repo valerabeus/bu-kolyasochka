@@ -55,6 +55,9 @@ const Cart = {
         countEl.style.display = 'none';
       }
     }
+    if (typeof updateBottomCartCount === 'function') {
+      updateBottomCartCount(this.items.length);
+    }
 
     if (!itemsEl) return;
 

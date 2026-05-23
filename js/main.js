@@ -1,17 +1,25 @@
-const WHATSAPP_NUMBER = '79000000000'; // Replace with real number
+const WHATSAPP_NUMBER = '79000000000';
 const PAGE_SIZE = 12;
-
-// ─── Utilities ──────────────────────────────────────────────────────────────
+const FEATURED_IDS = [49, 2, 3];
 
 function formatPrice(n) {
   return n.toLocaleString('ru-RU') + ' ₽';
 }
 
 function getConditionLabel(c) { return CONDITIONS[c] || c; }
+function getConditionBadge(c) { return getConditionLabel(c).toUpperCase(); }
 function getTypeLabel(t) { return TYPES[t] || t; }
 
 function getParams() {
   return new URLSearchParams(window.location.search);
+}
+
+function pluralize(n, one, few, many) {
+  const mod10 = n % 10, mod100 = n % 100;
+  if (mod100 >= 11 && mod100 <= 19) return many;
+  if (mod10 === 1) return one;
+  if (mod10 >= 2 && mod10 <= 4) return few;
+  return many;
 }
 
 function buildProductCard(product) {
@@ -24,16 +32,14 @@ function buildProductCard(product) {
       <a href="product.html?id=${product.id}" class="product-card-link">
         <div class="product-card-img-wrap">
           <img src="${product.img}" alt="${product.name}" class="product-card-img" loading="lazy">
+          ${discount ? `<span class="product-card-badge">−${discount}%</span>` : ''}
+          <span class="product-card-condition">${getConditionBadge(product.condition)}</span>
           <div class="product-card-overlay">
             <button class="btn btn-primary btn-sm add-to-cart-btn" data-id="${product.id}">В корзину</button>
-            <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Здравствуйте! Интересует: ' + product.name + ' за ' + formatPrice(product.price))}"
-               class="btn btn-ghost btn-sm" target="_blank" rel="noopener">WhatsApp</a>
           </div>
-          ${discount ? `<span class="product-card-badge">−${discount}%</span>` : ''}
-          <span class="product-card-condition">${getConditionLabel(product.condition)}</span>
         </div>
         <div class="product-card-info">
-          <p class="product-card-brand">${product.brand}</p>
+          <p class="product-card-brand">${product.brand.toUpperCase()}</p>
           <h3 class="product-card-name">${product.name}</h3>
           <div class="product-card-prices">
             <span class="product-card-price">${formatPrice(product.price)}</span>
@@ -42,10 +48,8 @@ function buildProductCard(product) {
         </div>
       </a>
     </article>
-  `;
+  `
 }
-
-// ─── Page Loader ────────────────────────────────────────────────────────────
 
 function initLoader() {
   const loader = document.getElementById('pageLoader');
@@ -56,55 +60,86 @@ function initLoader() {
   });
 }
 
-// ─── Header ─────────────────────────────────────────────────────────────────
-
 function initHeader() {
   const header = document.getElementById('header');
   if (!header) return;
-  const onScroll = () => {
+  window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 50);
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
+  }, { passive: true });
 }
-
-// ─── Mobile Menu ────────────────────────────────────────────────────────────
 
 function initMobileMenu() {
   const menu = document.getElementById('mobileMenu');
   const overlay = document.getElementById('mobileMenuOverlay');
   const burger = document.getElementById('burgerBtn');
-  const close = document.getElementById('mobileMenuClose');
-
+  const closeBtn = document.getElementById('mobileMenuClose');
   if (!menu) return;
 
   const open = () => {
     menu.classList.add('active');
-    overlay.classList.add('active');
+    overlay?.classList.add('active');
     document.body.style.overflow = 'hidden';
   };
   const closeMenu = () => {
     menu.classList.remove('active');
-    overlay.classList.remove('active');
+    overlay?.classList.remove('active');
     document.body.style.overflow = '';
   };
 
   burger?.addEventListener('click', open);
-  close?.addEventListener('click', closeMenu);
+  closeBtn?.addEventListener('click', closeMenu);
   overlay?.addEventListener('click', closeMenu);
-
   menu.querySelectorAll('.mobile-nav-link').forEach(link => {
     link.addEventListener('click', closeMenu);
   });
 }
 
-// ─── Index Page ─────────────────────────────────────────────────────────────
+function initBottomNav() {
+  const nav = document.getElementById('bottomNav');
+  if (!nav) return;
+
+  const page = document.body.dataset.page || '';
+  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}`;
+
+  nav.innerHTML = `
+    <div class="bottom-nav-inner">
+      <a href="index.html" class="bottom-nav-item${page === 'home' ? ' active' : ''}">
+        <span>🏠</span><span>Главная</span>
+      </a>
+      <a href="catalog.html" class="bottom-nav-item${page === 'catalog' ? ' active' : ''}">
+        <span>📋</span><span>Каталог</span>
+      </a>
+      <a href="${waUrl}" class="bottom-nav-item" target="_blank" rel="noopener">
+        <span>💬</span><span>WhatsApp</span>
+      </a>
+      <button type="button" class="bottom-nav-item" id="bottomCartBtn" style="position:relative">
+        <span>🛒</span><span>Корзина</span>
+        <span class="nav-cart-count" id="bottomCartCount"></span>
+      </button>
+    </div>
+  `;
+
+  document.getElementById('bottomCartBtn')?.addEventListener('click', () => Cart.open());
+  document.getElementById('mobileCartToggle')?.addEventListener('click', () => Cart.open());
+}
+
+function updateBottomCartCount(count) {
+  const el = document.getElementById('bottomCartCount');
+  if (!el) return;
+  if (count > 0) {
+    el.textContent = count;
+    el.style.display = 'flex';
+  } else {
+    el.style.display = 'none';
+  }
+}
 
 function initIndexPage() {
   if (!document.getElementById('featuredGrid')) return;
 
-  // Category counts
   const counts = { transformer: 0, stroller: 0, twin: 0, sport: 0 };
   PRODUCTS.forEach(p => { if (counts[p.type] !== undefined) counts[p.type]++; });
+
   const setCount = (id, val) => {
     const el = document.getElementById(id);
     if (el) el.textContent = val + ' ' + pluralize(val, 'позиция', 'позиции', 'позиций');
@@ -114,90 +149,93 @@ function initIndexPage() {
   setCount('countTwin', counts.twin);
   setCount('countSport', counts.sport);
 
-  // Featured: latest 8 products
-  const featured = [...PRODUCTS].slice(0, 8);
+  const featured = FEATURED_IDS.map(id => PRODUCTS.find(p => p.id === id)).filter(Boolean);
   const grid = document.getElementById('featuredGrid');
   grid.innerHTML = featured.map(buildProductCard).join('');
   bindAddToCart(grid);
 }
 
-function pluralize(n, one, few, many) {
-  const mod10 = n % 10, mod100 = n % 100;
-  if (mod100 >= 11 && mod100 <= 19) return many;
-  if (mod10 === 1) return one;
-  if (mod10 >= 2 && mod10 <= 4) return few;
-  return many;
+let catalogState = { type: '', condition: '', sort: 'default', page: 1 };
+
+function syncFilterButtons() {
+  document.querySelectorAll('[data-filter]').forEach(btn => {
+    const filter = btn.dataset.filter;
+    const value = btn.dataset.value;
+  btn.classList.toggle('active', catalogState[filter] === value);
+  });
+  const sortSelect = document.getElementById('sortSelect');
+  if (sortSelect) sortSelect.value = catalogState.sort;
 }
 
-// ─── Catalog Page ───────────────────────────────────────────────────────────
+function applyFilter(filter, value) {
+  catalogState[filter] = value;
+  catalogState.page = 1;
+  syncFilterButtons();
+  renderCatalog();
+}
 
-let catalogState = {
-  type: '',
-  condition: '',
-  sort: 'default',
-  page: 1
-};
+function initMobileFilters() {
+  const typeContainer = document.getElementById('mobileTypeFilters');
+  const condContainer = document.getElementById('mobileConditionFilters');
+  if (!typeContainer || !condContainer) return;
+
+  const typeOptions = [
+    ['', 'Все'], ['transformer', 'Трансформеры'], ['stroller', 'Прогулочные'],
+    ['twin', 'Для двойни'], ['sport', 'Спортивные']
+  ];
+  const condOptions = [
+    ['', 'Все'], ['likenew', 'Как новая'], ['excellent', 'Отличное'], ['good', 'Хорошее']
+  ];
+
+  typeContainer.innerHTML = typeOptions.map(([val, label]) =>
+    `<button class="filter-btn${catalogState.type === val ? ' active' : ''}" data-filter="type" data-value="${val}">${label}</button>`
+  ).join('');
+
+  condContainer.innerHTML = condOptions.map(([val, label]) =>
+    `<button class="filter-btn${catalogState.condition === val ? ' active' : ''}" data-filter="condition" data-value="${val}">${label}</button>`
+  ).join('');
+
+  typeContainer.querySelectorAll('[data-filter]').forEach(btn => {
+    btn.addEventListener('click', () => applyFilter('type', btn.dataset.value));
+  });
+  condContainer.querySelectorAll('[data-filter]').forEach(btn => {
+    btn.addEventListener('click', () => applyFilter('condition', btn.dataset.value));
+  });
+}
 
 function initCatalogPage() {
   const grid = document.getElementById('catalogGrid');
   if (!grid) return;
 
-  // Read URL params
   const params = getParams();
   if (params.get('type')) catalogState.type = params.get('type');
   if (params.get('condition')) catalogState.condition = params.get('condition');
+  syncFilterButtons();
 
-  // Activate matching filter buttons
   document.querySelectorAll('[data-filter]').forEach(btn => {
-    const filter = btn.dataset.filter;
-    const value = btn.dataset.value;
-    if (catalogState[filter] === value) {
-      btn.closest('.filter-group').querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    }
+    btn.addEventListener('click', () => applyFilter(btn.dataset.filter, btn.dataset.value));
   });
 
-  // Filter events
-  document.querySelectorAll('[data-filter]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const filter = btn.dataset.filter;
-      btn.closest('.filter-group').querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      catalogState[filter] = btn.dataset.value;
-      catalogState.page = 1;
-      renderCatalog();
-    });
+  document.getElementById('sortSelect')?.addEventListener('change', e => {
+    catalogState.sort = e.target.value;
+    catalogState.page = 1;
+    renderCatalog();
   });
 
-  // Sort events
-  document.querySelectorAll('[data-sort]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('[data-sort]').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      catalogState.sort = btn.dataset.sort;
-      catalogState.page = 1;
-      renderCatalog();
-    });
-  });
-
-  // Reset
   const resetFn = () => {
     catalogState = { type: '', condition: '', sort: 'default', page: 1 };
-    document.querySelectorAll('.filter-btn').forEach(b => {
-      b.classList.remove('active');
-      if (b.dataset.value === '' || b.dataset.sort === 'default') b.classList.add('active');
-    });
+    syncFilterButtons();
+    initMobileFilters();
     renderCatalog();
   };
-  document.getElementById('filterReset')?.addEventListener('click', resetFn);
   document.getElementById('emptyReset')?.addEventListener('click', resetFn);
 
-  // Load more
   document.getElementById('loadMoreBtn')?.addEventListener('click', () => {
     catalogState.page++;
     renderCatalog(true);
   });
 
+  initMobileFilters();
   renderCatalog();
 }
 
@@ -221,11 +259,13 @@ function renderCatalog(append = false) {
   const shown = catalogState.page * PAGE_SIZE;
   const slice = all.slice(append ? (catalogState.page - 1) * PAGE_SIZE : 0, shown);
 
-  if (subtitle) subtitle.textContent = `${total} ${pluralize(total, 'коляска', 'коляски', 'колясок')}`;
+  if (subtitle) {
+    subtitle.textContent = `${total} ${pluralize(total, 'коляска', 'коляски', 'колясок')}`;
+  }
 
   if (total === 0) {
     grid.innerHTML = '';
-    if (emptyEl) emptyEl.style.display = 'block';
+    if (emptyEl) emptyEl.style.display = 'flex';
     if (loadMoreWrapper) loadMoreWrapper.style.display = 'none';
     return;
   }
@@ -239,13 +279,16 @@ function renderCatalog(append = false) {
   }
 
   bindAddToCart(grid);
+  initMobileFilters();
 
   if (loadMoreWrapper) {
     loadMoreWrapper.style.display = shown < total ? 'flex' : 'none';
   }
 }
 
-// ─── Product Page ───────────────────────────────────────────────────────────
+function getProductThumbs(product) {
+  return [product.img, product.img, product.img, product.img];
+}
 
 function initProductPage() {
   const layout = document.getElementById('productLayout');
@@ -259,30 +302,37 @@ function initProductPage() {
     return;
   }
 
-  // Update page title and breadcrumb
   document.title = `${product.name} — Б/У Колясочка`;
   const breadEl = document.getElementById('breadcrumbCurrent');
   if (breadEl) breadEl.textContent = product.name;
+  const mobileTitle = document.getElementById('mobileProductTitle');
+  if (mobileTitle) mobileTitle.textContent = product.name;
 
   const waText = encodeURIComponent(`Здравствуйте! Интересует: ${product.name} за ${formatPrice(product.price)}`);
   const discount = product.newPrice ? Math.round((1 - product.price / product.newPrice) * 100) : null;
+  const thumbs = getProductThumbs(product);
 
   layout.innerHTML = `
     <div class="product-gallery">
       <div class="product-main-img">
         <img src="${product.img}" alt="${product.name}" id="mainProductImg">
       </div>
+      <div class="product-thumbs">
+        ${thumbs.map((src, i) => `
+          <button type="button" class="product-thumb${i === 0 ? ' active' : ''}" data-src="${src}" aria-label="Фото ${i + 1}">
+            <img src="${src}" alt="">
+          </button>
+        `).join('')}
+      </div>
     </div>
     <div class="product-details">
-      <div class="product-brand">${product.brand}</div>
+      <div class="product-brand">${product.brand.toUpperCase()}</div>
       <h1 class="product-name">${product.name}</h1>
-
       <div class="product-price-block">
         <span class="product-price">${formatPrice(product.price)}</span>
         ${product.newPrice ? `<span class="product-price-old">${formatPrice(product.newPrice)}</span>` : ''}
         ${discount ? `<span class="product-discount">−${discount}%</span>` : ''}
       </div>
-
       <div class="product-meta">
         <div class="product-meta-row">
           <span class="product-meta-label">Состояние</span>
@@ -301,40 +351,31 @@ function initProductPage() {
           <span class="product-meta-value">${product.year}</span>
         </div>
       </div>
-
       <p class="product-desc">${product.desc}</p>
-
       <div class="product-actions">
-        <button class="btn btn-primary btn-lg add-to-cart-btn" data-id="${product.id}" style="flex:1">В корзину</button>
-        <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${waText}" class="btn btn-whatsapp btn-lg" target="_blank" rel="noopener" style="flex:1">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/>
-          </svg>
-          Купить в WhatsApp
-        </a>
+        <button class="btn btn-primary btn-lg add-to-cart-btn" data-id="${product.id}">В корзину</button>
+        <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${waText}" class="btn btn-whatsapp btn-lg" target="_blank" rel="noopener">Купить в WhatsApp</a>
       </div>
-
       <div class="product-guarantees">
-        <div class="guarantee-item">
-          <span class="guarantee-icon">✓</span>
-          <span>Проверено перед продажей</span>
-        </div>
-        <div class="guarantee-item">
-          <span class="guarantee-icon">✓</span>
-          <span>Честное описание состояния</span>
-        </div>
-        <div class="guarantee-item">
-          <span class="guarantee-icon">✓</span>
-          <span>Быстрый ответ в WhatsApp</span>
-        </div>
+        <div class="guarantee-item"><span class="guarantee-icon">✓</span><span>Проверено перед продажей</span></div>
+        <div class="guarantee-item"><span class="guarantee-icon">✓</span><span>Честное описание состояния</span></div>
+        <div class="guarantee-item"><span class="guarantee-icon">✓</span><span>Быстрый ответ в WhatsApp</span></div>
       </div>
     </div>
   `;
 
+  layout.querySelectorAll('.product-thumb').forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      layout.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+      const mainImg = document.getElementById('mainProductImg');
+      if (mainImg) mainImg.src = thumb.dataset.src;
+    });
+  });
+
   bindAddToCart(layout);
 
-  // Related products (same type, different id)
-  const related = PRODUCTS.filter(p => p.type === product.type && p.id !== product.id).slice(0, 4);
+  const related = PRODUCTS.filter(p => p.type === product.type && p.id !== product.id).slice(0, 3);
   if (related.length > 0) {
     const relatedSection = document.getElementById('relatedSection');
     const relatedGrid = document.getElementById('relatedGrid');
@@ -346,8 +387,6 @@ function initProductPage() {
   }
 }
 
-// ─── Add to Cart binding ─────────────────────────────────────────────────────
-
 function bindAddToCart(container) {
   container.querySelectorAll('.add-to-cart-btn').forEach(btn => {
     btn.addEventListener('click', e => {
@@ -358,13 +397,14 @@ function bindAddToCart(container) {
   });
 }
 
-// ─── Init ────────────────────────────────────────────────────────────────────
-
 document.addEventListener('DOMContentLoaded', () => {
   initLoader();
   initHeader();
   initMobileMenu();
+  initBottomNav();
   initIndexPage();
   initCatalogPage();
   initProductPage();
 });
+
+window.updateBottomCartCount = updateBottomCartCount;

@@ -1,7 +1,26 @@
 window.WHATSAPP_NUMBER = window.WHATSAPP_NUMBER || '79000000000';
 const WHATSAPP_NUMBER = window.WHATSAPP_NUMBER;
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 24;
 const FEATURED_IDS = [49, 2, 3];
+
+const SORT_OPTIONS = [
+  ['newest', 'Новинки'],
+  ['price-asc', 'Цена ↑'],
+  ['price-desc', 'Цена ↓'],
+  ['name-asc', 'По названию'],
+  ['brand-asc', 'По бренду'],
+  ['discount-desc', 'Скидка ↓'],
+  ['condition-desc', 'Состояние']
+];
+
+const CONDITION_ORDER = { likenew: 0, excellent: 1, good: 2 };
+
+const TYPE_FILTER_LABELS = {
+  transformer: 'Трансформеры',
+  stroller: 'Прогулочные',
+  twin: 'Для двойни',
+  sport: 'Спортивные'
+};
 
 function pageUrl(path) {
   const base = window.SITE_BASE || '/bu-kolyasochka/';
@@ -42,16 +61,49 @@ function pluralize(n, one, few, many) {
   return many;
 }
 
-function buildProductCard(product) {
+function sortProducts(list, sortKey) {
+  const arr = [...list];
+  switch (sortKey) {
+    case 'price-asc':
+      return arr.sort((a, b) => a.price - b.price);
+    case 'price-desc':
+      return arr.sort((a, b) => b.price - a.price);
+    case 'name-asc':
+      return arr.sort((a, b) => a.name.localeCompare(b.name, 'ru'));
+    case 'brand-asc':
+      return arr.sort((a, b) => {
+        const cmp = a.brand.localeCompare(b.brand, 'ru');
+        return cmp !== 0 ? cmp : a.name.localeCompare(b.name, 'ru');
+      });
+    case 'discount-desc':
+      return arr.sort((a, b) => {
+        const da = a.newPrice ? 1 - a.price / a.newPrice : 0;
+        const db = b.newPrice ? 1 - b.price / b.newPrice : 0;
+        return db - da;
+      });
+    case 'condition-desc':
+      return arr.sort((a, b) =>
+        (CONDITION_ORDER[a.condition] ?? 9) - (CONDITION_ORDER[b.condition] ?? 9)
+      );
+    case 'newest':
+    default:
+      return arr.sort((a, b) => b.year - a.year || b.id - a.id);
+  }
+}
+
+function buildProductCard(product, animIndex) {
   const discount = product.newPrice
     ? Math.round((1 - product.price / product.newPrice) * 100)
     : null;
+  const animDelay = animIndex != null ? ` style="animation-delay:${Math.min(animIndex, 11) * 45}ms"` : '';
+  const typeLabel = getTypeLabel(product.type);
 
   return `
-    <article class="product-card" data-id="${product.id}">
+    <article class="product-card catalog-card-in"${animDelay} data-id="${product.id}">
       <a href="${pageUrl('product.html?id=' + product.id)}" class="product-card-link">
         <div class="product-card-img-wrap">
           <img src="${product.img}" alt="${product.name}" class="product-card-img" loading="lazy" onerror="fixProductImg(this,'${escAttr(product.name)}')">
+          <span class="product-card-type">${typeLabel}</span>
           ${discount ? `<span class="product-card-badge">−${discount}%</span>` : ''}
           <span class="product-card-condition">${getConditionBadge(product.condition)}</span>
           <div class="product-card-overlay">
@@ -64,6 +116,7 @@ function buildProductCard(product) {
           <div class="product-card-meta">
             <span>${getTypeLabel(product.type)}</span>
             <span>${product.year}</span>
+            <span>${product.color}</span>
           </div>
           <div class="product-card-prices">
             <span class="product-card-price">${formatPrice(product.price)}</span>
@@ -166,11 +219,21 @@ function initIndexPage() {
 
   const featured = FEATURED_IDS.map(id => PRODUCTS.find(p => p.id === id)).filter(Boolean);
   const grid = document.getElementById('featuredGrid');
-  grid.innerHTML = featured.map(buildProductCard).join('');
+  grid.innerHTML = featured.map((p, i) => buildProductCard(p, i)).join('');
   bindAddToCart(grid);
 }
 
-let catalogState = { type: '', condition: '', sort: 'default', page: 1 };
+let catalogState = { type: '', condition: '', sort: 'newest', page: 1 };
+
+function syncCatalogUrl() {
+  const params = new URLSearchParams();
+  if (catalogState.type) params.set('type', catalogState.type);
+  if (catalogState.condition) params.set('condition', catalogState.condition);
+  if (catalogState.sort && catalogState.sort !== 'newest') params.set('sort', catalogState.sort);
+  const qs = params.toString();
+  const url = window.location.pathname + (qs ? '?' + qs : '');
+  history.replaceState(null, '', url);
+}
 
 function syncFilterButtons() {
   document.querySelectorAll('[data-filter]').forEach(btn => {
@@ -178,15 +241,89 @@ function syncFilterButtons() {
     const value = btn.dataset.value;
     btn.classList.toggle('active', catalogState[filter] === value);
   });
-  const sortSelect = document.getElementById('sortSelect');
-  if (sortSelect) sortSelect.value = catalogState.sort;
+  document.querySelectorAll('[data-sort]').forEach(btn => {
+    btn.classList.toggle('active', catalogState.sort === btn.dataset.sort);
+  });
 }
 
 function applyFilter(filter, value) {
   catalogState[filter] = value;
   catalogState.page = 1;
   syncFilterButtons();
+  syncFilterChips();
+  syncCatalogUrl();
   renderCatalog();
+}
+
+function applySort(sortKey) {
+  catalogState.sort = sortKey;
+  catalogState.page = 1;
+  syncFilterButtons();
+  syncCatalogUrl();
+  renderCatalog();
+}
+
+function syncFilterChips() {
+  const container = document.getElementById('catalogActiveFilters');
+  if (!container) return;
+
+  const chips = [];
+  if (catalogState.type) {
+    chips.push({
+      key: 'type',
+      label: TYPE_FILTER_LABELS[catalogState.type] || catalogState.type
+    });
+  }
+  if (catalogState.condition) {
+    chips.push({
+      key: 'condition',
+      label: CONDITIONS[catalogState.condition] || catalogState.condition
+    });
+  }
+
+  if (chips.length === 0) {
+    container.innerHTML = '';
+    container.style.display = 'none';
+    return;
+  }
+
+  container.style.display = 'flex';
+  container.innerHTML = chips.map(chip => `
+    <button type="button" class="catalog-chip" data-clear-filter="${chip.key}">
+      ${chip.label} <span aria-hidden="true">✕</span>
+    </button>
+  `).join('') + `
+    <button type="button" class="catalog-chip catalog-chip--reset" data-clear-all>Сбросить всё</button>
+  `;
+
+  container.querySelectorAll('[data-clear-filter]').forEach(btn => {
+    btn.addEventListener('click', () => applyFilter(btn.dataset.clearFilter, ''));
+  });
+  container.querySelector('[data-clear-all]')?.addEventListener('click', resetCatalogFilters);
+}
+
+function resetCatalogFilters() {
+  catalogState = { type: '', condition: '', sort: catalogState.sort || 'newest', page: 1 };
+  syncFilterButtons();
+  syncFilterChips();
+  syncCatalogUrl();
+  initMobileFilters();
+  renderCatalog();
+}
+
+function renderSortPills(container) {
+  if (!container) return;
+  container.innerHTML = SORT_OPTIONS.map(([key, label]) =>
+    `<button type="button" class="sort-pill${catalogState.sort === key ? ' active' : ''}" data-sort="${key}">${label}</button>`
+  ).join('');
+  container.querySelectorAll('[data-sort]').forEach(btn => {
+    btn.addEventListener('click', () => applySort(btn.dataset.sort));
+  });
+}
+
+function initSortPills() {
+  renderSortPills(document.getElementById('sortPills'));
+  renderSortPills(document.getElementById('mobileSortFilters'));
 }
 
 function initMobileFilters() {
@@ -225,32 +362,34 @@ function initCatalogPage() {
   const params = getParams();
   if (params.get('type')) catalogState.type = params.get('type');
   if (params.get('condition')) catalogState.condition = params.get('condition');
-  syncFilterButtons();
+  const sortParam = params.get('sort');
+  if (sortParam && SORT_OPTIONS.some(([key]) => key === sortParam)) {
+    catalogState.sort = sortParam;
+  }
 
-  document.querySelectorAll('[data-filter]').forEach(btn => {
+  document.querySelectorAll('.filter-bar [data-filter]').forEach(btn => {
     btn.addEventListener('click', () => applyFilter(btn.dataset.filter, btn.dataset.value));
   });
 
-  document.getElementById('sortSelect')?.addEventListener('change', e => {
-    catalogState.sort = e.target.value;
-    catalogState.page = 1;
+  document.getElementById('emptyReset')?.addEventListener('click', () => {
+    catalogState = { type: '', condition: '', sort: 'newest', page: 1 };
+    syncFilterButtons();
+    syncFilterChips();
+    syncCatalogUrl();
+    initMobileFilters();
+    initSortPills();
     renderCatalog();
   });
-
-  const resetFn = () => {
-    catalogState = { type: '', condition: '', sort: 'default', page: 1 };
-    syncFilterButtons();
-    initMobileFilters();
-    renderCatalog();
-  };
-  document.getElementById('emptyReset')?.addEventListener('click', resetFn);
 
   document.getElementById('loadMoreBtn')?.addEventListener('click', () => {
     catalogState.page++;
     renderCatalog(true);
   });
 
+  initSortPills();
   initMobileFilters();
+  syncFilterButtons();
+  syncFilterChips();
   renderCatalog();
 }
 
@@ -258,9 +397,7 @@ function getFilteredProducts() {
   let list = [...PRODUCTS];
   if (catalogState.type) list = list.filter(p => p.type === catalogState.type);
   if (catalogState.condition) list = list.filter(p => p.condition === catalogState.condition);
-  if (catalogState.sort === 'price-asc') list.sort((a, b) => a.price - b.price);
-  if (catalogState.sort === 'price-desc') list.sort((a, b) => b.price - a.price);
-  return list;
+  return sortProducts(list, catalogState.sort);
 }
 
 function renderCatalog(append = false) {
@@ -268,36 +405,50 @@ function renderCatalog(append = false) {
   const emptyEl = document.getElementById('catalogEmpty');
   const loadMoreWrapper = document.getElementById('loadMoreWrapper');
   const subtitle = document.getElementById('catalogSubtitle');
+  const shownCount = document.getElementById('catalogShownCount');
 
   const all = getFilteredProducts();
   const total = all.length;
-  const shown = catalogState.page * PAGE_SIZE;
-  const slice = all.slice(append ? (catalogState.page - 1) * PAGE_SIZE : 0, shown);
+  const shownMax = catalogState.page * PAGE_SIZE;
+  const start = append ? (catalogState.page - 1) * PAGE_SIZE : 0;
+  const slice = all.slice(start, shownMax);
+  const displayed = Math.min(shownMax, total);
 
   if (subtitle) {
     subtitle.textContent = `${total} ${pluralize(total, 'коляска', 'коляски', 'колясок')}`;
+  }
+
+  if (shownCount) {
+    shownCount.textContent = total === 0
+      ? ''
+      : `Показано ${displayed} из ${total}`;
   }
 
   if (total === 0) {
     grid.innerHTML = '';
     if (emptyEl) emptyEl.style.display = 'flex';
     if (loadMoreWrapper) loadMoreWrapper.style.display = 'none';
+    syncFilterChips();
     return;
   }
 
   if (emptyEl) emptyEl.style.display = 'none';
 
+  const cardsHtml = slice.map((p, i) => buildProductCard(p, append ? i : start + i)).join('');
+
   if (append) {
-    grid.insertAdjacentHTML('beforeend', slice.map(buildProductCard).join(''));
+    grid.insertAdjacentHTML('beforeend', cardsHtml);
   } else {
-    grid.innerHTML = slice.map(buildProductCard).join('');
+    grid.innerHTML = cardsHtml;
   }
 
   bindAddToCart(grid);
   initMobileFilters();
+  initSortPills();
+  syncFilterChips();
 
   if (loadMoreWrapper) {
-    loadMoreWrapper.style.display = shown < total ? 'flex' : 'none';
+    loadMoreWrapper.style.display = displayed < total ? 'flex' : 'none';
   }
 }
 
@@ -395,12 +546,15 @@ function initProductPage() {
 
   bindAddToCart(layout);
 
-  const related = PRODUCTS.filter(p => p.type === product.type && p.id !== product.id).slice(0, 3);
+  const related = sortProducts(
+    PRODUCTS.filter(p => p.type === product.type && p.id !== product.id),
+    'newest'
+  ).slice(0, 3);
   if (related.length > 0) {
     const relatedSection = document.getElementById('relatedSection');
     const relatedGrid = document.getElementById('relatedGrid');
     if (relatedSection && relatedGrid) {
-      relatedGrid.innerHTML = related.map(buildProductCard).join('');
+      relatedGrid.innerHTML = related.map((p, i) => buildProductCard(p, i)).join('');
       relatedSection.style.display = 'block';
       bindAddToCart(relatedGrid);
     }

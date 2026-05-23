@@ -70,5 +70,17 @@ const PRODUCTS = [
   { id: 50, name: "Silver Cross Dune", brand: "Silver Cross", type: "transformer", condition: "excellent", price: 56000, newPrice: 136000, color: "Серый", year: 2022, img: "https://placehold.co/600x600/111111/C9A96E?text=Silver+Cross+Dune", desc: "Роскошная британская коляска." }
 ];
 
+const PRODUCT_IMAGE_NUMS = [1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+function productImageUrl(productId) {
+  const base = (typeof window !== 'undefined' && window.SITE_BASE) || '/bu-kolyasochka/';
+  const n = PRODUCT_IMAGE_NUMS[(productId - 1) % PRODUCT_IMAGE_NUMS.length];
+  return base + 'img/img_' + n + '.png';
+}
+
+PRODUCTS.forEach(p => {
+  p.img = productImageUrl(p.id);
+});
+
 const CONDITIONS = { likenew: "Как новая", excellent: "Отличное", good: "Хорошее" };
 const TYPES = { stroller: "Прогулочная", transformer: "Трансформер", twin: "Для двойни", sport: "Спортивная" };

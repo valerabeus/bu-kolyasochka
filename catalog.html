@@ -69,6 +69,10 @@
         <p class="mobile-filter-label">Состояние</p>
         <div class="mobile-filter-btns" id="mobileConditionFilters"></div>
       </div>
+      <div class="mobile-filter-group">
+        <p class="mobile-filter-label">Сортировка</p>
+        <div class="mobile-filter-btns mobile-sort-btns" id="mobileSortFilters"></div>
+      </div>
     </div>
   </div>
 
@@ -102,20 +106,25 @@
           <button class="filter-btn" data-filter="condition" data-value="likenew">Как новая</button>
           <button class="filter-btn" data-filter="condition" data-value="excellent">Отличное</button>
           <button class="filter-btn" data-filter="condition" data-value="good">Хорошее</button>
-          <div class="filter-sort">
-            <span class="filter-sort-label">Сортировка:</span>
-            <select class="filter-sort-select" id="sortSelect">
-              <option value="default">По умолчанию ↓</option>
-              <option value="price-asc">Цена ↑</option>
-              <option value="price-desc">Цена ↓</option>
-            </select>
-          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="catalog-toolbar">
+      <div class="container catalog-toolbar-inner">
+        <div class="catalog-toolbar-row">
+          <span class="filter-label">Сортировка</span>
+          <div class="sort-pills" id="sortPills"></div>
+        </div>
+        <div class="catalog-toolbar-meta">
+          <p class="catalog-shown" id="catalogShownCount"></p>
+          <div class="catalog-active-filters" id="catalogActiveFilters"></div>
         </div>
       </div>
     </div>
 
     <div class="container catalog-grid-wrap">
-      <div class="products-grid" id="catalogGrid"></div>
+      <div class="products-grid products-grid--catalog" id="catalogGrid"></div>
       <div class="load-more-wrapper" id="loadMoreWrapper" style="display:none">
         <button class="btn btn-ghost btn-lg" id="loadMoreBtn">Показать ещё</button>
       </div>

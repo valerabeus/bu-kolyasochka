@@ -23,8 +23,9 @@
       <a href="index.html" class="logo">Б/У<br>Колясочка</a>
       <nav class="nav">
         <a href="catalog.html" class="nav-link">Каталог</a>
+        <a href="kak-vybrat.html" class="nav-link">Как выбрать</a>
+        <a href="compare.html" class="nav-link">Сравнение <span data-compare-count style="display:none"></span></a>
         <a href="#about" class="nav-link">О магазине</a>
-        <a href="#reviews" class="nav-link">Отзывы</a>
         <a href="#contact" class="nav-link">Контакты</a>
       </nav>
       <div class="header-actions">
@@ -51,7 +52,9 @@
       <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Закрыть">✕</button>
     </div>
     <nav class="mobile-nav">
-        <a href="catalog.html" class="mobile-nav-link">Каталог</a>
+      <a href="catalog.html" class="mobile-nav-link">Каталог</a>
+      <a href="kak-vybrat.html" class="mobile-nav-link">Как выбрать</a>
+      <a href="compare.html" class="mobile-nav-link">Сравнение</a>
       <a href="#about" class="mobile-nav-link">О магазине</a>
       <a href="#reviews" class="mobile-nav-link">Отзывы</a>
       <a href="#contact" class="mobile-nav-link">Контакты</a>
@@ -74,7 +77,7 @@
       </div>
       <div class="hero-cta">
         <a href="catalog.html" class="btn btn-primary btn-lg">Смотреть каталог</a>
-        <a href="https://wa.me/79000000000" class="btn btn-ghost btn-lg" target="_blank" rel="noopener">Написать в WhatsApp</a>
+        <button type="button" class="btn btn-ghost btn-lg" onclick="window.CatalogAssistant && window.CatalogAssistant.open()">AI подбор по каталогу</button>
       </div>
       <div class="hero-stats">
         <div class="hero-stat">
@@ -270,6 +273,8 @@
         </div>
         <div class="footer-col">
           <h4 class="footer-col-title">Информация</h4>
+          <a href="kak-vybrat.html" class="footer-link">Как выбрать коляску</a>
+          <a href="compare.html" class="footer-link">Сравнение товаров</a>
           <a href="#about" class="footer-link">О магазине</a>
           <a href="#reviews" class="footer-link">Отзывы</a>
           <a href="#contact" class="footer-link">Контакты</a>
@@ -313,6 +318,8 @@
 
   <script src="/bu-kolyasochka/js/products.js"></script>
   <script src="/bu-kolyasochka/js/cart.js"></script>
+  <script src="/bu-kolyasochka/js/compare.js"></script>
   <script src="/bu-kolyasochka/js/main.js"></script>
+  <script src="/bu-kolyasochka/js/assistant.js"></script>
 </body>
 </html>

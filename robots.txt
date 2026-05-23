@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://valerabeus.github.io/bu-kolyasochka/sitemap.xml

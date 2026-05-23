@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Каталог — Б/У Колясочка</title>
-  <meta name="description" content="Каталог б/у премиальных детских колясок. Bugaboo, Stokke, UPPAbaby, Cybex и другие бренды в наличии.">
+  <title>Сравнение детских колясок — Б/У Колясочка</title>
+  <meta name="description" content="Сравните б/у премиальные детские коляски по цене, состоянию, году, бренду и типу. AI делает краткий вывод по моделям из каталога сайта.">
   <script>
     (function () {
       var p = location.pathname, m = '/bu-kolyasochka';
@@ -16,15 +16,15 @@
   <script src="/bu-kolyasochka/js/site.js"></script>
   <link rel="stylesheet" href="/bu-kolyasochka/css/style.css">
 </head>
-<body data-page="catalog">
+<body data-page="compare">
 
   <header class="header" id="header">
     <div class="header-inner">
       <a href="index.html" class="logo">Б/У<br>Колясочка</a>
       <nav class="nav">
-        <a href="catalog.html" class="nav-link nav-link--active">Каталог</a>
+        <a href="catalog.html" class="nav-link">Каталог</a>
         <a href="kak-vybrat.html" class="nav-link">Как выбрать</a>
-        <a href="compare.html" class="nav-link">Сравнение <span data-compare-count style="display:none"></span></a>
+        <a href="compare.html" class="nav-link nav-link--active">Сравнение <span data-compare-count style="display:none"></span></a>
         <a href="index.html#about" class="nav-link">О магазине</a>
         <a href="index.html#contact" class="nav-link">Контакты</a>
       </nav>
@@ -62,80 +62,45 @@
     <div class="mobile-menu-wa">
       <a href="https://wa.me/79000000000" class="btn btn-whatsapp btn-sm" style="width:100%" target="_blank" rel="noopener">WhatsApp</a>
     </div>
-    <div class="mobile-menu-filters" id="mobileMenuFilters">
-      <p class="mobile-menu-filters-title">Фильтры</p>
-      <div class="mobile-filter-group">
-        <p class="mobile-filter-label">Тип</p>
-        <div class="mobile-filter-btns" id="mobileTypeFilters"></div>
-      </div>
-      <div class="mobile-filter-group">
-        <p class="mobile-filter-label">Состояние</p>
-        <div class="mobile-filter-btns" id="mobileConditionFilters"></div>
-      </div>
-      <div class="mobile-filter-group">
-        <p class="mobile-filter-label">Сортировка</p>
-        <div class="mobile-filter-btns mobile-sort-btns" id="mobileSortFilters"></div>
-      </div>
-    </div>
   </div>
 
-  <main class="catalog-page">
-    <div class="container">
-      <div class="catalog-header">
-        <p class="section-kicker">Подбор по сценарию</p>
-        <h1 class="catalog-title">Каталог колясок</h1>
-        <p class="catalog-subtitle" id="catalogSubtitle">Каталог колясок</p>
-        <div class="catalog-highlights" aria-label="Преимущества каталога">
-          <span>Проверенное состояние</span>
-          <span>Сортировка по цене</span>
-          <span>Быстрая бронь в WhatsApp</span>
+  <main class="compare-page">
+    <section class="page-hero">
+      <div class="container page-hero-grid">
+        <div>
+          <p class="section-kicker">Сравнение товаров</p>
+          <h1 class="page-hero-title">Сравните коляски перед покупкой</h1>
+          <p class="page-hero-sub">Добавляйте до 4 моделей из каталога. Таблица покажет цену, состояние, тип, год, бренд и описание, а встроенный AI даст короткий вывод только по товарам сайта.</p>
+          <div class="compare-topbar">
+            <a href="catalog.html" class="btn btn-primary btn-lg">Добавить из каталога</a>
+            <button type="button" class="btn btn-ghost btn-lg" onclick="window.CatalogAssistant && window.CatalogAssistant.open()">Спросить AI</button>
+          </div>
         </div>
+        <aside class="compare-ai-card">
+          <p>AI кратко</p>
+          <strong>Вывод по выбранным моделям</strong>
+          <div class="compare-ai-summary" id="compareAiSummary">Добавьте 2-4 коляски из каталога, и помощник кратко сравнит их по цене, состоянию и сценарию использования.</div>
+        </aside>
       </div>
-    </div>
+    </section>
 
-    <div class="filter-bar" id="filterBar">
-      <div class="filter-bar-inner">
-        <div class="filter-row">
-          <span class="filter-label">Тип:</span>
-          <button class="filter-btn active" data-filter="type" data-value="">Все</button>
-          <button class="filter-btn" data-filter="type" data-value="transformer">Трансформеры</button>
-          <button class="filter-btn" data-filter="type" data-value="stroller">Прогулочные</button>
-          <button class="filter-btn" data-filter="type" data-value="twin">Для двойни</button>
-          <button class="filter-btn" data-filter="type" data-value="sport">Спортивные</button>
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="section-kicker">Ваш выбор</p>
+            <h2 class="section-title">Модели в сравнении</h2>
+          </div>
+          <a href="kak-vybrat.html" class="section-link">Как выбрать →</a>
         </div>
-        <div class="filter-row">
-          <span class="filter-label">Состояние:</span>
-          <button class="filter-btn active" data-filter="condition" data-value="">Все</button>
-          <button class="filter-btn" data-filter="condition" data-value="likenew">Как новая</button>
-          <button class="filter-btn" data-filter="condition" data-value="excellent">Отличное</button>
-          <button class="filter-btn" data-filter="condition" data-value="good">Хорошее</button>
+        <div class="compare-empty" id="compareEmpty">
+          <p>Пока нет товаров для сравнения. Откройте каталог и нажмите “Сравнить” на понравившихся колясках.</p>
+          <a href="catalog.html" class="btn btn-primary btn-sm">Перейти в каталог</a>
         </div>
+        <div class="compare-products" id="compareProducts"></div>
+        <div class="compare-table" id="compareTable" aria-label="Таблица сравнения колясок"></div>
       </div>
-    </div>
-
-    <div class="catalog-toolbar">
-      <div class="container catalog-toolbar-inner">
-        <div class="catalog-toolbar-row">
-          <span class="filter-label">Сортировка</span>
-          <div class="sort-pills" id="sortPills"></div>
-        </div>
-        <div class="catalog-toolbar-meta">
-          <p class="catalog-shown" id="catalogShownCount"></p>
-          <div class="catalog-active-filters" id="catalogActiveFilters"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container catalog-grid-wrap">
-      <div class="products-grid products-grid--catalog" id="catalogGrid"></div>
-      <div class="load-more-wrapper" id="loadMoreWrapper" style="display:none">
-        <button class="btn btn-ghost btn-lg" id="loadMoreBtn">Показать ещё</button>
-      </div>
-      <div class="catalog-empty" id="catalogEmpty" style="display:none">
-        <p>По вашему запросу ничего не найдено</p>
-        <button class="btn btn-ghost btn-sm" id="emptyReset">Сбросить фильтры</button>
-      </div>
-    </div>
+    </section>
   </main>
 
   <footer class="footer">
@@ -163,7 +128,8 @@
         <div class="footer-col">
           <h4 class="footer-col-title">Связаться</h4>
           <a href="https://wa.me/79000000000" class="footer-link" target="_blank" rel="noopener">WhatsApp</a>
-          <p class="footer-text">Пн–Вс 9:00–21:00</p>
+          <p class="footer-text">Ответим в течение часа</p>
+          <p class="footer-text">Пн-Вс 9:00-21:00</p>
         </div>
       </div>
       <div class="footer-bottom">

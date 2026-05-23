@@ -12,7 +12,7 @@
   --muted: #888888;
   --border: rgba(255, 255, 255, 0.08);
   --wa: #25D366;
-  --font: 'Manrope', sans-serif;
+  --font: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --header-h: 70px;
   --header-h-mobile: 56px;
   --bottom-nav-h: 60px;

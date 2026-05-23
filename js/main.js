@@ -54,10 +54,20 @@ function buildProductCard(product) {
 function initLoader() {
   const loader = document.getElementById('pageLoader');
   if (!loader) return;
-  window.addEventListener('load', () => {
+
+  const hide = () => {
+    if (!loader.isConnected) return;
     loader.classList.add('hidden');
     setTimeout(() => loader.remove(), 400);
-  });
+  };
+
+  // Не ждём все внешние картинки — иначе экран может висеть бесконечно
+  if (document.readyState === 'complete') {
+    hide();
+  } else {
+    document.addEventListener('DOMContentLoaded', hide, { once: true });
+    setTimeout(hide, 1500);
+  }
 }
 
 function initHeader() {

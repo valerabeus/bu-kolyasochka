@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Б/У Колясочка — Премиальные коляски с историей</title>
+  <meta name="description" content="Магазин б/у премиальных детских колясок. Bugaboo, Stokke, UPPAbaby, Cybex — тщательно проверенные коляски по честным ценам.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Page Loader -->
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-logo">Б/У Колясочка</div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Б/У<br>Колясочка</a>
+
+      <nav class="nav">
+        <a href="catalog.html" class="nav-link">Каталог</a>
+        <a href="#about" class="nav-link">О магазине</a>
+        <a href="#reviews" class="nav-link">Отзывы</a>
+        <a href="#contact" class="nav-link">Контакты</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="social-icons">
+          <a href="https://wa.me/79000000000" class="social-icon social-icon--wa" target="_blank" rel="noopener" title="WhatsApp">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+          <a href="https://t.me/bukolyasochka" class="social-icon social-icon--tg" target="_blank" rel="noopener" title="Telegram">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          </a>
+          <a href="https://www.avito.ru/rossiya/detskie_tovary" class="social-icon social-icon--avito" target="_blank" rel="noopener" title="Авито">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M9.5 2a7.5 7.5 0 1 1 0 15 7.5 7.5 0 0 1 0-15zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11zm8.5.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zm0 1.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-5 8.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 1.5a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm7.5.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zm0 1.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>
+          </a>
+          <a href="https://vk.com/bukolyasochka" class="social-icon social-icon--vk" target="_blank" rel="noopener" title="ВКонтакте">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.391 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.05-1.727-1.033-1.01-1.49-.9-1.49.476v1.255c0 .368-.122.588-1.14.588-1.68 0-3.54-.996-4.85-2.859-1.965-2.748-2.503-4.804-2.503-5.226 0-.228.09-.44.347-.44h1.753c.26 0 .357.12.453.406.502 1.455 1.34 2.73 1.68 2.73.13 0 .189-.06.189-.386V9.28c-.044-.834-.484-1.166-.484-1.536 0-.189.163-.388.422-.388h2.761c.22 0 .297.117.297.375v3.572c0 .207.09.28.146.28.13 0 .243-.073.483-.325 1.492-1.615 2.558-4.11 2.558-4.11.069-.145.22-.283.475-.283h1.753c.524 0 .637.268.524.53-.217.505-2.312 3.96-2.312 3.96-.178.3-.245.43 0 .757.178.246.762.756 1.152 1.213.716.828 1.264 1.525 1.409 2.005.14.487-.107.738-.596.738z"/></svg>
+          </a>
+        </div>
+        <button class="cart-toggle" id="cartToggle" aria-label="Корзина">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          <span class="cart-count" id="cartCount" style="display:none">0</span>
+        </button>
+        <button class="burger" id="burgerBtn" aria-label="Меню">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Закрыть">✕</button>
+    <nav class="mobile-nav">
+      <a href="catalog.html" class="mobile-nav-link">Каталог</a>
+      <a href="#about" class="mobile-nav-link">О магазине</a>
+      <a href="#reviews" class="mobile-nav-link">Отзывы</a>
+      <a href="#contact" class="mobile-nav-link">Контакты</a>
+      <a href="https://wa.me/79000000000" class="mobile-nav-link" target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
+  </div>
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-label">Премиальные коляски с историей</p>
+      <h1 class="hero-title">Лучшие бренды.<br>Честные цены.</h1>
+      <p class="hero-sub">Bugaboo, Stokke, UPPAbaby и другие — каждая коляска проверена и готова к новой прогулке</p>
+      <div class="hero-cta">
+        <a href="catalog.html" class="btn btn-primary btn-lg">Смотреть каталог</a>
+        <a href="https://www.avito.ru/rossiya/detskie_tovary" class="btn btn-avito btn-lg" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9.5 2a7.5 7.5 0 1 1 0 15 7.5 7.5 0 0 1 0-15zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11zm8.5.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zm0 1.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-5 8.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 1.5a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm7.5.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zm0 1.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>
+          Магазин на Авито
+        </a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-num">50+</span>
+        <span class="hero-stat-label">Колясок в наличии</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">15+</span>
+        <span class="hero-stat-label">Топ брендов</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">до 70%</span>
+        <span class="hero-stat-label">Экономия от новой</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ticker -->
+  <div class="ticker">
+    <div class="ticker-track" id="tickerTrack">
+      <span>BUGABOO</span><span>·</span>
+      <span>STOKKE</span><span>·</span>
+      <span>UPPABABY</span><span>·</span>
+      <span>CYBEX</span><span>·</span>
+      <span>INGLESINA</span><span>·</span>
+      <span>SILVER CROSS</span><span>·</span>
+      <span>ICANDY</span><span>·</span>
+      <span>MIMA</span><span>·</span>
+      <span>NUNA</span><span>·</span>
+      <span>THULE</span><span>·</span>
+      <span>BUGABOO</span><span>·</span>
+      <span>STOKKE</span><span>·</span>
+      <span>UPPABABY</span><span>·</span>
+      <span>CYBEX</span><span>·</span>
+      <span>INGLESINA</span><span>·</span>
+      <span>SILVER CROSS</span><span>·</span>
+      <span>ICANDY</span><span>·</span>
+      <span>MIMA</span><span>·</span>
+      <span>NUNA</span><span>·</span>
+      <span>THULE</span><span>·</span>
+    </div>
+  </div>
+
+  <!-- Categories -->
+  <section class="section" id="categories">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Категории</h2>
+        <a href="catalog.html" class="btn btn-ghost btn-sm">Все коляски</a>
+      </div>
+      <div class="categories-grid">
+        <a href="catalog.html?type=transformer" class="category-card category-card--large">
+          <div class="category-card-bg" style="background-image: url('https://placehold.co/800x900/111111/C9A96E?text=Трансформеры')"></div>
+          <div class="category-card-content">
+            <h3 class="category-card-title">Трансформеры</h3>
+            <p class="category-card-count" id="countTransformer">— позиций</p>
+          </div>
+        </a>
+        <div class="categories-side">
+          <a href="catalog.html?type=stroller" class="category-card">
+            <div class="category-card-bg" style="background-image: url('https://placehold.co/600x400/111111/C9A96E?text=Прогулочные')"></div>
+            <div class="category-card-content">
+              <h3 class="category-card-title">Прогулочные</h3>
+              <p class="category-card-count" id="countStroller">— позиций</p>
+            </div>
+          </a>
+          <a href="catalog.html?type=twin" class="category-card">
+            <div class="category-card-bg" style="background-image: url('https://placehold.co/600x400/111111/C9A96E?text=Для+двойни')"></div>
+            <div class="category-card-content">
+              <h3 class="category-card-title">Для двойни</h3>
+              <p class="category-card-count" id="countTwin">— позиций</p>
+            </div>
+          </a>
+          <a href="catalog.html?type=sport" class="category-card">
+            <div class="category-card-bg" style="background-image: url('https://placehold.co/600x400/111111/C9A96E?text=Спортивные')"></div>
+            <div class="category-card-content">
+              <h3 class="category-card-title">Спортивные</h3>
+              <p class="category-card-count" id="countSport">— позиций</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="section" id="featured">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Новые поступления</h2>
+        <a href="catalog.html" class="btn btn-ghost btn-sm">Весь каталог</a>
+      </div>
+      <div class="products-grid" id="featuredGrid">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Promo Banner -->
+  <section class="promo-banner">
+    <div class="container">
+      <div class="promo-inner">
+        <div class="promo-text">
+          <p class="promo-label">Спецпредложение</p>
+          <h2 class="promo-title">Состояние «Как новая» — скидка до 60% от цены нового</h2>
+          <p class="promo-sub">Коляски в состоянии «как новая» использовались не более 3 месяцев. Идеальный выбор для тех, кто хочет премиум без переплаты.</p>
+          <a href="catalog.html?condition=likenew" class="btn btn-primary btn-lg">Смотреть подборку</a>
+        </div>
+        <div class="promo-image">
+          <img src="https://placehold.co/600x500/1A1A1A/C9A96E?text=Как+Новая" alt="Коляски как новые" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">О магазине</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="about-card-icon">01</div>
+          <h3 class="about-card-title">Только проверенные коляски</h3>
+          <p class="about-card-text">Каждая коляска проходит осмотр перед публикацией. Мы честно описываем состояние и не скрываем дефекты.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-card-icon">02</div>
+          <h3 class="about-card-title">Топовые бренды</h3>
+          <p class="about-card-text">Bugaboo, Stokke, UPPAbaby, Cybex — бренды, которые держат качество спустя годы использования.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-card-icon">03</div>
+          <h3 class="about-card-title">Быстрое оформление</h3>
+          <p class="about-card-text">Пишите в WhatsApp — ответим в течение часа, поможем с выбором и организуем доставку или самовывоз.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="section" id="reviews">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Отзывы</h2>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">«Купила Bugaboo Cameleon — просто мечта! Описание полностью совпало с реальностью, коляска в отличном состоянии. Спасибо за честность!»</p>
+          <div class="review-author">Анна М., Москва</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">«Брала Stokke Xplory для второго ребёнка. Оформили за 20 минут в WhatsApp, привезли на следующий день. Очень удобный сервис!»</p>
+          <div class="review-author">Марина К., Санкт-Петербург</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★☆</div>
+          <p class="review-text">«Хорошее состояние, честные фото. Продавец подробно ответил на все вопросы. Рекомендую магазин всем молодым мамам!»</p>
+          <div class="review-author">Светлана Д., Краснодар</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / Footer CTA -->
+  <section class="section section--dark" id="contact">
+    <div class="container">
+      <div class="contact-cta">
+        <h2 class="contact-title">Не нашли что искали?</h2>
+        <p class="contact-sub">Напишите нам — мы поможем подобрать коляску под ваши требования и бюджет</p>
+        <a href="https://wa.me/79000000000" class="btn btn-primary btn-lg" target="_blank" rel="noopener">Написать в WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">Б/У Колясочка</div>
+          <p class="footer-tagline">Премиальные коляски<br>с историей</p>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-col-title">Каталог</h4>
+          <a href="catalog.html?type=transformer" class="footer-link">Трансформеры</a>
+          <a href="catalog.html?type=stroller" class="footer-link">Прогулочные</a>
+          <a href="catalog.html?type=twin" class="footer-link">Для двойни</a>
+          <a href="catalog.html?type=sport" class="footer-link">Спортивные</a>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-col-title">Информация</h4>
+          <a href="#about" class="footer-link">О магазине</a>
+          <a href="#reviews" class="footer-link">Отзывы</a>
+          <a href="#contact" class="footer-link">Контакты</a>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-col-title">Связаться</h4>
+          <a href="https://wa.me/79000000000" class="footer-link" target="_blank" rel="noopener">WhatsApp</a>
+          <p class="footer-text">Ответим в течение часа</p>
+          <p class="footer-text">Пн–Вс 9:00–21:00</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2024 Б/У Колясочка. Все права защищены.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Drawer -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h3 class="cart-drawer-title">Корзина</h3>
+      <button class="cart-drawer-close" id="cartClose" aria-label="Закрыть">✕</button>
+    </div>
+    <div class="cart-drawer-body" id="cartBody">
+      <div class="cart-empty" id="cartEmpty">
+        <p>Корзина пуста</p>
+        <a href="catalog.html" class="btn btn-primary btn-sm">Перейти в каталог</a>
+      </div>
+      <div class="cart-items" id="cartItems"></div>
+    </div>
+    <div class="cart-drawer-footer" id="cartFooter" style="display:none">
+      <div class="cart-total">
+        <span>Итого:</span>
+        <span class="cart-total-price" id="cartTotal">0 ₽</span>
+      </div>
+      <button class="btn btn-primary btn-lg" id="checkoutBtn" style="width:100%">Оформить через WhatsApp</button>
+    </div>
+  </aside>
+
+  <!-- Mobile Bottom Bar -->
+  <nav class="mobile-bottom-bar" aria-label="Мобильная навигация">
+    <div class="mbb-inner">
+      <a href="index.html" class="mbb-item active">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+        <span>Главная</span>
+      </a>
+      <a href="catalog.html" class="mbb-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span>Каталог</span>
+      </a>
+      <a href="https://wa.me/79000000000" class="mbb-item mbb-item--cta" target="_blank" rel="noopener">
+        <div class="mbb-cta-dot">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </div>
+        <span>Написать</span>
+      </a>
+      <a href="https://vk.com/bukolyasochka" class="mbb-item" target="_blank" rel="noopener">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.391 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.05-1.727-1.033-1.01-1.49-.9-1.49.476v1.255c0 .368-.122.588-1.14.588-1.68 0-3.54-.996-4.85-2.859-1.965-2.748-2.503-4.804-2.503-5.226 0-.228.09-.44.347-.44h1.753c.26 0 .357.12.453.406.502 1.455 1.34 2.73 1.68 2.73.13 0 .189-.06.189-.386V9.28c-.044-.834-.484-1.166-.484-1.536 0-.189.163-.388.422-.388h2.761c.22 0 .297.117.297.375v3.572c0 .207.09.28.146.28.13 0 .243-.073.483-.325 1.492-1.615 2.558-4.11 2.558-4.11.069-.145.22-.283.475-.283h1.753c.524 0 .637.268.524.53-.217.505-2.312 3.96-2.312 3.96-.178.3-.245.43 0 .757.178.246.762.756 1.152 1.213.716.828 1.264 1.525 1.409 2.005.14.487-.107.738-.596.738z"/></svg>
+        <span>ВКонтакте</span>
+      </a>
+      <a href="https://www.avito.ru/rossiya/detskie_tovary" class="mbb-item" target="_blank" rel="noopener">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span>Авито</span>
+      </a>
+    </div>
+  </nav>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

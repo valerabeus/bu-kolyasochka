@@ -1,0 +1,73 @@
+const STROLLER_PHOTOS = [
+  'img/img_1.png',
+  'img/img_2.png',
+  'img/img_4.png',
+  'img/img_5.png',
+  'img/img_6.png',
+  'img/img_7.png',
+  'img/img_8.png',
+  'img/img_9.png',
+  'img/img_10.png',
+  'img/img_11.png',
+  'img/img_12.png',
+];
+
+function getProductImg(product) {
+  return STROLLER_PHOTOS[(product.id - 1) % STROLLER_PHOTOS.length];
+}
+
+const PRODUCTS = [
+  { id: 1, name: "Bugaboo Cameleon 3+", brand: "Bugaboo", type: "transformer", condition: "good", price: 45000, newPrice: 110000, color: "Чёрный", year: 2021, img: "https://placehold.co/600x600/111111/C9A96E?text=Bugaboo+Cameleon+3%2B", desc: "Полная комплектация: люлька, прогулочный блок, дождевик, москитная сетка. Рама в отличном состоянии, чехол чистый без пятен." },
+  { id: 2, name: "Stokke Xplory V6", brand: "Stokke", type: "stroller", condition: "excellent", price: 38000, newPrice: 95000, color: "Серый", year: 2022, img: "https://placehold.co/600x600/111111/C9A96E?text=Stokke+Xplory+V6", desc: "Состояние как новая. Использовалась 6 месяцев. Все механизмы работают идеально." },
+  { id: 3, name: "UPPAbaby Vista", brand: "UPPAbaby", type: "transformer", condition: "likenew", price: 52000, newPrice: 130000, color: "Синий", year: 2022, img: "https://placehold.co/600x600/111111/C9A96E?text=UPPAbaby+Vista", desc: "Как новая. Полный комплект, все документы сохранены." },
+  { id: 4, name: "Cybex Priam", brand: "Cybex", type: "stroller", condition: "good", price: 41000, newPrice: 100000, color: "Бежевый", year: 2021, img: "https://placehold.co/600x600/111111/C9A96E?text=Cybex+Priam", desc: "Хорошее состояние, небольшие потертости на раме. Ткань идеальная." },
+  { id: 5, name: "Inglesina Quad", brand: "Inglesina", type: "stroller", condition: "good", price: 22000, newPrice: 55000, color: "Красный", year: 2020, img: "https://placehold.co/600x600/111111/C9A96E?text=Inglesina+Quad", desc: "Лёгкая прогулочная коляска в хорошем состоянии." },
+  { id: 6, name: "Thule Urban Glide 2", brand: "Thule", type: "sport", condition: "excellent", price: 29000, newPrice: 70000, color: "Серый", year: 2022, img: "https://placehold.co/600x600/111111/C9A96E?text=Thule+Urban+Glide+2", desc: "Спортивная коляска для бега. Отличное состояние." },
+  { id: 7, name: "Britax B-Agile", brand: "Britax", type: "stroller", condition: "good", price: 17000, newPrice: 42000, color: "Зелёный", year: 2020, img: "https://placehold.co/600x600/111111/C9A96E?text=Britax+B-Agile", desc: "Лёгкая и манёвренная. Хорошее состояние." },
+  { id: 8, name: "Joie Litetrax", brand: "Joie", type: "stroller", condition: "good", price: 13000, newPrice: 32000, color: "Белый", year: 2021, img: "https://placehold.co/600x600/111111/C9A96E?text=Joie+Litetrax", desc: "Компактная прогулочная коляска." },
+  { id: 9, name: "Bugaboo Bee 5", brand: "Bugaboo", type: "stroller", condition: "excellent", price: 35000, newPrice: 85000, color: "Чёрный", year: 2021, img: "https://placehold.co/600x600/111111/C9A96E?text=Bugaboo+Bee+5", desc: "Городская коляска в отличном состоянии. Лёгкая, манёвренная." },
+  { id: 10, name: "Stokke Scoot", brand: "Stokke", type: "stroller", condition: "good", price: 28000, newPrice: 68000, color: "Серый", year: 2020, img: "https://placehold.co/600x600/111111/C9A96E?text=Stokke+Scoot", desc: "Компактная городская коляска." },
+  { id: 11, name: "Quinny Moodd", brand: "Quinny", type: "transformer", condition: "good", price: 19000, newPrice: 48000, color: "Оранжевый", year: 2020, img: "https://placehold.co/600x600/111111/C9A96E?text=Quinny+Moodd", desc: "Стильная коляска-трансформер." },
+  { id: 12, name: "iCandy Peach", brand: "iCandy", type: "transformer", condition: "excellent", price: 44000, newPrice: 108000, color: "Чёрный", year: 2022, img: "https://placehold.co/600x600/111111/C9A96E?text=iCandy+Peach", desc: "Роскошная коляска в отличном состоянии." },
+  { id: 13, name: "Babyzen Yoyo", brand: "Babyzen", type: "stroller", condition: "excellent", price: 31000, newPrice: 75000, color: "Серый", year: 2022, img: "https://placehold.co/600x600/111111/C9A96E?text=Babyzen+Yoyo", desc: "Самая компактная складная коляска. Летает в самолёте." },
+  { id: 14, name: "Maclaren Quest", brand: "Maclaren", type: "stroller", condition: "good", price: 12000, newPrice: 30000, color: "Красный", year: 2020, img: "https://placehold.co/600x600/111111/C9A96E?text=Maclaren+Quest", desc: "Лёгкая зонтичная коляска." },
+  { id: 15, name: "Silver Cross Surf", brand: "Silver Cross", type: "transformer", condition: "excellent", price: 48000, newPrice: 118000, color: "Серый", year: 2022, img: "https://placehold.co/600x600/111111/C9A96E?text=Silver+Cross+Surf", desc: "Британское качество. Полная комплектация." },
+  { id: 16, name: "Easywalker Harvey", brand: "Easywalker", type: "transformer", condition: "good", price: 26000, newPrice: 64000, color: "Синий", year: 2021, img: "https://placehold.co/600x600/111111/C9A96E?text=Easywalker+Harvey", desc: "Надёжная коляска с большой корзиной." },
+  { id: 17, name: "Mima Xari", brand: "Mima", type: "stroller", condition: "excellent", price: 55000, newPrice: 135000, color: "Белый", year: 2022, img: "https://placehold.co/600x600/111111/C9A96E?text=Mima+Xari", desc: "Дизайнерская коляска. Состояние идеальное." },
+  { id: 18, name: "Bugaboo Fox 2", brand: "Bugaboo", type: "transformer", condition: "excellent", price: 62000, newPrice: 150000, color: "Чёрный", year: 2022, img: "https://placehold.co/600x600/111111/C9A96E?text=Bugaboo+Fox+2", desc: "Флагманская коляска Bugaboo. Как новая." },
+  { id: 19, name: "Cybex Gazelle S", brand: "Cybex", type: "twin", condition: "excellent", price: 58000, newPrice: 140000, color: "Чёрный", year: 2022, img: "https://placehold.co/600x600/111111/C9A96E?text=Cybex+Gazelle+S", desc: "Модульная коляска для двойни. Отличное состояние." },
+  { id: 20, name: "UPPAbaby Cruz", brand: "UPPAbaby", type: "stroller", condition: "good", price: 43000, newPrice: 105000, color: "Серый", year: 2021, img: "https://placehold.co/600x600/111111/C9A96E?text=UPPAbaby+Cruz", desc: "Городская версия Vista. Хорошее состояние." },
+  { id: 21, name: "Nuna Mixx", brand: "Nuna", type: "transformer", condition: "excellent", price: 37000, newPrice: 90000, color: "Серый", year: 2022, img: "https://placehold.co/600x600/111111/C9A96E?text=Nuna+Mixx", desc: "Нидерландское качество. Отличное состояние." },
+  { id: 22, name: "Bumbleride Indie", brand: "Bumbleride", type: "sport", condition: "good", price: 33000, newPrice: 80000, color: "Зелёный", year: 2021, img: "https://placehold.co/600x600/111111/C9A96E?text=Bumbleride+Indie", desc: "Внедорожная коляска для активных родителей." },
+  { id: 23, name: "GB Pockit+", brand: "GB", type: "stroller", condition: "good", price: 16000, newPrice: 40000, color: "Чёрный", year: 2021, img: "https://placehold.co/600x600/111111/C9A96E?text=GB+Pockit%2B", desc: "Самая маленькая складная коляска в мире." },
+  { id: 24, name: "Chicco Multiride", brand: "Chicco", type: "stroller", condition: "good", price: 14000, newPrice: 35000, color: "Серый", year: 2020, img: "https://placehold.co/600x600/111111/C9A96E?text=Chicco+Multiride", desc: "Надёжная итальянская коляска." },
+  { id: 25, name: "Hauck Rapid 4R", brand: "Hauck", type: "stroller", condition: "good", price: 8000, newPrice: 20000, color: "Серый", year: 2020, img: "https://placehold.co/600x600/111111/C9A96E?text=Hauck+Rapid+4R", desc: "Доступная и функциональная коляска." },
+  { id: 26, name: "Graco Modes", brand: "Graco", type: "transformer", condition: "good", price: 11000, newPrice: 28000, color: "Серый", year: 2020, img: "https://placehold.co/600x600/111111/C9A96E?text=Graco+Modes", desc: "Многофункциональная коляска-трансформер." },
+  { id: 27, name: "Inglesina Aptica", brand: "Inglesina", type: "transformer", condition: "excellent", price: 39000, newPrice: 95000, color: "Серый", year: 2022, img: "https://placehold.co/600x600/111111/C9A96E?text=Inglesina+Aptica", desc: "Итальянский дизайн. Отличное состояние." },
+  { id: 28, name: "Peg Perego Booklet", brand: "Peg Perego", type: "stroller", condition: "good", price: 32000, newPrice: 78000, color: "Серый", year: 2021, img: "https://placehold.co/600x600/111111/C9A96E?text=Peg+Perego+Booklet", desc: "Классика итальянского производства." },
+  { id: 29, name: "Mutsy Nexo", brand: "Mutsy", type: "stroller", condition: "good", price: 27000, newPrice: 66000, color: "Серый", year: 2021, img: "https://placehold.co/600x600/111111/C9A96E?text=Mutsy+Nexo", desc: "Голландская коляска с большими колёсами." },
+  { id: 30, name: "Concord Neo", brand: "Concord", type: "transformer", condition: "good", price: 21000, newPrice: 52000, color: "Чёрный", year: 2020, img: "https://placehold.co/600x600/111111/C9A96E?text=Concord+Neo", desc: "Немецкое качество по доступной цене." },
+  { id: 31, name: "Cybex Balios S", brand: "Cybex", type: "stroller", condition: "excellent", price: 34000, newPrice: 83000, color: "Серый", year: 2022, img: "https://placehold.co/600x600/111111/C9A96E?text=Cybex+Balios+S", desc: "Современная городская коляска." },
+  { id: 32, name: "Stokke Trailz", brand: "Stokke", type: "sport", condition: "good", price: 46000, newPrice: 112000, color: "Серый", year: 2021, img: "https://placehold.co/600x600/111111/C9A96E?text=Stokke+Trailz", desc: "Внедорожная версия от Stokke." },
+  { id: 33, name: "Bugaboo Ant", brand: "Bugaboo", type: "stroller", condition: "good", price: 25000, newPrice: 62000, color: "Чёрный", year: 2021, img: "https://placehold.co/600x600/111111/C9A96E?text=Bugaboo+Ant", desc: "Компактная городская коляска от Bugaboo." },
+  { id: 34, name: "Thule Spring", brand: "Thule", type: "stroller", condition: "good", price: 23000, newPrice: 57000, color: "Серый", year: 2021, img: "https://placehold.co/600x600/111111/C9A96E?text=Thule+Spring", desc: "Скандинавский минимализм и функциональность." },
+  { id: 35, name: "Quinny Zapp Flex", brand: "Quinny", type: "stroller", condition: "good", price: 18000, newPrice: 45000, color: "Красный", year: 2020, img: "https://placehold.co/600x600/111111/C9A96E?text=Quinny+Zapp+Flex", desc: "Инновационная складная коляска." },
+  { id: 36, name: "Joie Tourist", brand: "Joie", type: "stroller", condition: "good", price: 9000, newPrice: 22000, color: "Серый", year: 2020, img: "https://placehold.co/600x600/111111/C9A96E?text=Joie+Tourist", desc: "Бюджетная но качественная коляска." },
+  { id: 37, name: "Britax Holiday", brand: "Britax", type: "stroller", condition: "good", price: 7000, newPrice: 18000, color: "Синий", year: 2019, img: "https://placehold.co/600x600/111111/C9A96E?text=Britax+Holiday", desc: "Зонтичная коляска для путешествий." },
+  { id: 38, name: "Maxi-Cosi Adorra", brand: "Maxi-Cosi", type: "transformer", condition: "good", price: 24000, newPrice: 59000, color: "Серый", year: 2021, img: "https://placehold.co/600x600/111111/C9A96E?text=Maxi-Cosi+Adorra", desc: "Французский дизайн. Полная комплектация." },
+  { id: 39, name: "Nuna Tavo", brand: "Nuna", type: "stroller", condition: "excellent", price: 29000, newPrice: 71000, color: "Серый", year: 2022, img: "https://placehold.co/600x600/111111/C9A96E?text=Nuna+Tavo", desc: "Минималистичная городская коляска." },
+  { id: 40, name: "Ergobaby Metro+", brand: "Ergobaby", type: "stroller", condition: "good", price: 20000, newPrice: 50000, color: "Чёрный", year: 2021, img: "https://placehold.co/600x600/111111/C9A96E?text=Ergobaby+Metro%2B", desc: "Эргономичная складная коляска." },
+  { id: 41, name: "Veer Terrain", brand: "Veer", type: "sport", condition: "excellent", price: 53000, newPrice: 130000, color: "Серый", year: 2022, img: "https://placehold.co/600x600/111111/C9A96E?text=Veer+Terrain", desc: "Универсальная коляска-трансформер для любой местности." },
+  { id: 42, name: "Mountain Buggy Nano", brand: "Mountain Buggy", type: "stroller", condition: "good", price: 15000, newPrice: 37000, color: "Чёрный", year: 2021, img: "https://placehold.co/600x600/111111/C9A96E?text=Mountain+Buggy+Nano", desc: "Сверхлёгкая складная коляска." },
+  { id: 43, name: "Bugaboo Donkey 3", brand: "Bugaboo", type: "twin", condition: "excellent", price: 68000, newPrice: 165000, color: "Чёрный", year: 2022, img: "https://placehold.co/600x600/111111/C9A96E?text=Bugaboo+Donkey+3", desc: "Лучшая коляска для двойни. Как новая." },
+  { id: 44, name: "UPPAbaby Vista V2 (двойня)", brand: "UPPAbaby", type: "twin", condition: "excellent", price: 71000, newPrice: 172000, color: "Серый", year: 2022, img: "https://placehold.co/600x600/111111/C9A96E?text=UPPAbaby+Vista+V2", desc: "Полный комплект для двойни. Отличное состояние." },
+  { id: 45, name: "Baby Jogger City Select 2", brand: "Baby Jogger", type: "twin", condition: "good", price: 59000, newPrice: 143000, color: "Чёрный", year: 2022, img: "https://placehold.co/600x600/111111/C9A96E?text=Baby+Jogger+City+Select+2", desc: "Модульная система для двойни." },
+  { id: 46, name: "Phil&Teds Navigator", brand: "Phil&Teds", type: "twin", condition: "good", price: 42000, newPrice: 102000, color: "Серый", year: 2021, img: "https://placehold.co/600x600/111111/C9A96E?text=Phil%26Teds+Navigator", desc: "Тандемная коляска для двойни." },
+  { id: 47, name: "Cybex Gazelle S (двойня)", brand: "Cybex", type: "twin", condition: "excellent", price: 63000, newPrice: 153000, color: "Синий", year: 2022, img: "https://placehold.co/600x600/111111/C9A96E?text=Cybex+Gazelle+S+Twin", desc: "Полная конфигурация для двойни от Cybex." },
+  { id: 48, name: "Stokke Xplory X", brand: "Stokke", type: "stroller", condition: "likenew", price: 65000, newPrice: 158000, color: "Белый", year: 2023, img: "https://placehold.co/600x600/111111/C9A96E?text=Stokke+Xplory+X", desc: "Новейшая модель Stokke. Почти новая." },
+  { id: 49, name: "Bugaboo Fox 3", brand: "Bugaboo", type: "transformer", condition: "likenew", price: 72000, newPrice: 180000, color: "Чёрный", year: 2023, img: "https://placehold.co/600x600/111111/C9A96E?text=Bugaboo+Fox+3", desc: "Топовая модель Bugaboo 2023. Как новая." },
+  { id: 50, name: "Silver Cross Dune", brand: "Silver Cross", type: "transformer", condition: "excellent", price: 56000, newPrice: 136000, color: "Серый", year: 2022, img: "https://placehold.co/600x600/111111/C9A96E?text=Silver+Cross+Dune", desc: "Роскошная британская коляска." }
+];
+
+const CONDITIONS = { likenew: "Как новая", excellent: "Отличное", good: "Хорошее" };
+const TYPES = { stroller: "Прогулочная", transformer: "Трансформер", twin: "Для двойни", sport: "Спортивная" };

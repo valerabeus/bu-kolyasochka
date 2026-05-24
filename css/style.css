@@ -153,7 +153,28 @@ h2 { font-size: clamp(28px, 4.6vw, 58px); font-weight: 820; letter-spacing: -1.8
   box-shadow: 0 18px 44px rgba(37, 211, 102, 0.22);
 }
 .btn-whatsapp:hover { box-shadow: 0 20px 54px rgba(37, 211, 102, 0.3); }
+.btn-avito {
+  background: linear-gradient(135deg, #40bfff, #00aaff);
+  color: #fff;
+  box-shadow: 0 18px 44px rgba(0, 170, 255, 0.22);
+}
+.btn-avito:hover { box-shadow: 0 20px 54px rgba(0, 170, 255, 0.3); }
 .btn-sm { min-height: 38px; padding: 9px 18px; font-size: 10px; }
+
+/* ===== SOCIAL ICONS ===== */
+.social-icons { display: flex; align-items: center; gap: 6px; }
+.social-icon {
+  width: 34px; height: 34px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(255,255,255,0.13);
+  background: rgba(255,255,255,0.045);
+  color: var(--cream); transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+.social-icon:hover { border-color: transparent; color: #fff; }
+.social-icon--wa:hover { background: #25D366; }
+.social-icon--tg:hover { background: #29B6F6; }
+.social-icon--avito:hover { background: #00AAFF; }
+.social-icon--vk:hover { background: #0077FF; }
 .btn-lg { min-height: 56px; padding: 17px 34px; }
 
 /* ===== PAGE LOADER ===== */

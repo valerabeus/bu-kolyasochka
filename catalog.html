@@ -1,218 +1,524 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Каталог — Б/У Колясочка</title>
-  <meta name="description" content="Каталог б/у премиальных детских колясок. Bugaboo, Stokke, UPPAbaby, Cybex и другие бренды в наличии.">
-  <script>
-    (function () {
-      var p = location.pathname, m = '/bu-kolyasochka';
-      if (p === m || (p.endsWith(m) && !p.endsWith(m + '/'))) {
-        location.replace(p + '/' + location.search + location.hash);
-      }
-    })();
-  </script>
-  <script src="/bu-kolyasochka/js/site.js"></script>
-  <link rel="stylesheet" href="/bu-kolyasochka/css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Каталог колясок б/у — КолясочкиPRO</title>
+<meta name="description" content="Каталог б/у колясок премиум-брендов: 62 товара, проверка, рассрочка, доставка.">
+<script src="/bu-kolyasochka/js/site.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cream: #f5f0e8;
+  --cream2: #ede7d9;
+  --cream3: #e5dece;
+  --ink: #1c1a16;
+  --ink2: #4a4640;
+  --ink3: #8a847a;
+  --surface: #ffffff;
+  --border: rgba(28,26,22,0.1);
+  --border2: rgba(28,26,22,0.06);
+  --green: #2d5a3d;
+  --green-light: #e8f2eb;
+  --green-mid: #4a8c62;
+  --sand: #c8a96e;
+  --sand-light: #f7f0e2;
+  --r: 14px;
+  --r-sm: 8px;
+  --sidebar: 256px;
+  --nav-h: 65px;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+a { text-decoration: none; color: inherit; }
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 200;
+  background: rgba(245,240,232,0.93);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  height: var(--nav-h);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 0 20px; max-width: 1200px; margin: 0 auto; height: 100%; }
+.logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; }
+.logo span { color: var(--green); }
+.nav-links { display: flex; gap: 28px; list-style: none; font-size: 14px; color: var(--ink2); }
+.nav-links a:hover { color: var(--green); }
+.nav-links a.active { color: var(--green); font-weight: 500; }
+.nav-actions { display: flex; gap: 8px; }
+.nav-btn { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .15s; position: relative; }
+.nav-btn:hover { background: var(--cream2); }
+.nav-btn svg { width: 17px; height: 17px; stroke: var(--ink2); fill: none; stroke-width: 1.6; }
+.cart-dot { position: absolute; top: -2px; right: -2px; width: 15px; height: 15px; border-radius: 50%; background: var(--green); color: #fff; font-size: 9px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+.burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+.burger span { display: block; width: 22px; height: 1.5px; background: var(--ink); border-radius: 2px; }
+
+/* ── PAGE LAYOUT ── */
+.page-wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px 80px; }
+
+/* ── BREADCRUMB + HEADER ── */
+.catalog-header { padding: 24px 0 0; }
+.breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink3); margin-bottom: 16px; flex-wrap: wrap; }
+.breadcrumb a { color: var(--ink3); }
+.breadcrumb a:hover { color: var(--ink); }
+.breadcrumb span { color: var(--border); }
+.catalog-title-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 8px; flex-wrap: wrap; }
+.catalog-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 4vw, 44px); font-weight: 500; line-height: 1.1; letter-spacing: -.01em; }
+.catalog-title em { font-style: italic; color: var(--green); }
+.catalog-count { font-size: 13px; color: var(--ink3); }
+
+/* ── ACTIVE FILTERS ── */
+.active-filters { display: flex; gap: 8px; flex-wrap: wrap; padding: 12px 0 20px; }
+.filter-tag { display: flex; align-items: center; gap: 6px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 5px 12px; font-size: 12px; color: var(--ink2); cursor: pointer; transition: border-color .15s; }
+.filter-tag:hover { border-color: var(--ink3); }
+.filter-tag .remove { color: var(--ink3); font-size: 14px; line-height: 1; }
+.filter-tag.clear-all { background: var(--ink); color: #fff; border-color: var(--ink); }
+.filter-tag.clear-all:hover { background: var(--green); border-color: var(--green); }
+
+/* ── MAIN CONTENT GRID ── */
+.content-grid { display: grid; grid-template-columns: var(--sidebar) 1fr; gap: 28px; align-items: start; }
+
+/* ── SIDEBAR ── */
+.sidebar { position: sticky; top: calc(var(--nav-h) + 20px); background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+.sidebar-head { padding: 16px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.sidebar-title { font-size: 13px; font-weight: 500; color: var(--ink); }
+.sidebar-reset { font-size: 11px; color: var(--green); cursor: pointer; background: none; border: none; font-family: 'DM Sans', sans-serif; }
+.sidebar-reset:hover { text-decoration: underline; }
+
+.filter-group { border-bottom: 1px solid var(--border2); }
+.filter-group:last-child { border-bottom: none; }
+.filter-group-head { display: flex; align-items: center; justify-content: space-between; padding: 13px 18px; cursor: pointer; user-select: none; }
+.filter-group-head:hover { background: var(--cream); }
+.filter-group-label { font-size: 12px; font-weight: 500; color: var(--ink2); letter-spacing: .03em; }
+.filter-chevron { width: 14px; height: 14px; stroke: var(--ink3); fill: none; stroke-width: 1.8; transition: transform .2s; }
+.filter-group.open .filter-chevron { transform: rotate(180deg); }
+.filter-group-body { padding: 0 18px 14px; display: none; }
+.filter-group.open .filter-group-body { display: block; }
+
+/* Price range */
+.price-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+.price-input { padding: 7px 10px; border: 1px solid var(--border); border-radius: var(--r-sm); font-family: 'DM Sans', sans-serif; font-size: 12px; color: var(--ink); background: var(--cream); width: 100%; outline: none; }
+.price-input:focus { border-color: var(--green-mid); }
+.price-slider { width: 100%; accent-color: var(--green); }
+.price-presets { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.price-preset { font-size: 11px; padding: 3px 8px; border-radius: 12px; border: 1px solid var(--border); color: var(--ink3); cursor: pointer; background: transparent; transition: all .15s; }
+.price-preset:hover, .price-preset.active { background: var(--green-light); border-color: var(--green-mid); color: var(--green); }
+
+/* Checkbox filters */
+.filter-options { display: flex; flex-direction: column; gap: 0; }
+.filter-opt { display: flex; align-items: center; gap: 9px; padding: 6px 0; cursor: pointer; }
+.filter-opt:hover .opt-label { color: var(--ink); }
+.opt-check { width: 16px; height: 16px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all .15s; }
+.filter-opt.checked .opt-check { background: var(--green); border-color: var(--green); }
+.filter-opt.checked .opt-check::after { content: ''; display: block; width: 8px; height: 5px; border-left: 1.5px solid #fff; border-bottom: 1.5px solid #fff; transform: rotate(-45deg) translateY(-1px); }
+.opt-label { font-size: 12px; color: var(--ink2); flex: 1; }
+.opt-count { font-size: 11px; color: var(--ink3); }
+
+/* Color swatches */
+.color-swatches { display: flex; flex-wrap: wrap; gap: 6px; }
+.swatch { width: 24px; height: 24px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: border-color .15s; }
+.swatch:hover { border-color: var(--ink3); }
+.swatch.active { border-color: var(--green); box-shadow: 0 0 0 2px var(--green-light); }
+
+/* ── TOOLBAR ── */
+.toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+.filter-mobile-btn { display: none; align-items: center; gap: 7px; padding: 9px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 40px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ink2); cursor: pointer; transition: border-color .15s; }
+.filter-mobile-btn:hover { border-color: var(--ink3); }
+.filter-mobile-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.6; }
+.filter-badge { background: var(--green); color: #fff; border-radius: 50%; width: 18px; height: 18px; font-size: 10px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+.sort-wrap { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.sort-label { font-size: 12px; color: var(--ink3); white-space: nowrap; }
+.sort-select { padding: 8px 30px 8px 12px; border: 1px solid var(--border); border-radius: 40px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ink); background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a847a' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 10px center; -webkit-appearance: none; cursor: pointer; outline: none; transition: border-color .15s; }
+.sort-select:focus { border-color: var(--green-mid); }
+.view-btns { display: flex; gap: 4px; }
+.view-btn { width: 34px; height: 34px; border: 1px solid var(--border); border-radius: var(--r-sm); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .15s; }
+.view-btn.active { background: var(--ink); border-color: var(--ink); }
+.view-btn svg { width: 15px; height: 15px; stroke: var(--ink3); fill: none; stroke-width: 1.6; }
+.view-btn.active svg { stroke: #fff; }
+
+/* ── PRODUCTS GRID ── */
+.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; }
+.products-grid.list-view { grid-template-columns: 1fr; }
+
+.prod-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; cursor: pointer; transition: border-color .2s, transform .2s; display: flex; flex-direction: column; animation: fadeUp .4s ease both; }
+.prod-card:hover { border-color: var(--green-mid); transform: translateY(-3px); }
+
+.prod-thumb { aspect-ratio: 4/3; background: var(--cream2); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.prod-thumb svg { width: 56px; height: 56px; opacity: .15; stroke: var(--ink); fill: none; stroke-width: 1; }
+.prod-badges { position: absolute; top: 10px; left: 10px; display: flex; flex-direction: column; gap: 5px; }
+.pbadge { font-size: 10px; font-weight: 500; padding: 3px 9px; border-radius: 20px; }
+.pg { background: #d1ead9; color: #1b4332; }
+.ps { background: #f5e8cc; color: #7a5010; }
+.pr { background: #fde8e0; color: #8b2a10; }
+.pb { background: #e0eafd; color: #1e3a8a; }
+.fav { position: absolute; top: 8px; right: 8px; width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,.9); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .15s; }
+.fav:hover { background: #fff; }
+.fav svg { width: 14px; height: 14px; stroke: var(--ink3); fill: none; stroke-width: 1.8; transition: all .15s; }
+.fav.on svg { stroke: #e75480; fill: #e75480; }
+
+.prod-body { padding: 12px 14px; flex: 1; display: flex; flex-direction: column; gap: 4px; }
+.prod-brand { font-size: 10px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--ink3); }
+.prod-name { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 500; line-height: 1.2; color: var(--ink); }
+.prod-meta { font-size: 11px; color: var(--ink3); }
+.prod-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px; }
+.ptag { font-size: 10px; padding: 2px 7px; border-radius: 12px; border: 1px solid var(--border2); color: var(--ink3); }
+
+.prod-foot { padding: 10px 14px 13px; border-top: 1px solid var(--border2); display: flex; align-items: center; justify-content: space-between; }
+.prod-price { font-size: 16px; font-weight: 500; color: var(--ink); }
+.prod-price-old { font-size: 11px; color: var(--ink3); text-decoration: line-through; margin-left: 5px; }
+.prod-installment { font-size: 10px; color: var(--green); display: block; margin-top: 1px; }
+.btn-cart { width: 30px; height: 30px; border-radius: 50%; background: var(--ink); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .15s, transform .1s; }
+.btn-cart:hover { background: var(--green); }
+.btn-cart:active { transform: scale(.92); }
+.btn-cart svg { width: 13px; height: 13px; stroke: #fff; fill: none; stroke-width: 2.2; }
+
+/* LIST VIEW overrides */
+.list-view .prod-card { flex-direction: row; }
+.list-view .prod-thumb { aspect-ratio: unset; width: 180px; flex-shrink: 0; }
+.list-view .prod-body { padding: 16px 18px; }
+.list-view .prod-name { font-size: 20px; }
+.list-view .prod-meta { font-size: 12px; }
+.list-view .prod-foot { border-top: none; border-left: 1px solid var(--border2); padding: 16px 18px; flex-direction: column; align-items: flex-start; gap: 10px; min-width: 140px; }
+
+/* ── PAGINATION ── */
+.pagination { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 36px; flex-wrap: wrap; }
+.page-btn { width: 38px; height: 38px; border-radius: var(--r-sm); border: 1px solid var(--border); background: var(--surface); font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--ink2); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .15s; }
+.page-btn:hover { border-color: var(--ink3); background: var(--cream2); }
+.page-btn.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+.page-btn.arrow { background: transparent; }
+.page-btn.arrow svg { width: 16px; height: 16px; stroke: var(--ink3); fill: none; stroke-width: 2; }
+.page-btn.arrow:hover svg { stroke: var(--ink); }
+.page-dots { font-size: 14px; color: var(--ink3); padding: 0 4px; }
+.pagination-info { font-size: 12px; color: var(--ink3); margin-top: 12px; text-align: center; }
+
+/* ── MOBILE FILTER DRAWER ── */
+.drawer-overlay { display: none; position: fixed; inset: 0; background: rgba(28,26,22,.4); z-index: 300; opacity: 0; transition: opacity .25s; }
+.drawer-overlay.open { display: block; opacity: 1; }
+.drawer { position: fixed; left: 0; top: 0; bottom: 0; width: min(340px, 92vw); background: var(--surface); z-index: 400; transform: translateX(-100%); transition: transform .3s cubic-bezier(.32,.72,0,1); overflow-y: auto; display: flex; flex-direction: column; }
+.drawer.open { transform: translateX(0); }
+.drawer-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--surface); z-index: 1; }
+.drawer-title { font-size: 16px; font-weight: 500; color: var(--ink); }
+.drawer-close { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.drawer-close svg { width: 16px; height: 16px; stroke: var(--ink3); fill: none; stroke-width: 2; }
+.drawer-body { flex: 1; padding: 0; overflow-y: auto; }
+.drawer-foot { padding: 16px 20px; border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: sticky; bottom: 0; background: var(--surface); }
+.drawer-btn { padding: 12px; border-radius: var(--r-sm); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--ink); transition: all .15s; }
+.drawer-btn.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
+.drawer-btn.primary:hover { background: var(--green); border-color: var(--green); }
+.drawer-btn:hover { border-color: var(--ink3); }
+
+/* ── EMPTY STATE ── */
+.empty-state { grid-column: 1/-1; text-align: center; padding: 64px 24px; }
+.empty-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
+.empty-sub { font-size: 14px; color: var(--ink3); margin-bottom: 24px; }
+.btn-outline { padding: 11px 24px; border: 1px solid var(--ink); border-radius: 40px; font-family: 'DM Sans', sans-serif; font-size: 14px; cursor: pointer; background: transparent; color: var(--ink); transition: all .2s; }
+.btn-outline:hover { background: var(--ink); color: #fff; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .burger { display: flex; }
+  .content-grid { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .filter-mobile-btn { display: flex; }
+  .list-view .prod-thumb { width: 130px; }
+}
+@media (max-width: 560px) {
+  .products-grid:not(.list-view) { grid-template-columns: repeat(2, 1fr); }
+  .view-btns { display: none; }
+  .sort-label { display: none; }
+}
+@media (max-width: 380px) {
+  .products-grid:not(.list-view) { grid-template-columns: 1fr; }
+}
+
+.product-thumb img,.prod-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.product-link,.prod-thumb{color:inherit;text-decoration:none}.pbadge-gray,.pg{background:#ede7d9;color:#4a4640}.prod-installment{display:block;font-size:10px;color:var(--green);margin-top:2px}
+</style>
+<link rel="stylesheet" href="/bu-kolyasochka/css/assistant.css">
 </head>
 <body data-page="catalog">
 
-  <header class="header" id="header">
-    <div class="header-inner">
-      <a href="index.html" class="logo">Б/У<br>Колясочка</a>
-      <nav class="nav">
-        <a href="catalog.html" class="nav-link nav-link--active">Каталог</a>
-        <a href="kak-vybrat.html" class="nav-link">Как выбрать</a>
-        <a href="compare.html" class="nav-link">Сравнение <span data-compare-count style="display:none"></span></a>
-        <a href="index.html#about" class="nav-link">О магазине</a>
-        <a href="index.html#contact" class="nav-link">Контакты</a>
-      </nav>
-      <div class="header-actions">
-        <div class="social-icons">
-          <a href="https://wa.me/79000000000" class="social-icon social-icon--wa" target="_blank" rel="noopener" title="WhatsApp">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          </a>
-          <a href="https://t.me/bukolyasochka" class="social-icon social-icon--tg" target="_blank" rel="noopener" title="Telegram">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-          </a>
-          <a href="https://www.avito.ru/bukolyasochka" class="social-icon social-icon--avito" target="_blank" rel="noopener" title="Авито">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.5 2a7.5 7.5 0 1 1 0 15 7.5 7.5 0 0 1 0-15zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11zm8.5.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zm0 1.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-5 8.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 1.5a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm7.5.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zm0 1.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>
-          </a>
-          <a href="https://vk.com/bukolyasochka" class="social-icon social-icon--vk" target="_blank" rel="noopener" title="ВКонтакте">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.391 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.05-1.727-1.033-1.01-1.49-.9-1.49.476v1.255c0 .368-.122.588-1.14.588-1.68 0-3.54-.996-4.85-2.859-1.965-2.748-2.503-4.804-2.503-5.226 0-.228.09-.44.347-.44h1.753c.26 0 .357.12.453.406.502 1.455 1.34 2.73 1.68 2.73.13 0 .189-.06.189-.386V9.28c-.044-.834-.484-1.166-.484-1.536 0-.189.163-.388.422-.388h2.761c.22 0 .297.117.297.375v3.572c0 .207.09.28.146.28.13 0 .243-.073.483-.325 1.492-1.615 2.558-4.11 2.558-4.11.069-.145.22-.283.475-.283h1.753c.524 0 .637.268.524.53-.217.505-2.312 3.96-2.312 3.96-.178.3-.245.43 0 .757.178.246.762.756 1.152 1.213.716.828 1.264 1.525 1.409 2.005.14.487-.107.738-.596.738z"/></svg>
-          </a>
-        </div>
-        <button class="cart-toggle" id="cartToggle" aria-label="Корзина">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
-            <line x1="3" y1="6" x2="21" y2="6"/>
-            <path d="M16 10a4 4 0 01-8 0"/>
-          </svg>
-          <span class="cart-count" id="cartCount">0</span>
-        </button>
-        <button class="burger" id="burgerBtn" aria-label="Меню">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Колясочки<span>PRO</span></a>
+    <ul class="nav-links">
+      <li><a href="catalog.html" class="active">Каталог</a></li><li><a href="delivery.html">Доставка</a></li><li><a href="payment.html">Оплата</a></li><li><a href="index.html#contact">Контакты</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="nav-btn" aria-label="Поиск"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></button>
+      <button class="nav-btn" aria-label="Избранное"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <button class="nav-btn" aria-label="Корзина"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cart-dot">3</span></button>
+      <button class="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-wrap">
+
+  <!-- HEADER -->
+  <header class="catalog-header">
+    <nav class="breadcrumb" aria-label="Хлебные крошки">
+      <a href="index.html">Главная</a>
+      <span>›</span>
+      <span style="color:var(--ink2)">Все коляски</span>
+    </nav>
+    <div class="catalog-title-row">
+      <h1 class="catalog-title">Все <em>коляски</em></h1>
+      <span class="catalog-count" id="totalCount">84 позиции</span>
     </div>
   </header>
 
-  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-  <div class="mobile-menu" id="mobileMenu">
-    <div class="mobile-menu-head">
-      <span class="mobile-menu-title">Меню</span>
-      <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Закрыть">✕</button>
-    </div>
-    <nav class="mobile-nav">
-      <a href="catalog.html" class="mobile-nav-link">Каталог</a>
-      <a href="kak-vybrat.html" class="mobile-nav-link">Как выбрать</a>
-      <a href="compare.html" class="mobile-nav-link">Сравнение</a>
-      <a href="index.html#about" class="mobile-nav-link">О магазине</a>
-      <a href="index.html#reviews" class="mobile-nav-link">Отзывы</a>
-      <a href="index.html#contact" class="mobile-nav-link">Контакты</a>
-    </nav>
-    <div class="mobile-menu-wa">
-      <a href="https://wa.me/79000000000" class="btn btn-whatsapp btn-sm" style="width:100%" target="_blank" rel="noopener">WhatsApp</a>
-    </div>
-    <div class="mobile-menu-filters" id="mobileMenuFilters">
-      <p class="mobile-menu-filters-title">Фильтры</p>
-      <div class="mobile-filter-group">
-        <p class="mobile-filter-label">Тип</p>
-        <div class="mobile-filter-btns" id="mobileTypeFilters"></div>
+  <!-- ACTIVE FILTERS -->
+  <div class="active-filters" id="activeFilters"></div>
+
+  <!-- CONTENT -->
+  <div class="content-grid">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar" aria-label="Фильтры">
+      <div class="sidebar-head">
+        <span class="sidebar-title">Фильтры</span>
+        <button class="sidebar-reset" onclick="clearAllFilters()">Сбросить</button>
       </div>
-      <div class="mobile-filter-group">
-        <p class="mobile-filter-label">Состояние</p>
-        <div class="mobile-filter-btns" id="mobileConditionFilters"></div>
+
+      <!-- PRICE -->
+      <div class="filter-group open" id="fg-price">
+        <div class="filter-group-head" onclick="toggleGroup('fg-price')">
+          <span class="filter-group-label">Цена, ₽</span>
+          <svg class="filter-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="filter-group-body">
+          <div class="price-inputs">
+            <input class="price-input" type="number" placeholder="От" value="0" id="priceMin">
+            <input class="price-input" type="number" placeholder="До" value="150000" id="priceMax">
+          </div>
+          <div class="price-presets">
+            <button class="price-preset" onclick="setPrice(0,10000)">до 10 000</button>
+            <button class="price-preset" onclick="setPrice(10000,30000)">10–30 тыс</button>
+            <button class="price-preset" onclick="setPrice(30000,70000)">30–70 тыс</button>
+            <button class="price-preset" onclick="setPrice(70000,150000)">от 70 тыс</button>
+          </div>
+        </div>
       </div>
-      <div class="mobile-filter-group">
-        <p class="mobile-filter-label">Сортировка</p>
-        <div class="mobile-filter-btns mobile-sort-btns" id="mobileSortFilters"></div>
+
+      <!-- CONDITION -->
+      <div class="filter-group open" id="fg-cond">
+        <div class="filter-group-head" onclick="toggleGroup('fg-cond')">
+          <span class="filter-group-label">Состояние</span>
+          <svg class="filter-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="filter-group-body">
+          <div class="filter-options">
+            <label class="filter-opt checked" onclick="toggleOpt(this)">
+              <div class="opt-check"></div>
+              <span class="opt-label">Как новое</span>
+              <span class="opt-count">23</span>
+            </label>
+            <label class="filter-opt" onclick="toggleOpt(this)">
+              <div class="opt-check"></div>
+              <span class="opt-label">Отличное</span>
+              <span class="opt-count">38</span>
+            </label>
+            <label class="filter-opt" onclick="toggleOpt(this)">
+              <div class="opt-check"></div>
+              <span class="opt-label">Хорошее</span>
+              <span class="opt-count">19</span>
+            </label>
+            <label class="filter-opt" onclick="toggleOpt(this)">
+              <div class="opt-check"></div>
+              <span class="opt-label">Новое (нераспак.)</span>
+              <span class="opt-count">4</span>
+            </label>
+          </div>
+        </div>
       </div>
+
+      <!-- TYPE -->
+      <div class="filter-group open" id="fg-type">
+        <div class="filter-group-head" onclick="toggleGroup('fg-type')">
+          <span class="filter-group-label">Тип коляски</span>
+          <svg class="filter-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="filter-group-body">
+          <div class="filter-options">
+            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Прогулочная</span><span class="opt-count">28</span></label>
+            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Трансформер 2-в-1</span><span class="opt-count">22</span></label>
+            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Трансформер 3-в-1</span><span class="opt-count">18</span></label>
+            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Для новорождённых</span><span class="opt-count">11</span></label>
+            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Для двойни</span><span class="opt-count">5</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- BRAND -->
+      <div class="filter-group open" id="fg-brand">
+        <div class="filter-group-head" onclick="toggleGroup('fg-brand')">
+          <span class="filter-group-label">Бренд</span>
+          <svg class="filter-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="filter-group-body">
+          <div class="filter-options">
+            <label class="filter-opt checked" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Bugaboo</span><span class="opt-count">14</span></label>
+            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Stokke</span><span class="opt-count">11</span></label>
+            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Cybex</span><span class="opt-count">16</span></label>
+            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">UPPAbaby</span><span class="opt-count">9</span></label>
+            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Joie</span><span class="opt-count">12</span></label>
+            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Inglesina</span><span class="opt-count">7</span></label>
+            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Maclaren</span><span class="opt-count">6</span></label>
+            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Другие</span><span class="opt-count">9</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLOR -->
+      <div class="filter-group" id="fg-color">
+        <div class="filter-group-head" onclick="toggleGroup('fg-color')">
+          <span class="filter-group-label">Цвет</span>
+          <svg class="filter-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="filter-group-body">
+          <div class="color-swatches">
+            <div class="swatch active" style="background:#1a1a1a" title="Чёрный" onclick="this.classList.toggle('active')"></div>
+            <div class="swatch" style="background:#888" title="Серый" onclick="this.classList.toggle('active')"></div>
+            <div class="swatch" style="background:#e8dcc8" title="Бежевый" onclick="this.classList.toggle('active')"></div>
+            <div class="swatch" style="background:#4a6fa5" title="Синий" onclick="this.classList.toggle('active')"></div>
+            <div class="swatch" style="background:#5a8a6a" title="Зелёный" onclick="this.classList.toggle('active')"></div>
+            <div class="swatch" style="background:#c04a4a" title="Красный" onclick="this.classList.toggle('active')"></div>
+            <div class="swatch" style="background:#c8916a" title="Оранжевый" onclick="this.classList.toggle('active')"></div>
+            <div class="swatch" style="background:#ffffff;border:1px solid var(--border)" title="Белый" onclick="this.classList.toggle('active')"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEASON -->
+      <div class="filter-group" id="fg-season">
+        <div class="filter-group-head" onclick="toggleGroup('fg-season')">
+          <span class="filter-group-label">Сезон</span>
+          <svg class="filter-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="filter-group-body">
+          <div class="filter-options">
+            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Всесезонная</span><span class="opt-count">51</span></label>
+            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Лето</span><span class="opt-count">21</span></label>
+            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Зима</span><span class="opt-count">12</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- INSTALLMENT -->
+      <div class="filter-group" id="fg-inst">
+        <div class="filter-group-head" onclick="toggleGroup('fg-inst')">
+          <span class="filter-group-label">Дополнительно</span>
+          <svg class="filter-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="filter-group-body">
+          <div class="filter-options">
+            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Доступна рассрочка</span><span class="opt-count">84</span></label>
+            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">С люлькой</span><span class="opt-count">40</span></label>
+            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">С автокреслом</span><span class="opt-count">18</span></label>
+            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Полный комплект</span><span class="opt-count">29</span></label>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- RIGHT COLUMN -->
+    <div>
+      <!-- TOOLBAR -->
+      <div class="toolbar">
+        <button class="filter-mobile-btn" onclick="openDrawer()" aria-label="Открыть фильтры">
+          <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="12" y1="18" x2="20" y2="18"/></svg>
+          Фильтры
+          <span class="filter-badge">2</span>
+        </button>
+        <div class="sort-wrap">
+          <span class="sort-label">Сортировать:</span>
+          <select class="sort-select" onchange="handleSort(this)">
+            <option value="new">Сначала новые</option>
+            <option value="price-asc">Цена: по возрастанию</option>
+            <option value="price-desc">Цена: по убыванию</option>
+            <option value="discount">По скидке</option>
+            <option value="popular">Популярные</option>
+          </select>
+        </div>
+        <div class="view-btns">
+          <button class="view-btn active" id="gridBtn" onclick="setView('grid')" aria-label="Сетка">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          </button>
+          <button class="view-btn" id="listBtn" onclick="setView('list')" aria-label="Список">
+            <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- PRODUCTS GRID -->
+      <div class="products-grid" id="productsGrid">
+        <!-- Cards generated by JS -->
+      </div>
+
+      <!-- PAGINATION -->
+      <nav class="pagination" aria-label="Пагинация" id="pagination">
+        <button class="page-btn arrow" aria-label="Предыдущая" onclick="goPage(currentPage-1)">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <!-- pages injected by JS -->
+        <button class="page-btn arrow" aria-label="Следующая" onclick="goPage(currentPage+1)">
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </nav>
+      <p class="pagination-info" id="pageInfo"></p>
     </div>
   </div>
+</div>
 
-  <main class="catalog-page">
-    <div class="container">
-      <div class="catalog-header">
-        <p class="section-kicker">Подбор по сценарию</p>
-        <h1 class="catalog-title">Каталог колясок</h1>
-        <p class="catalog-subtitle" id="catalogSubtitle">Каталог колясок</p>
-        <div class="catalog-highlights" aria-label="Преимущества каталога">
-          <span>Проверенное состояние</span>
-          <span>Сортировка по цене</span>
-          <span>Быстрая бронь в WhatsApp</span>
-        </div>
-      </div>
-    </div>
+<!-- MOBILE DRAWER -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Фильтры">
+  <div class="drawer-head">
+    <span class="drawer-title">Фильтры</span>
+    <button class="drawer-close" onclick="closeDrawer()" aria-label="Закрыть">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="drawer-body" id="drawerBody">
+    <!-- Cloned from sidebar by JS -->
+  </div>
+  <div class="drawer-foot">
+    <button class="drawer-btn" onclick="clearAllFilters(); closeDrawer()">Сбросить</button>
+    <button class="drawer-btn primary" onclick="closeDrawer()">Показать результаты</button>
+  </div>
+</div>
 
-    <div class="filter-bar" id="filterBar">
-      <div class="filter-bar-inner">
-        <div class="filter-row">
-          <span class="filter-label">Тип:</span>
-          <button class="filter-btn active" data-filter="type" data-value="">Все</button>
-          <button class="filter-btn" data-filter="type" data-value="transformer">Трансформеры</button>
-          <button class="filter-btn" data-filter="type" data-value="stroller">Прогулочные</button>
-          <button class="filter-btn" data-filter="type" data-value="twin">Для двойни</button>
-          <button class="filter-btn" data-filter="type" data-value="sport">Спортивные</button>
-        </div>
-        <div class="filter-row">
-          <span class="filter-label">Состояние:</span>
-          <button class="filter-btn active" data-filter="condition" data-value="">Все</button>
-          <button class="filter-btn" data-filter="condition" data-value="likenew">Как новая</button>
-          <button class="filter-btn" data-filter="condition" data-value="excellent">Отличное</button>
-          <button class="filter-btn" data-filter="condition" data-value="good">Хорошее</button>
-        </div>
-      </div>
-    </div>
 
-    <div class="catalog-toolbar">
-      <div class="container catalog-toolbar-inner">
-        <div class="catalog-toolbar-row">
-          <span class="filter-label">Сортировка</span>
-          <div class="sort-pills" id="sortPills"></div>
-        </div>
-        <div class="catalog-toolbar-meta">
-          <p class="catalog-shown" id="catalogShownCount"></p>
-          <div class="catalog-active-filters" id="catalogActiveFilters"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container catalog-grid-wrap">
-      <div class="products-grid products-grid--catalog" id="catalogGrid"></div>
-      <div class="load-more-wrapper" id="loadMoreWrapper" style="display:none">
-        <button class="btn btn-ghost btn-lg" id="loadMoreBtn">Показать ещё</button>
-      </div>
-      <div class="catalog-empty" id="catalogEmpty" style="display:none">
-        <p>По вашему запросу ничего не найдено</p>
-        <button class="btn btn-ghost btn-sm" id="emptyReset">Сбросить фильтры</button>
-      </div>
-    </div>
-  </main>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <div class="footer-logo">Б/У Колясочка</div>
-          <p class="footer-tagline">Премиальные коляски с историей</p>
-        </div>
-        <div class="footer-col">
-          <h4 class="footer-col-title">Каталог</h4>
-          <a href="catalog.html?type=transformer" class="footer-link">Трансформеры</a>
-          <a href="catalog.html?type=stroller" class="footer-link">Прогулочные</a>
-          <a href="catalog.html?type=twin" class="footer-link">Для двойни</a>
-          <a href="catalog.html?type=sport" class="footer-link">Спортивные</a>
-        </div>
-        <div class="footer-col">
-          <h4 class="footer-col-title">Информация</h4>
-          <a href="kak-vybrat.html" class="footer-link">Как выбрать коляску</a>
-          <a href="compare.html" class="footer-link">Сравнение товаров</a>
-          <a href="index.html#about" class="footer-link">О магазине</a>
-          <a href="index.html#reviews" class="footer-link">Отзывы</a>
-          <a href="index.html#contact" class="footer-link">Контакты</a>
-        </div>
-        <div class="footer-col">
-          <h4 class="footer-col-title">Связаться</h4>
-          <a href="https://wa.me/79000000000" class="footer-link" target="_blank" rel="noopener">WhatsApp</a>
-          <p class="footer-text">Пн–Вс 9:00–21:00</p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p class="footer-copy">© 2024 Б/У Колясочка. Все права защищены.</p>
-      </div>
-    </div>
-  </footer>
-
-  <div class="cart-overlay" id="cartOverlay"></div>
-  <aside class="cart-drawer" id="cartDrawer">
-    <div class="cart-drawer-header">
-      <h3 class="cart-drawer-title">Корзина</h3>
-      <button class="cart-drawer-close" id="cartClose" aria-label="Закрыть">✕</button>
-    </div>
-    <div class="cart-drawer-body" id="cartBody">
-      <div class="cart-empty" id="cartEmpty">
-        <p>Корзина пуста</p>
-        <a href="catalog.html" class="btn btn-primary btn-sm">Перейти в каталог</a>
-      </div>
-      <div class="cart-items" id="cartItems"></div>
-    </div>
-    <div class="cart-drawer-footer" id="cartFooter" style="display:none">
-      <div class="cart-total">
-        <span>Итого:</span>
-        <span class="cart-total-price" id="cartTotal">0 ₽</span>
-      </div>
-      <button class="btn btn-primary btn-lg" id="checkoutBtn" style="width:100%">Оформить через WhatsApp</button>
-    </div>
-  </aside>
-
-  <nav class="bottom-nav" id="bottomNav" aria-label="Мобильная навигация"></nav>
-
-  <script src="/bu-kolyasochka/js/products.js"></script>
-  <script src="/bu-kolyasochka/js/cart.js"></script>
-  <script src="/bu-kolyasochka/js/compare.js"></script>
-  <script src="/bu-kolyasochka/js/main.js"></script>
-  <script src="/bu-kolyasochka/js/assistant.js"></script>
+<script src="/bu-kolyasochka/js/products.js"></script>
+<script src="/bu-kolyasochka/js/cart.js"></script>
+<script src="/bu-kolyasochka/js/main.js"></script>
+<script>let currentPage=1,currentView='grid',PER_PAGE=12,filtered=[...PRODUCTS];
+function typeLong(p){return p.type==='transformer'?(p.name.includes('3')||p.name.includes('Complete')?'Трансформер 3-в-1':'Трансформер 2-в-1'):getTypeLabel(p.type)}
+function renderCard(p,idx){const d=discount(p),delay=(idx%PER_PAGE)*.04;return '<article class="prod-card" style="animation-delay:'+delay+'s"><a href="'+pageUrl('product.html?id='+p.id)+'" class="prod-thumb" style="background:#e8e4db">'+strollerIcon()+'<img src="'+p.img+'" alt="'+escAttr(p.name)+'" onerror="fixProductImg(this,\''+escAttr(p.name)+'\')"><div class="prod-badges">'+condBadge(p.condition)+(d?'<span class="pbadge pr">−'+d+'%</span>':'')+'</div></a><div class="prod-body"><div class="prod-brand">'+p.brand+'</div><div class="prod-name">'+p.name+'</div><div class="prod-meta">'+p.year+' · '+p.color+' · '+typeLong(p)+'</div><div class="prod-tags"><span class="ptag">рассрочка</span>'+(p.type==='transformer'?'<span class="ptag">с люлькой</span>':'')+'</div></div><div class="prod-foot"><div><span class="prod-price">'+formatPrice(p.price)+'</span>'+(p.newPrice?'<span class="prod-price-old">'+formatPrice(p.newPrice)+'</span>':'')+'<span class="prod-installment">от '+installment(p.price)+' ₽/мес</span></div><button class="btn-cart add-to-cart-btn" data-id="'+p.id+'" aria-label="В корзину"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div></article>'}
+function applyFilters(){const min=Number(document.getElementById('priceMin')?.value||0),max=Number(document.getElementById('priceMax')?.value||999999);filtered=PRODUCTS.filter(p=>p.price>=min&&p.price<=max);currentPage=1;renderGrid()}
+function renderGrid(){const grid=document.getElementById('productsGrid'),total=filtered.length,totalPages=Math.max(1,Math.ceil(total/PER_PAGE));if(currentPage>totalPages)currentPage=totalPages;const start=(currentPage-1)*PER_PAGE,slice=filtered.slice(start,start+PER_PAGE);grid.innerHTML=slice.map(renderCard).join('')||'<div class="empty-state"><div class="empty-title">Ничего не найдено</div><p class="empty-sub">Попробуйте изменить фильтры.</p></div>';document.getElementById('totalCount').textContent=total+' '+(total===1?'позиция':total<5?'позиции':'позиций');document.getElementById('pageInfo').textContent=total?'Показано '+(start+1)+'–'+Math.min(start+PER_PAGE,total)+' из '+total:'';bindAddToCart(grid);renderPagination(totalPages)}
+function renderPagination(totalPages){const nav=document.getElementById('pagination'),prev=nav.querySelector('.page-btn.arrow:first-child'),next=nav.querySelector('.page-btn.arrow:last-child');nav.querySelectorAll('.page-btn:not(.arrow),.page-dots').forEach(e=>e.remove());let lastDots=false;for(let i=1;i<=totalPages;i++){if(i===1||i===totalPages||(i>=currentPage-1&&i<=currentPage+1)){const b=document.createElement('button');b.className='page-btn'+(i===currentPage?' active':'');b.textContent=i;b.onclick=()=>goPage(i);nav.insertBefore(b,next);lastDots=false}else if(!lastDots){const s=document.createElement('span');s.className='page-dots';s.textContent='…';nav.insertBefore(s,next);lastDots=true}}prev.disabled=currentPage===1;next.disabled=currentPage===totalPages}
+function goPage(p){const total=Math.ceil(filtered.length/PER_PAGE);if(p<1||p>total)return;currentPage=p;renderGrid();scrollTo({top:0,behavior:'smooth'})}
+function setView(v){currentView=v;document.getElementById('productsGrid').classList.toggle('list-view',v==='list');document.getElementById('gridBtn')?.classList.toggle('active',v==='grid');document.getElementById('listBtn')?.classList.toggle('active',v==='list');renderGrid()}
+function handleSort(sel){const v=sel.value;filtered.sort((a,b)=>v==='price-asc'?a.price-b.price:v==='price-desc'?b.price-a.price:v==='discount'?discount(b)-discount(a):v==='popular'?a.id-b.id:b.year-a.year||b.id-a.id);currentPage=1;renderGrid()}
+function toggleGroup(id){document.getElementById(id)?.classList.toggle('open')}
+function toggleOpt(el){el.classList.toggle('checked')}
+function setPrice(min,max){document.getElementById('priceMin').value=min;document.getElementById('priceMax').value=max;document.querySelectorAll('.price-preset').forEach(b=>b.classList.remove('active'));if(event?.target)event.target.classList.add('active');applyFilters()}
+function clearAllFilters(){document.getElementById('priceMin').value=0;document.getElementById('priceMax').value=150000;document.querySelectorAll('.filter-opt.checked,.swatch.active,.price-preset.active').forEach(el=>el.classList.remove('checked','active'));filtered=[...PRODUCTS];currentPage=1;renderGrid()}
+function openDrawer(){document.getElementById('drawerBody').innerHTML=document.getElementById('sidebar').innerHTML;document.getElementById('drawer').classList.add('open');document.getElementById('drawerOverlay').classList.add('open');document.body.style.overflow='hidden'}
+function closeDrawer(){document.getElementById('drawer').classList.remove('open');document.getElementById('drawerOverlay').classList.remove('open');document.body.style.overflow=''}
+document.addEventListener('DOMContentLoaded',()=>{document.getElementById('priceMin')?.addEventListener('change',applyFilters);document.getElementById('priceMax')?.addEventListener('change',applyFilters);renderGrid()});</script>
+<script src="/bu-kolyasochka/js/assistant.js"></script>
 </body>
 </html>

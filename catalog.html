@@ -3,525 +3,119 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Каталог колясок б/у — КолясочкиPRO</title>
-<meta name="description" content="Каталог б/у колясок премиум-брендов: 62 товара, проверка, рассрочка, доставка.">
+<title>Каталог колясок — КрохаКруг</title>
+<meta name="description" content="Каталог проверенных б/у колясок: Bugaboo, Stokke, Cybex. Рассрочка и доставка по России.">
 <script src="/bu-kolyasochka/js/site.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/bu-kolyasochka/css/theme.css">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --cream: #f5f0e8;
-  --cream2: #ede7d9;
-  --cream3: #e5dece;
-  --ink: #1c1a16;
-  --ink2: #4a4640;
-  --ink3: #8a847a;
-  --surface: #ffffff;
-  --border: rgba(28,26,22,0.1);
-  --border2: rgba(28,26,22,0.06);
-  --green: #2d5a3d;
-  --green-light: #e8f2eb;
-  --green-mid: #4a8c62;
-  --sand: #c8a96e;
-  --sand-light: #f7f0e2;
-  --r: 14px;
-  --r-sm: 8px;
-  --sidebar: 256px;
-  --nav-h: 65px;
-}
-
-html { scroll-behavior: smooth; }
-body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-a { text-decoration: none; color: inherit; }
-
-/* ── NAV ── */
-nav {
-  position: sticky; top: 0; z-index: 200;
-  background: rgba(245,240,232,0.93);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  height: var(--nav-h);
-}
-.nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 0 20px; max-width: 1200px; margin: 0 auto; height: 100%; }
-.logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; }
-.logo span { color: var(--green); }
-.nav-links { display: flex; gap: 28px; list-style: none; font-size: 14px; color: var(--ink2); }
-.nav-links a:hover { color: var(--green); }
-.nav-links a.active { color: var(--green); font-weight: 500; }
-.nav-actions { display: flex; gap: 8px; }
-.nav-btn { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .15s; position: relative; }
-.nav-btn:hover { background: var(--cream2); }
-.nav-btn svg { width: 17px; height: 17px; stroke: var(--ink2); fill: none; stroke-width: 1.6; }
-.cart-dot { position: absolute; top: -2px; right: -2px; width: 15px; height: 15px; border-radius: 50%; background: var(--green); color: #fff; font-size: 9px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
-.burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
-.burger span { display: block; width: 22px; height: 1.5px; background: var(--ink); border-radius: 2px; }
-
-/* ── PAGE LAYOUT ── */
-.page-wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px 80px; }
-
-/* ── BREADCRUMB + HEADER ── */
-.catalog-header { padding: 24px 0 0; }
-.breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink3); margin-bottom: 16px; flex-wrap: wrap; }
-.breadcrumb a { color: var(--ink3); }
-.breadcrumb a:hover { color: var(--ink); }
-.breadcrumb span { color: var(--border); }
-.catalog-title-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 8px; flex-wrap: wrap; }
-.catalog-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 4vw, 44px); font-weight: 500; line-height: 1.1; letter-spacing: -.01em; }
-.catalog-title em { font-style: italic; color: var(--green); }
-.catalog-count { font-size: 13px; color: var(--ink3); }
-
-/* ── ACTIVE FILTERS ── */
-.active-filters { display: flex; gap: 8px; flex-wrap: wrap; padding: 12px 0 20px; }
-.filter-tag { display: flex; align-items: center; gap: 6px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 5px 12px; font-size: 12px; color: var(--ink2); cursor: pointer; transition: border-color .15s; }
-.filter-tag:hover { border-color: var(--ink3); }
-.filter-tag .remove { color: var(--ink3); font-size: 14px; line-height: 1; }
-.filter-tag.clear-all { background: var(--ink); color: #fff; border-color: var(--ink); }
-.filter-tag.clear-all:hover { background: var(--green); border-color: var(--green); }
-
-/* ── MAIN CONTENT GRID ── */
-.content-grid { display: grid; grid-template-columns: var(--sidebar) 1fr; gap: 28px; align-items: start; }
-
-/* ── SIDEBAR ── */
-.sidebar { position: sticky; top: calc(var(--nav-h) + 20px); background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
-.sidebar-head { padding: 16px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-.sidebar-title { font-size: 13px; font-weight: 500; color: var(--ink); }
-.sidebar-reset { font-size: 11px; color: var(--green); cursor: pointer; background: none; border: none; font-family: 'DM Sans', sans-serif; }
-.sidebar-reset:hover { text-decoration: underline; }
-
-.filter-group { border-bottom: 1px solid var(--border2); }
-.filter-group:last-child { border-bottom: none; }
-.filter-group-head { display: flex; align-items: center; justify-content: space-between; padding: 13px 18px; cursor: pointer; user-select: none; }
-.filter-group-head:hover { background: var(--cream); }
-.filter-group-label { font-size: 12px; font-weight: 500; color: var(--ink2); letter-spacing: .03em; }
-.filter-chevron { width: 14px; height: 14px; stroke: var(--ink3); fill: none; stroke-width: 1.8; transition: transform .2s; }
-.filter-group.open .filter-chevron { transform: rotate(180deg); }
-.filter-group-body { padding: 0 18px 14px; display: none; }
-.filter-group.open .filter-group-body { display: block; }
-
-/* Price range */
-.price-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
-.price-input { padding: 7px 10px; border: 1px solid var(--border); border-radius: var(--r-sm); font-family: 'DM Sans', sans-serif; font-size: 12px; color: var(--ink); background: var(--cream); width: 100%; outline: none; }
-.price-input:focus { border-color: var(--green-mid); }
-.price-slider { width: 100%; accent-color: var(--green); }
-.price-presets { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
-.price-preset { font-size: 11px; padding: 3px 8px; border-radius: 12px; border: 1px solid var(--border); color: var(--ink3); cursor: pointer; background: transparent; transition: all .15s; }
-.price-preset:hover, .price-preset.active { background: var(--green-light); border-color: var(--green-mid); color: var(--green); }
-
-/* Checkbox filters */
-.filter-options { display: flex; flex-direction: column; gap: 0; }
-.filter-opt { display: flex; align-items: center; gap: 9px; padding: 6px 0; cursor: pointer; }
-.filter-opt:hover .opt-label { color: var(--ink); }
-.opt-check { width: 16px; height: 16px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all .15s; }
-.filter-opt.checked .opt-check { background: var(--green); border-color: var(--green); }
-.filter-opt.checked .opt-check::after { content: ''; display: block; width: 8px; height: 5px; border-left: 1.5px solid #fff; border-bottom: 1.5px solid #fff; transform: rotate(-45deg) translateY(-1px); }
-.opt-label { font-size: 12px; color: var(--ink2); flex: 1; }
-.opt-count { font-size: 11px; color: var(--ink3); }
-
-/* Color swatches */
-.color-swatches { display: flex; flex-wrap: wrap; gap: 6px; }
-.swatch { width: 24px; height: 24px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: border-color .15s; }
-.swatch:hover { border-color: var(--ink3); }
-.swatch.active { border-color: var(--green); box-shadow: 0 0 0 2px var(--green-light); }
-
-/* ── TOOLBAR ── */
-.toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
-.filter-mobile-btn { display: none; align-items: center; gap: 7px; padding: 9px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 40px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ink2); cursor: pointer; transition: border-color .15s; }
-.filter-mobile-btn:hover { border-color: var(--ink3); }
-.filter-mobile-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.6; }
-.filter-badge { background: var(--green); color: #fff; border-radius: 50%; width: 18px; height: 18px; font-size: 10px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
-.sort-wrap { display: flex; align-items: center; gap: 8px; margin-left: auto; }
-.sort-label { font-size: 12px; color: var(--ink3); white-space: nowrap; }
-.sort-select { padding: 8px 30px 8px 12px; border: 1px solid var(--border); border-radius: 40px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ink); background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a847a' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 10px center; -webkit-appearance: none; cursor: pointer; outline: none; transition: border-color .15s; }
-.sort-select:focus { border-color: var(--green-mid); }
-.view-btns { display: flex; gap: 4px; }
-.view-btn { width: 34px; height: 34px; border: 1px solid var(--border); border-radius: var(--r-sm); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .15s; }
-.view-btn.active { background: var(--ink); border-color: var(--ink); }
-.view-btn svg { width: 15px; height: 15px; stroke: var(--ink3); fill: none; stroke-width: 1.6; }
-.view-btn.active svg { stroke: #fff; }
-
-/* ── PRODUCTS GRID ── */
-.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; }
-.products-grid.list-view { grid-template-columns: 1fr; }
-
-.prod-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; cursor: pointer; transition: border-color .2s, transform .2s; display: flex; flex-direction: column; animation: fadeUp .4s ease both; }
-.prod-card:hover { border-color: var(--green-mid); transform: translateY(-3px); }
-
-.prod-thumb { aspect-ratio: 4/3; background: var(--cream2); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-.prod-thumb svg { width: 56px; height: 56px; opacity: .15; stroke: var(--ink); fill: none; stroke-width: 1; }
-.prod-badges { position: absolute; top: 10px; left: 10px; display: flex; flex-direction: column; gap: 5px; }
-.pbadge { font-size: 10px; font-weight: 500; padding: 3px 9px; border-radius: 20px; }
-.pg { background: #d1ead9; color: #1b4332; }
-.ps { background: #f5e8cc; color: #7a5010; }
-.pr { background: #fde8e0; color: #8b2a10; }
-.pb { background: #e0eafd; color: #1e3a8a; }
-.fav { position: absolute; top: 8px; right: 8px; width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,.9); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .15s; }
-.fav:hover { background: #fff; }
-.fav svg { width: 14px; height: 14px; stroke: var(--ink3); fill: none; stroke-width: 1.8; transition: all .15s; }
-.fav.on svg { stroke: #e75480; fill: #e75480; }
-
-.prod-body { padding: 12px 14px; flex: 1; display: flex; flex-direction: column; gap: 4px; }
-.prod-brand { font-size: 10px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--ink3); }
-.prod-name { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 500; line-height: 1.2; color: var(--ink); }
-.prod-meta { font-size: 11px; color: var(--ink3); }
-.prod-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px; }
-.ptag { font-size: 10px; padding: 2px 7px; border-radius: 12px; border: 1px solid var(--border2); color: var(--ink3); }
-
-.prod-foot { padding: 10px 14px 13px; border-top: 1px solid var(--border2); display: flex; align-items: center; justify-content: space-between; }
-.prod-price { font-size: 16px; font-weight: 500; color: var(--ink); }
-.prod-price-old { font-size: 11px; color: var(--ink3); text-decoration: line-through; margin-left: 5px; }
-.prod-installment { font-size: 10px; color: var(--green); display: block; margin-top: 1px; }
-.btn-cart { width: 30px; height: 30px; border-radius: 50%; background: var(--ink); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .15s, transform .1s; }
-.btn-cart:hover { background: var(--green); }
-.btn-cart:active { transform: scale(.92); }
-.btn-cart svg { width: 13px; height: 13px; stroke: #fff; fill: none; stroke-width: 2.2; }
-
-/* LIST VIEW overrides */
-.list-view .prod-card { flex-direction: row; }
-.list-view .prod-thumb { aspect-ratio: unset; width: 180px; flex-shrink: 0; }
-.list-view .prod-body { padding: 16px 18px; }
-.list-view .prod-name { font-size: 20px; }
-.list-view .prod-meta { font-size: 12px; }
-.list-view .prod-foot { border-top: none; border-left: 1px solid var(--border2); padding: 16px 18px; flex-direction: column; align-items: flex-start; gap: 10px; min-width: 140px; }
-
-/* ── PAGINATION ── */
-.pagination { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 36px; flex-wrap: wrap; }
-.page-btn { width: 38px; height: 38px; border-radius: var(--r-sm); border: 1px solid var(--border); background: var(--surface); font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--ink2); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .15s; }
-.page-btn:hover { border-color: var(--ink3); background: var(--cream2); }
-.page-btn.active { background: var(--ink); color: #fff; border-color: var(--ink); }
-.page-btn.arrow { background: transparent; }
-.page-btn.arrow svg { width: 16px; height: 16px; stroke: var(--ink3); fill: none; stroke-width: 2; }
-.page-btn.arrow:hover svg { stroke: var(--ink); }
-.page-dots { font-size: 14px; color: var(--ink3); padding: 0 4px; }
-.pagination-info { font-size: 12px; color: var(--ink3); margin-top: 12px; text-align: center; }
-
-/* ── MOBILE FILTER DRAWER ── */
-.drawer-overlay { display: none; position: fixed; inset: 0; background: rgba(28,26,22,.4); z-index: 300; opacity: 0; transition: opacity .25s; }
-.drawer-overlay.open { display: block; opacity: 1; }
-.drawer { position: fixed; left: 0; top: 0; bottom: 0; width: min(340px, 92vw); background: var(--surface); z-index: 400; transform: translateX(-100%); transition: transform .3s cubic-bezier(.32,.72,0,1); overflow-y: auto; display: flex; flex-direction: column; }
-.drawer.open { transform: translateX(0); }
-.drawer-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--surface); z-index: 1; }
-.drawer-title { font-size: 16px; font-weight: 500; color: var(--ink); }
-.drawer-close { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-.drawer-close svg { width: 16px; height: 16px; stroke: var(--ink3); fill: none; stroke-width: 2; }
-.drawer-body { flex: 1; padding: 0; overflow-y: auto; }
-.drawer-foot { padding: 16px 20px; border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: sticky; bottom: 0; background: var(--surface); }
-.drawer-btn { padding: 12px; border-radius: var(--r-sm); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--ink); transition: all .15s; }
-.drawer-btn.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
-.drawer-btn.primary:hover { background: var(--green); border-color: var(--green); }
-.drawer-btn:hover { border-color: var(--ink3); }
-
-/* ── EMPTY STATE ── */
-.empty-state { grid-column: 1/-1; text-align: center; padding: 64px 24px; }
-.empty-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
-.empty-sub { font-size: 14px; color: var(--ink3); margin-bottom: 24px; }
-.btn-outline { padding: 11px 24px; border: 1px solid var(--ink); border-radius: 40px; font-family: 'DM Sans', sans-serif; font-size: 14px; cursor: pointer; background: transparent; color: var(--ink); transition: all .2s; }
-.btn-outline:hover { background: var(--ink); color: #fff; }
-
-/* ── ANIMATIONS ── */
-@keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 900px) {
-  .nav-links { display: none; }
-  .burger { display: flex; }
-  .content-grid { grid-template-columns: 1fr; }
-  .sidebar { display: none; }
-  .filter-mobile-btn { display: flex; }
-  .list-view .prod-thumb { width: 130px; }
-}
-@media (max-width: 560px) {
-  .products-grid:not(.list-view) { grid-template-columns: repeat(2, 1fr); }
-  .view-btns { display: none; }
-  .sort-label { display: none; }
-}
-@media (max-width: 380px) {
-  .products-grid:not(.list-view) { grid-template-columns: 1fr; }
-}
-
-.product-thumb img,.prod-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.product-link,.prod-thumb{color:inherit;text-decoration:none}.pbadge-gray,.pg{background:#ede7d9;color:#4a4640}.prod-installment{display:block;font-size:10px;color:var(--green);margin-top:2px}
-</style>
 <link rel="stylesheet" href="/bu-kolyasochka/css/assistant.css">
+
 </head>
 <body data-page="catalog">
-
-
-<!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="logo">Колясочки<span>PRO</span></a>
-    <ul class="nav-links">
-      <li><a href="catalog.html" class="active">Каталог</a></li><li><a href="delivery.html">Доставка</a></li><li><a href="payment.html">Оплата</a></li><li><a href="index.html#contact">Контакты</a></li>
-    </ul>
+    <a href="index.html" class="logo">Кроха<span>Круг</span></a>
+    <div class="nav-links">
+      <a class="active" href="catalog.html" >Каталог</a>
+      <a href="kak-vybrat.html">Как выбрать</a>
+      <a href="delivery.html">Доставка</a>
+      <a href="payment.html">Рассрочка</a>
+      <a href="index.html#contact">Контакты</a>
+    </div>
     <div class="nav-actions">
-      <button class="nav-btn" aria-label="Поиск"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></button>
-      <button class="nav-btn" aria-label="Избранное"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-      <button class="nav-btn" aria-label="Корзина"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cart-dot">3</span></button>
-      <button class="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+      <button class="icon-btn"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m17 17 4 4"/></svg></button>
+      <button class="icon-btn"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <button class="icon-btn nav-btn" data-cart-open aria-label="Корзина"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cart-dot" data-cart-count style="display:none">0</span></button>
+      <button class="btn-primary" onclick="location.href='catalog.html'">Весь каталог</button>
     </div>
   </div>
 </nav>
-
-<div class="page-wrap">
-
-  <!-- HEADER -->
-  <header class="catalog-header">
-    <nav class="breadcrumb" aria-label="Хлебные крошки">
-      <a href="index.html">Главная</a>
-      <span>›</span>
-      <span style="color:var(--ink2)">Все коляски</span>
+<div class="page-top">
+  <div class="pt-inner">
+    <div class="breadcrumb"><a href="index.html">Главная</a><s>›</s><span>Все коляски</span></div>
+    <div class="pt-row">
+      <div>
+        <h1 class="page-title">Все коляски</h1>
+        <div class="count-tag" id="totalCount">62 товара</div>
+      </div>
+      <div class="sort-row">
+        <span class="sort-label">Сортировка:</span>
+        <button type="button" class="sort-btn on" onclick="setSort(this)">Новые</button>
+        <button type="button" class="sort-btn" onclick="setSort(this)">Дешевле</button>
+        <button type="button" class="sort-btn" onclick="setSort(this)">Дороже</button>
+        <button type="button" class="sort-btn" onclick="setSort(this)">Скидка</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sb-head">
+      <span class="sb-title">Фильтры</span>
+      <button type="button" class="sb-reset" onclick="clearAllFilters()">Сбросить</button>
+    </div>
+    <div class="filter-group">
+      <div class="fg-name">Цена, ₽</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+        <input type="number" id="priceMin" value="0" placeholder="От" style="padding:8px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:.8rem">
+        <input type="number" id="priceMax" value="150000" placeholder="До" style="padding:8px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:.8rem">
+      </div>
+      <div class="price-chips">
+        <div class="pc" onclick="setPriceChip(this,0,10000)">до 10 000</div>
+        <div class="pc" onclick="setPriceChip(this,10000,30000)">10–30 тыс</div>
+        <div class="pc" onclick="setPriceChip(this,30000,70000)">30–70 тыс</div>
+        <div class="pc" onclick="setPriceChip(this,70000,150000)">от 70 тыс</div>
+      </div>
+    </div>
+    <div class="filter-group">
+      <div class="fg-name">Состояние</div>
+      <div class="filter-opts">
+        <label class="fopt"><input type="checkbox"/><span class="fopt-label">Как новое</span><span class="fopt-count">23</span></label>
+        <label class="fopt"><input type="checkbox"/><span class="fopt-label">Отличное</span><span class="fopt-count">38</span></label>
+        <label class="fopt"><input type="checkbox"/><span class="fopt-label">Хорошее</span><span class="fopt-count">19</span></label>
+      </div>
+    </div>
+    <button type="button" class="sb-apply" onclick="applyFilters()">Показать результаты</button>
+  </aside>
+  <div>
+    <div class="products" id="productsGrid"></div>
+    <nav class="pagination" id="pagination" aria-label="Пагинация" style="display:flex;align-items:center;justify-content:center;gap:6px;margin:24px 0 8px">
+      <button type="button" class="page-btn arrow" onclick="goPage(currentPage-1)" aria-label="Назад">‹</button>
+      <button type="button" class="page-btn arrow" onclick="goPage(currentPage+1)" aria-label="Вперёд">›</button>
     </nav>
-    <div class="catalog-title-row">
-      <h1 class="catalog-title">Все <em>коляски</em></h1>
-      <span class="catalog-count" id="totalCount">84 позиции</span>
-    </div>
-  </header>
-
-  <!-- ACTIVE FILTERS -->
-  <div class="active-filters" id="activeFilters"></div>
-
-  <!-- CONTENT -->
-  <div class="content-grid">
-
-    <!-- SIDEBAR -->
-    <aside class="sidebar" id="sidebar" aria-label="Фильтры">
-      <div class="sidebar-head">
-        <span class="sidebar-title">Фильтры</span>
-        <button class="sidebar-reset" onclick="clearAllFilters()">Сбросить</button>
-      </div>
-
-      <!-- PRICE -->
-      <div class="filter-group open" id="fg-price">
-        <div class="filter-group-head" onclick="toggleGroup('fg-price')">
-          <span class="filter-group-label">Цена, ₽</span>
-          <svg class="filter-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="filter-group-body">
-          <div class="price-inputs">
-            <input class="price-input" type="number" placeholder="От" value="0" id="priceMin">
-            <input class="price-input" type="number" placeholder="До" value="150000" id="priceMax">
-          </div>
-          <div class="price-presets">
-            <button class="price-preset" onclick="setPrice(0,10000)">до 10 000</button>
-            <button class="price-preset" onclick="setPrice(10000,30000)">10–30 тыс</button>
-            <button class="price-preset" onclick="setPrice(30000,70000)">30–70 тыс</button>
-            <button class="price-preset" onclick="setPrice(70000,150000)">от 70 тыс</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- CONDITION -->
-      <div class="filter-group open" id="fg-cond">
-        <div class="filter-group-head" onclick="toggleGroup('fg-cond')">
-          <span class="filter-group-label">Состояние</span>
-          <svg class="filter-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="filter-group-body">
-          <div class="filter-options">
-            <label class="filter-opt checked" onclick="toggleOpt(this)">
-              <div class="opt-check"></div>
-              <span class="opt-label">Как новое</span>
-              <span class="opt-count">23</span>
-            </label>
-            <label class="filter-opt" onclick="toggleOpt(this)">
-              <div class="opt-check"></div>
-              <span class="opt-label">Отличное</span>
-              <span class="opt-count">38</span>
-            </label>
-            <label class="filter-opt" onclick="toggleOpt(this)">
-              <div class="opt-check"></div>
-              <span class="opt-label">Хорошее</span>
-              <span class="opt-count">19</span>
-            </label>
-            <label class="filter-opt" onclick="toggleOpt(this)">
-              <div class="opt-check"></div>
-              <span class="opt-label">Новое (нераспак.)</span>
-              <span class="opt-count">4</span>
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <!-- TYPE -->
-      <div class="filter-group open" id="fg-type">
-        <div class="filter-group-head" onclick="toggleGroup('fg-type')">
-          <span class="filter-group-label">Тип коляски</span>
-          <svg class="filter-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="filter-group-body">
-          <div class="filter-options">
-            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Прогулочная</span><span class="opt-count">28</span></label>
-            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Трансформер 2-в-1</span><span class="opt-count">22</span></label>
-            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Трансформер 3-в-1</span><span class="opt-count">18</span></label>
-            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Для новорождённых</span><span class="opt-count">11</span></label>
-            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Для двойни</span><span class="opt-count">5</span></label>
-          </div>
-        </div>
-      </div>
-
-      <!-- BRAND -->
-      <div class="filter-group open" id="fg-brand">
-        <div class="filter-group-head" onclick="toggleGroup('fg-brand')">
-          <span class="filter-group-label">Бренд</span>
-          <svg class="filter-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="filter-group-body">
-          <div class="filter-options">
-            <label class="filter-opt checked" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Bugaboo</span><span class="opt-count">14</span></label>
-            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Stokke</span><span class="opt-count">11</span></label>
-            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Cybex</span><span class="opt-count">16</span></label>
-            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">UPPAbaby</span><span class="opt-count">9</span></label>
-            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Joie</span><span class="opt-count">12</span></label>
-            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Inglesina</span><span class="opt-count">7</span></label>
-            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Maclaren</span><span class="opt-count">6</span></label>
-            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Другие</span><span class="opt-count">9</span></label>
-          </div>
-        </div>
-      </div>
-
-      <!-- COLOR -->
-      <div class="filter-group" id="fg-color">
-        <div class="filter-group-head" onclick="toggleGroup('fg-color')">
-          <span class="filter-group-label">Цвет</span>
-          <svg class="filter-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="filter-group-body">
-          <div class="color-swatches">
-            <div class="swatch active" style="background:#1a1a1a" title="Чёрный" onclick="this.classList.toggle('active')"></div>
-            <div class="swatch" style="background:#888" title="Серый" onclick="this.classList.toggle('active')"></div>
-            <div class="swatch" style="background:#e8dcc8" title="Бежевый" onclick="this.classList.toggle('active')"></div>
-            <div class="swatch" style="background:#4a6fa5" title="Синий" onclick="this.classList.toggle('active')"></div>
-            <div class="swatch" style="background:#5a8a6a" title="Зелёный" onclick="this.classList.toggle('active')"></div>
-            <div class="swatch" style="background:#c04a4a" title="Красный" onclick="this.classList.toggle('active')"></div>
-            <div class="swatch" style="background:#c8916a" title="Оранжевый" onclick="this.classList.toggle('active')"></div>
-            <div class="swatch" style="background:#ffffff;border:1px solid var(--border)" title="Белый" onclick="this.classList.toggle('active')"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SEASON -->
-      <div class="filter-group" id="fg-season">
-        <div class="filter-group-head" onclick="toggleGroup('fg-season')">
-          <span class="filter-group-label">Сезон</span>
-          <svg class="filter-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="filter-group-body">
-          <div class="filter-options">
-            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Всесезонная</span><span class="opt-count">51</span></label>
-            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Лето</span><span class="opt-count">21</span></label>
-            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Зима</span><span class="opt-count">12</span></label>
-          </div>
-        </div>
-      </div>
-
-      <!-- INSTALLMENT -->
-      <div class="filter-group" id="fg-inst">
-        <div class="filter-group-head" onclick="toggleGroup('fg-inst')">
-          <span class="filter-group-label">Дополнительно</span>
-          <svg class="filter-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="filter-group-body">
-          <div class="filter-options">
-            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Доступна рассрочка</span><span class="opt-count">84</span></label>
-            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">С люлькой</span><span class="opt-count">40</span></label>
-            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">С автокреслом</span><span class="opt-count">18</span></label>
-            <label class="filter-opt" onclick="toggleOpt(this)"><div class="opt-check"></div><span class="opt-label">Полный комплект</span><span class="opt-count">29</span></label>
-          </div>
-        </div>
-      </div>
-    </aside>
-
-    <!-- RIGHT COLUMN -->
-    <div>
-      <!-- TOOLBAR -->
-      <div class="toolbar">
-        <button class="filter-mobile-btn" onclick="openDrawer()" aria-label="Открыть фильтры">
-          <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="12" y1="18" x2="20" y2="18"/></svg>
-          Фильтры
-          <span class="filter-badge">2</span>
-        </button>
-        <div class="sort-wrap">
-          <span class="sort-label">Сортировать:</span>
-          <select class="sort-select" onchange="handleSort(this)">
-            <option value="new">Сначала новые</option>
-            <option value="price-asc">Цена: по возрастанию</option>
-            <option value="price-desc">Цена: по убыванию</option>
-            <option value="discount">По скидке</option>
-            <option value="popular">Популярные</option>
-          </select>
-        </div>
-        <div class="view-btns">
-          <button class="view-btn active" id="gridBtn" onclick="setView('grid')" aria-label="Сетка">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-          </button>
-          <button class="view-btn" id="listBtn" onclick="setView('list')" aria-label="Список">
-            <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- PRODUCTS GRID -->
-      <div class="products-grid" id="productsGrid">
-        <!-- Cards generated by JS -->
-      </div>
-
-      <!-- PAGINATION -->
-      <nav class="pagination" aria-label="Пагинация" id="pagination">
-        <button class="page-btn arrow" aria-label="Предыдущая" onclick="goPage(currentPage-1)">
-          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <!-- pages injected by JS -->
-        <button class="page-btn arrow" aria-label="Следующая" onclick="goPage(currentPage+1)">
-          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-      </nav>
-      <p class="pagination-info" id="pageInfo"></p>
-    </div>
+    <p id="pageInfo" style="text-align:center;font-size:.78rem;color:var(--mid);margin-bottom:40px"></p>
   </div>
 </div>
-
-<!-- MOBILE DRAWER -->
-<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
-<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Фильтры">
-  <div class="drawer-head">
-    <span class="drawer-title">Фильтры</span>
-    <button class="drawer-close" onclick="closeDrawer()" aria-label="Закрыть">
-      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-col"><div class="footer-logo">Кроха<span>Круг</span></div><p class="footer-desc">Проверенные б/у коляски от 3 900 ₽. Доставка по всей России.</p></div>
+      <div class="footer-col"><h4>Каталог</h4><ul><li><a href="catalog.html?type=stroller">Прогулочные</a></li><li><a href="catalog.html?type=newborn">Для новорождённых</a></li><li><a href="catalog.html?type=transformer">Трансформеры</a></li><li><a href="catalog.html?type=twin">Для двойни</a></li><li><a href="catalog.html?price=budget">До 15 000 ₽</a></li></ul></div>
+      <div class="footer-col"><h4>Покупателям</h4><ul><li><a href="checkout.html">Как купить</a></li><li><a href="payment.html">Рассрочка</a></li><li><a href="delivery.html">Доставка</a></li><li><a href="returns.html">Возврат</a></li></ul></div>
+      <div class="footer-col"><h4>Компания</h4><ul><li><a href="index.html#contact">Контакты</a></li><li><a href="#">Telegram</a></li><li><a href="oferta.html">Оферта</a></li><li><a href="privacy.html">Конфиденциальность</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 КрохаКруг</span><span><a href="privacy.html">Политика</a> · <a href="oferta.html">Оферта</a></span></div>
   </div>
-  <div class="drawer-body" id="drawerBody">
-    <!-- Cloned from sidebar by JS -->
-  </div>
-  <div class="drawer-foot">
-    <button class="drawer-btn" onclick="clearAllFilters(); closeDrawer()">Сбросить</button>
-    <button class="drawer-btn primary" onclick="closeDrawer()">Показать результаты</button>
-  </div>
-</div>
-
-
+</footer>
 <script src="/bu-kolyasochka/js/products.js"></script>
 <script src="/bu-kolyasochka/js/cart.js"></script>
 <script src="/bu-kolyasochka/js/main.js"></script>
 <script>let currentPage=1,currentView='grid',PER_PAGE=12,filtered=[...PRODUCTS];
 function typeLong(p){return p.type==='transformer'?(p.name.includes('3')||p.name.includes('Complete')?'Трансформер 3-в-1':'Трансформер 2-в-1'):getTypeLabel(p.type)}
-function renderCard(p,idx){const d=discount(p),delay=(idx%PER_PAGE)*.04;return '<article class="prod-card" style="animation-delay:'+delay+'s"><a href="'+pageUrl('product.html?id='+p.id)+'" class="prod-thumb" style="background:#e8e4db">'+strollerIcon()+'<img src="'+p.img+'" alt="'+escAttr(p.name)+'" onerror="fixProductImg(this,\''+escAttr(p.name)+'\')"><div class="prod-badges">'+condBadge(p.condition)+(d?'<span class="pbadge pr">−'+d+'%</span>':'')+'</div></a><div class="prod-body"><div class="prod-brand">'+p.brand+'</div><div class="prod-name">'+p.name+'</div><div class="prod-meta">'+p.year+' · '+p.color+' · '+typeLong(p)+'</div><div class="prod-tags"><span class="ptag">рассрочка</span>'+(p.type==='transformer'?'<span class="ptag">с люлькой</span>':'')+'</div></div><div class="prod-foot"><div><span class="prod-price">'+formatPrice(p.price)+'</span>'+(p.newPrice?'<span class="prod-price-old">'+formatPrice(p.newPrice)+'</span>':'')+'<span class="prod-installment">от '+installment(p.price)+' ₽/мес</span></div><button class="btn-cart add-to-cart-btn" data-id="'+p.id+'" aria-label="В корзину"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div></article>'}
+function condClass(c){return c==='likenew'?'':c==='excellent'?' p-cond-ok':''}
+function badgeHtml(p){const d=discount(p);if(d>=50)return'<span class="p-badge pb-red">−'+d+'%</span>';if(p.condition==='likenew')return'<span class="p-badge pb-green">'+getConditionLabel(p.condition)+'</span>';return'<span class="p-badge pb-orange">Выгодно</span>'}
+function renderCard(p,idx){const d=discount(p),delay=(idx%PER_PAGE)*.04;return '<article class="pcard" style="animation-delay:'+delay+'s"><a href="'+pageUrl('product.html?id='+p.id)+'" class="pcard-link"><div class="pcard-img">'+strollerIcon()+'<img src="'+p.img+'" alt="'+escAttr(p.name)+'" onerror="fixProductImg(this,\''+escAttr(p.name)+'\')"><span class="p-badge '+((p.condition==='likenew')?'pb-green':(d?'pb-red':'pb-orange'))+'">'+(d?'−'+d+'%':getConditionLabel(p.condition))+'</span></div><div class="pcard-body"><div class="p-brand">'+p.brand+'</div><div class="p-name">'+p.name+'</div><div class="p-cond'+condClass(p.condition)+'">'+getConditionLabel(p.condition)+'</div></a><div class="pcard-foot"><div><div class="p-price">'+formatPrice(p.price)+'</div>'+(p.newPrice?'<div class="p-old">'+formatPrice(p.newPrice)+'</div>':'')+'</div><button class="add-btn add-to-cart-btn" data-id="'+p.id+'" aria-label="В корзину">+</button></div></article>'}
 function applyFilters(){const min=Number(document.getElementById('priceMin')?.value||0),max=Number(document.getElementById('priceMax')?.value||999999);filtered=PRODUCTS.filter(p=>p.price>=min&&p.price<=max);currentPage=1;renderGrid()}
-function renderGrid(){const grid=document.getElementById('productsGrid'),total=filtered.length,totalPages=Math.max(1,Math.ceil(total/PER_PAGE));if(currentPage>totalPages)currentPage=totalPages;const start=(currentPage-1)*PER_PAGE,slice=filtered.slice(start,start+PER_PAGE);grid.innerHTML=slice.map(renderCard).join('')||'<div class="empty-state"><div class="empty-title">Ничего не найдено</div><p class="empty-sub">Попробуйте изменить фильтры.</p></div>';document.getElementById('totalCount').textContent=total+' '+(total===1?'позиция':total<5?'позиции':'позиций');document.getElementById('pageInfo').textContent=total?'Показано '+(start+1)+'–'+Math.min(start+PER_PAGE,total)+' из '+total:'';bindAddToCart(grid);renderPagination(totalPages)}
-function renderPagination(totalPages){const nav=document.getElementById('pagination'),prev=nav.querySelector('.page-btn.arrow:first-child'),next=nav.querySelector('.page-btn.arrow:last-child');nav.querySelectorAll('.page-btn:not(.arrow),.page-dots').forEach(e=>e.remove());let lastDots=false;for(let i=1;i<=totalPages;i++){if(i===1||i===totalPages||(i>=currentPage-1&&i<=currentPage+1)){const b=document.createElement('button');b.className='page-btn'+(i===currentPage?' active':'');b.textContent=i;b.onclick=()=>goPage(i);nav.insertBefore(b,next);lastDots=false}else if(!lastDots){const s=document.createElement('span');s.className='page-dots';s.textContent='…';nav.insertBefore(s,next);lastDots=true}}prev.disabled=currentPage===1;next.disabled=currentPage===totalPages}
+function renderGrid(){const grid=document.getElementById('productsGrid'),total=filtered.length,totalPages=Math.max(1,Math.ceil(total/PER_PAGE));if(currentPage>totalPages)currentPage=totalPages;const start=(currentPage-1)*PER_PAGE,slice=filtered.slice(start,start+PER_PAGE);grid.innerHTML=slice.map(renderCard).join('')||'<div class="empty-state"><p>Ничего не найдено</p></div>';const tc=document.getElementById('totalCount');if(tc)tc.textContent=total+' '+(total===1?'товар':total<5?'товара':'товаров');const pi=document.getElementById('pageInfo');if(pi)pi.textContent=total?'Показано '+(start+1)+'–'+Math.min(start+PER_PAGE,total)+' из '+total:'';bindAddToCart(grid);renderPagination(totalPages)}
+function renderPagination(totalPages){const nav=document.getElementById('pagination');if(!nav)return;const prev=nav.querySelector('.page-btn.arrow:first-child'),next=nav.querySelector('.page-btn.arrow:last-child');nav.querySelectorAll('.page-btn:not(.arrow),.page-dots').forEach(e=>e.remove());let lastDots=false;for(let i=1;i<=totalPages;i++){if(i===1||i===totalPages||(i>=currentPage-1&&i<=currentPage+1)){const b=document.createElement('button');b.className='page-btn'+(i===currentPage?' active':'');b.textContent=i;b.onclick=()=>goPage(i);nav.insertBefore(b,next);lastDots=false}else if(!lastDots){const s=document.createElement('span');s.className='page-dots';s.textContent='…';nav.insertBefore(s,next);lastDots=true}}if(prev)prev.disabled=currentPage===1;if(next)next.disabled=currentPage===totalPages}
 function goPage(p){const total=Math.ceil(filtered.length/PER_PAGE);if(p<1||p>total)return;currentPage=p;renderGrid();scrollTo({top:0,behavior:'smooth'})}
-function setView(v){currentView=v;document.getElementById('productsGrid').classList.toggle('list-view',v==='list');document.getElementById('gridBtn')?.classList.toggle('active',v==='grid');document.getElementById('listBtn')?.classList.toggle('active',v==='list');renderGrid()}
-function handleSort(sel){const v=sel.value;filtered.sort((a,b)=>v==='price-asc'?a.price-b.price:v==='price-desc'?b.price-a.price:v==='discount'?discount(b)-discount(a):v==='popular'?a.id-b.id:b.year-a.year||b.id-a.id);currentPage=1;renderGrid()}
-function toggleGroup(id){document.getElementById(id)?.classList.toggle('open')}
-function toggleOpt(el){el.classList.toggle('checked')}
-function setPrice(min,max){document.getElementById('priceMin').value=min;document.getElementById('priceMax').value=max;document.querySelectorAll('.price-preset').forEach(b=>b.classList.remove('active'));if(event?.target)event.target.classList.add('active');applyFilters()}
-function clearAllFilters(){document.getElementById('priceMin').value=0;document.getElementById('priceMax').value=150000;document.querySelectorAll('.filter-opt.checked,.swatch.active,.price-preset.active').forEach(el=>el.classList.remove('checked','active'));filtered=[...PRODUCTS];currentPage=1;renderGrid()}
-function openDrawer(){document.getElementById('drawerBody').innerHTML=document.getElementById('sidebar').innerHTML;document.getElementById('drawer').classList.add('open');document.getElementById('drawerOverlay').classList.add('open');document.body.style.overflow='hidden'}
-function closeDrawer(){document.getElementById('drawer').classList.remove('open');document.getElementById('drawerOverlay').classList.remove('open');document.body.style.overflow=''}
+function setSort(btn){document.querySelectorAll('.sort-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');const t=btn.textContent.trim();filtered.sort((a,b)=>t.includes('Дешевле')?a.price-b.price:t.includes('Дороже')?b.price-a.price:t.includes('Скидка')?discount(b)-discount(a):b.year-a.year||b.id-a.id);currentPage=1;renderGrid()}
+function setPriceChip(el,min,max){document.querySelectorAll('.pc').forEach(c=>c.classList.remove('on'));el.classList.add('on');const pm=document.getElementById('priceMin'),px=document.getElementById('priceMax');if(pm)pm.value=min;if(px)px.value=max;applyFilters()}
+function clearAllFilters(){document.querySelectorAll('input[type=checkbox]').forEach(c=>c.checked=false);document.querySelectorAll('.pc').forEach(c=>c.classList.remove('on'));const pm=document.getElementById('priceMin'),px=document.getElementById('priceMax');if(pm)pm.value=0;if(px)px.value=150000;filtered=[...PRODUCTS];currentPage=1;renderGrid()}
 document.addEventListener('DOMContentLoaded',()=>{document.getElementById('priceMin')?.addEventListener('change',applyFilters);document.getElementById('priceMax')?.addEventListener('change',applyFilters);renderGrid()});</script>
 <script src="/bu-kolyasochka/js/assistant.js"></script>
+<script src="/bu-kolyasochka/js/site-ui.js"></script>
 </body>
 </html>

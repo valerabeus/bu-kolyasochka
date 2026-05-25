@@ -1,180 +1,84 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Сравнение детских колясок — Б/У Колясочка</title>
-  <meta name="description" content="Сравните б/у премиальные детские коляски по цене, состоянию, году, бренду и типу. Короткий вывод помогает выбрать модель из каталога сайта.">
-  <script>
-    (function () {
-      var p = location.pathname, m = '/bu-kolyasochka';
-      if (p === m || (p.endsWith(m) && !p.endsWith(m + '/'))) {
-        location.replace(p + '/' + location.search + location.hash);
-      }
-    })();
-  </script>
-  <script src="/bu-kolyasochka/js/site.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сравнение колясок — КрохаКруг</title>
+<meta name="description" content="Сравните модели колясок по параметрам.">
+<script src="/bu-kolyasochka/js/site.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/bu-kolyasochka/css/theme.css">
 <link rel="stylesheet" href="/bu-kolyasochka/css/assistant.css">
 </head>
 <body data-page="compare">
-
-  <header class="header" id="header">
-    <div class="header-inner">
-      <a href="index.html" class="logo">Б/У<br>Колясочка</a>
-      <nav class="nav">
-        <a href="catalog.html" class="nav-link">Каталог</a>
-        <a href="kak-vybrat.html" class="nav-link">Как выбрать</a>
-        <a href="compare.html" class="nav-link nav-link--active">Сравнение <span data-compare-count style="display:none"></span></a>
-        <a href="index.html#about" class="nav-link">О магазине</a>
-        <a href="index.html#contact" class="nav-link">Контакты</a>
-      </nav>
-      <div class="header-actions">
-        <div class="social-icons">
-          <a href="https://wa.me/79000000000" class="social-icon social-icon--wa" target="_blank" rel="noopener" title="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
-          <a href="https://t.me/bukolyasochka" class="social-icon social-icon--tg" target="_blank" rel="noopener" title="Telegram"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
-          <a href="https://www.avito.ru/bukolyasochka" class="social-icon social-icon--avito" target="_blank" rel="noopener" title="Авито"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.5 2a7.5 7.5 0 1 1 0 15 7.5 7.5 0 0 1 0-15zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11zm8.5.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zm0 1.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-5 8.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 1.5a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm7.5.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zm0 1.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg></a>
-          <a href="https://vk.com/bukolyasochka" class="social-icon social-icon--vk" target="_blank" rel="noopener" title="ВКонтакте"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.391 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.05-1.727-1.033-1.01-1.49-.9-1.49.476v1.255c0 .368-.122.588-1.14.588-1.68 0-3.54-.996-4.85-2.859-1.965-2.748-2.503-4.804-2.503-5.226 0-.228.09-.44.347-.44h1.753c.26 0 .357.12.453.406.502 1.455 1.34 2.73 1.68 2.73.13 0 .189-.06.189-.386V9.28c-.044-.834-.484-1.166-.484-1.536 0-.189.163-.388.422-.388h2.761c.22 0 .297.117.297.375v3.572c0 .207.09.28.146.28.13 0 .243-.073.483-.325 1.492-1.615 2.558-4.11 2.558-4.11.069-.145.22-.283.475-.283h1.753c.524 0 .637.268.524.53-.217.505-2.312 3.96-2.312 3.96-.178.3-.245.43 0 .757.178.246.762.756 1.152 1.213.716.828 1.264 1.525 1.409 2.005.14.487-.107.738-.596.738z"/></svg></a>
-        </div>
-        <button class="cart-toggle" id="cartToggle" aria-label="Корзина">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
-            <line x1="3" y1="6" x2="21" y2="6"/>
-            <path d="M16 10a4 4 0 01-8 0"/>
-          </svg>
-          <span class="cart-count" id="cartCount">0</span>
-        </button>
-        <button class="burger" id="burgerBtn" aria-label="Меню">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-  <div class="mobile-menu" id="mobileMenu">
-    <div class="mobile-menu-head">
-      <span class="mobile-menu-title">Меню</span>
-      <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Закрыть">✕</button>
-    </div>
-    <nav class="mobile-nav">
-      <a href="catalog.html" class="mobile-nav-link">Каталог</a>
-      <a href="kak-vybrat.html" class="mobile-nav-link">Как выбрать</a>
-      <a href="compare.html" class="mobile-nav-link">Сравнение</a>
-      <a href="index.html#about" class="mobile-nav-link">О магазине</a>
-      <a href="index.html#reviews" class="mobile-nav-link">Отзывы</a>
-      <a href="index.html#contact" class="mobile-nav-link">Контакты</a>
-    </nav>
-    <div class="mobile-menu-wa">
-      <a href="https://wa.me/79000000000" class="btn btn-whatsapp btn-sm" style="width:100%" target="_blank" rel="noopener">WhatsApp</a>
-    </div>
+<nav><div class="nav-inner">
+  <a href="index.html" class="logo">Кроха<span>Круг</span></a>
+  <div class="nav-links"><a href="catalog.html">Каталог</a><a href="kak-vybrat.html">Как выбрать</a><a href="delivery.html">Доставка</a><a href="payment.html">Рассрочка</a><a href="index.html#contact">Контакты</a></div>
+  <div class="nav-actions">
+    <button class="icon-btn"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m17 17 4 4"/></svg></button>
+    <button class="icon-btn"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+    <button class="icon-btn nav-btn" data-cart-open aria-label="Корзина"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cart-dot" data-cart-count style="display:none">0</span></button>
+    <button class="btn-primary" onclick="location.href='catalog.html'">Весь каталог</button>
   </div>
+</div></nav>
 
-  <main class="compare-page">
-    <section class="page-hero">
-      <div class="container page-hero-grid">
-        <div>
-          <p class="section-kicker">Сравнение товаров</p>
-          <h1 class="page-hero-title">Сравните коляски перед покупкой</h1>
-          <p class="page-hero-sub">Добавляйте до 4 моделей из каталога. Таблица покажет цену, состояние, тип, год, бренд и описание, а короткий вывод поможет быстрее понять разницу.</p>
-          <div class="compare-topbar">
-            <a href="catalog.html" class="btn btn-primary btn-lg">Добавить из каталога</a>
-            <button type="button" class="btn btn-ghost btn-lg" onclick="window.CatalogAssistant && window.CatalogAssistant.open()">Помочь с выбором</button>
-          </div>
-        </div>
-        <aside class="compare-ai-card">
-          <p>Коротко</p>
-          <strong>Вывод по выбранным моделям</strong>
-          <div class="compare-ai-summary" id="compareAiSummary">Добавьте 2-4 коляски из каталога, и подбор кратко сравнит их по цене, состоянию и сценарию использования.</div>
-        </aside>
-      </div>
-    </section>
+<div class="page-header"><div class="wrap">
+  <div class="breadcrumb"><a href="index.html">Главная</a><s>›</s><span>Сравнение</span></div>
+  <h1 class="page-title">Сравнение колясок</h1>
+  <p class="page-sub">Добавляйте коляски из каталога для сравнения характеристик.</p>
+</div></div>
+<div class="wrap" style="padding-bottom:80px">
+  <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;background:var(--white);border-radius:var(--r);overflow:hidden;border:1px solid var(--border)">
+      <thead>
+        <tr>
+          <th style="padding:16px 20px;text-align:left;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mid);border-bottom:1px solid var(--border);background:var(--bg)">Характеристика</th>
+          <th style="padding:16px 20px;text-align:center;border-bottom:1px solid var(--border);border-left:1px solid var(--border)">
+            <img src="https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?w=120&q=75" style="width:80px;height:80px;object-fit:cover;border-radius:8px;margin:0 auto 8px" alt="Bugaboo"/>
+            <div style="font-size:.8rem;font-weight:700;color:var(--mid)">Bugaboo</div>
+            <div style="font-size:.88rem;font-weight:800">Fox 3 Complete</div>
+            <div style="font-size:1rem;font-weight:800;margin-top:4px">68 900 ₽</div>
+          </th>
+          <th style="padding:16px 20px;text-align:center;border-bottom:1px solid var(--border);border-left:1px solid var(--border)">
+            <img src="https://images.unsplash.com/photo-1566933293069-b55c7f326dd4?w=120&q=75" style="width:80px;height:80px;object-fit:cover;border-radius:8px;margin:0 auto 8px" alt="Stokke"/>
+            <div style="font-size:.8rem;font-weight:700;color:var(--mid)">Stokke</div>
+            <div style="font-size:.88rem;font-weight:800">Xplory X</div>
+            <div style="font-size:1rem;font-weight:800;margin-top:4px">54 500 ₽</div>
+          </th>
+          <th style="padding:16px 20px;text-align:center;border-bottom:1px solid var(--border);border-left:1px solid var(--border)">
+            <img src="https://images.unsplash.com/photo-1544126592-807ade215a0b?w=120&q=75" style="width:80px;height:80px;object-fit:cover;border-radius:8px;margin:0 auto 8px" alt="Joie"/>
+            <div style="font-size:.8rem;font-weight:700;color:var(--mid)">Joie</div>
+            <div style="font-size:.88rem;font-weight:800">Versatrax 360°</div>
+            <div style="font-size:1rem;font-weight:800;margin-top:4px">18 900 ₽</div>
+          </th>
+        </tr>
+      </thead>
+      <tbody id="compTable">
+      </tbody>
+    </table>
+  </div>
+  <div style="text-align:center;margin-top:28px">
+    <a href="catalog.html" style="display:inline-flex;align-items:center;height:48px;padding:0 32px;border-radius:10px;background:var(--ink);color:#fff;font-family:Manrope,sans-serif;font-size:.88rem;font-weight:700">Добавить коляску для сравнения</a>
+  </div>
+</div>
 
-    <section class="section">
-      <div class="container">
-        <div class="section-header">
-          <div>
-            <p class="section-kicker">Ваш выбор</p>
-            <h2 class="section-title">Модели в сравнении</h2>
-          </div>
-          <a href="kak-vybrat.html" class="section-link">Как выбрать →</a>
-        </div>
-        <div class="compare-empty" id="compareEmpty">
-          <p>Пока нет товаров для сравнения. Откройте каталог и нажмите “Сравнить” на понравившихся колясках.</p>
-          <a href="catalog.html" class="btn btn-primary btn-sm">Перейти в каталог</a>
-        </div>
-        <div class="compare-products" id="compareProducts"></div>
-        <div class="compare-table" id="compareTable" aria-label="Таблица сравнения колясок"></div>
-      </div>
-    </section>
-  </main>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <div class="footer-logo">Б/У Колясочка</div>
-          <p class="footer-tagline">Премиальные коляски с историей</p>
-        </div>
-        <div class="footer-col">
-          <h4 class="footer-col-title">Каталог</h4>
-          <a href="catalog.html?type=transformer" class="footer-link">Трансформеры</a>
-          <a href="catalog.html?type=stroller" class="footer-link">Прогулочные</a>
-          <a href="catalog.html?type=twin" class="footer-link">Для двойни</a>
-          <a href="catalog.html?type=sport" class="footer-link">Спортивные</a>
-        </div>
-        <div class="footer-col">
-          <h4 class="footer-col-title">Информация</h4>
-          <a href="kak-vybrat.html" class="footer-link">Как выбрать коляску</a>
-          <a href="compare.html" class="footer-link">Сравнение товаров</a>
-          <a href="index.html#about" class="footer-link">О магазине</a>
-          <a href="index.html#reviews" class="footer-link">Отзывы</a>
-          <a href="index.html#contact" class="footer-link">Контакты</a>
-        </div>
-        <div class="footer-col">
-          <h4 class="footer-col-title">Связаться</h4>
-          <a href="https://wa.me/79000000000" class="footer-link" target="_blank" rel="noopener">WhatsApp</a>
-          <p class="footer-text">Ответим в течение часа</p>
-          <p class="footer-text">Пн-Вс 9:00-21:00</p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p class="footer-copy">© 2024 Б/У Колясочка. Все права защищены.</p>
-      </div>
-    </div>
-  </footer>
+<footer><div class="footer-inner">
+  <div class="footer-top">
+    <div class="footer-col"><div class="footer-logo">Кроха<span>Круг</span></div><p class="footer-desc">Проверенные б/у коляски от 3 900 ₽. Доставка по всей России.</p></div>
+    <div class="footer-col"><h4>Каталог</h4><ul><li><a href="catalog.html">Все коляски</a></li><li><a href="catalog.html?type=stroller">Прогулочные</a></li><li><a href="catalog.html?type=transformer">Трансформеры</a></li></ul></div>
+    <div class="footer-col"><h4>Покупателям</h4><ul><li><a href="checkout.html">Как купить</a></li><li><a href="payment.html">Рассрочка</a></li><li><a href="delivery.html">Доставка</a></li><li><a href="returns.html">Возврат</a></li></ul></div>
+    <div class="footer-col"><h4>Компания</h4><ul><li><a href="index.html#contact">Контакты</a></li><li><a href="#">Telegram</a></li><li><a href="oferta.html">Оферта</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 КрохаКруг</span><span><a href="privacy.html">Политика</a> · <a href="oferta.html">Оферта</a></span></div>
+</div></footer>
+<script src="/bu-kolyasochka/js/products.js"></script>
+<script src="/bu-kolyasochka/js/cart.js"></script>
+<script src="/bu-kolyasochka/js/main.js"></script>
 
-  <div class="cart-overlay" id="cartOverlay"></div>
-  <aside class="cart-drawer" id="cartDrawer">
-    <div class="cart-drawer-header">
-      <h3 class="cart-drawer-title">Корзина</h3>
-      <button class="cart-drawer-close" id="cartClose" aria-label="Закрыть">✕</button>
-    </div>
-    <div class="cart-drawer-body" id="cartBody">
-      <div class="cart-empty" id="cartEmpty">
-        <p>Корзина пуста</p>
-        <a href="catalog.html" class="btn btn-primary btn-sm">Перейти в каталог</a>
-      </div>
-      <div class="cart-items" id="cartItems"></div>
-    </div>
-    <div class="cart-drawer-footer" id="cartFooter" style="display:none">
-      <div class="cart-total">
-        <span>Итого:</span>
-        <span class="cart-total-price" id="cartTotal">0 ₽</span>
-      </div>
-      <button class="btn btn-primary btn-lg" id="checkoutBtn" style="width:100%">Оформить через WhatsApp</button>
-    </div>
-  </aside>
-
-  <nav class="bottom-nav" id="bottomNav" aria-label="Мобильная навигация"></nav>
-
-  <script src="/bu-kolyasochka/js/products.js"></script>
-  <script src="/bu-kolyasochka/js/cart.js"></script>
-  <script src="/bu-kolyasochka/js/compare.js"></script>
-  <script src="/bu-kolyasochka/js/main.js"></script>
-  <script src="/bu-kolyasochka/js/assistant.js"></script>
+<script src="/bu-kolyasochka/js/assistant.js"></script>
+<script src="/bu-kolyasochka/js/site-ui.js"></script>
 </body>
 </html>

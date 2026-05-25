@@ -1,500 +1,79 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<script src="/bu-kolyasochka/js/site.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Оплата и рассрочка — КолясочкаPRO</title>
+<title>Рассрочка — КрохаКруг</title>
+<meta name="description" content="Рассрочка 0% на коляски: Тинькофф, Сбер, Яндекс Сплит.">
+<script src="/bu-kolyasochka/js/site.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/bu-kolyasochka/css/theme.css">
 <link rel="stylesheet" href="/bu-kolyasochka/css/assistant.css">
 </head>
 <body data-page="payment">
-
-<!-- NAV -->
-<nav>
-  <div class="nav-inner">
-    <a href="index.html" class="logo">Колясочки<span>PRO</span></a>
-    <ul class="nav-links">
-      <li><a href="catalog.html">Каталог</a></li>
-      <li><a href="#calc">Рассрочка</a></li>
-      <li><a href="#faq">FAQ</a></li>
-      <li><a href="#">Контакты</a></li>
-    </ul>
-    <button class="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+<nav><div class="nav-inner">
+  <a href="index.html" class="logo">Кроха<span>Круг</span></a>
+  <div class="nav-links"><a href="catalog.html">Каталог</a><a href="kak-vybrat.html">Как выбрать</a><a href="delivery.html">Доставка</a><a href="payment.html">Рассрочка</a><a href="index.html#contact">Контакты</a></div>
+  <div class="nav-actions">
+    <button class="icon-btn"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m17 17 4 4"/></svg></button>
+    <button class="icon-btn"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+    <button class="icon-btn nav-btn" data-cart-open aria-label="Корзина"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="cart-dot" data-cart-count style="display:none">0</span></button>
+    <button class="btn-primary" onclick="location.href='catalog.html'">Весь каталог</button>
   </div>
-</nav>
+</div></nav>
 
+<div class="page-header"><div class="wrap">
+  <div class="breadcrumb"><a href="index.html">Главная</a><s>›</s><span>Рассрочка</span></div>
+  <h1 class="page-title">Рассрочка 0%</h1>
+  <p class="page-sub">Покупайте сейчас — платите частями без переплат и скрытых комиссий.</p>
+</div></div>
 <div class="wrap">
-
-  <!-- BREADCRUMB -->
-  <nav class="breadcrumb">
-    <a href="index.html">Главная</a>
-    <sep>›</sep>
-    <span style="color:var(--ink2)">Оплата и рассрочка</span>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero reveal">
-    <div class="hero-eyebrow">Без переплат и скрытых комиссий</div>
-    <h1>Оплата и <em>рассрочка</em></h1>
-    <p class="hero-sub">Платите удобным способом — картой, через СБП или оформите рассрочку на срок до 24 месяцев. Никаких процентов, никаких переплат.</p>
-    <div class="hero-pills">
-      <span class="hero-pill"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Рассрочка 0%</span>
-      <span class="hero-pill"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>5 способов оплаты</span>
-      <span class="hero-pill"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Оплата при получении</span>
-      <span class="hero-pill"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Безопасная транзакция</span>
+  <div class="grid2">
+    <div class="info-box"><div class="info-icon">🏦</div><div class="info-title">Тинькофф</div><div class="info-text">Рассрочка на 3, 6 или 12 месяцев. Оформление за 2 минуты прямо на сайте без визита в банк.</div></div>
+    <div class="info-box"><div class="info-icon">🟢</div><div class="info-title">СберПэй</div><div class="info-text">Если вы клиент Сбербанка — оформите рассрочку через привычное приложение за несколько кликов.</div></div>
+    <div class="info-box"><div class="info-icon">🟡</div><div class="info-title">Яндекс Pay</div><div class="info-text">Быстрое оформление через аккаунт Яндекс. Без дополнительных документов, решение за минуту.</div></div>
+    <div class="info-box"><div class="info-icon">⚡</div><div class="info-title">СБП (Система быстрых платежей)</div><div class="info-text">Оплата через QR-код из любого банковского приложения. Мгновенное зачисление.</div></div>
+  </div>
+  <div class="card">
+    <h2>Как оформить рассрочку</h2>
+    <div class="step-list">
+      <div class="step-item"><div class="step-n">1</div><div><div class="step-title">Добавьте товар в корзину</div><div class="step-text">Выберите коляску в каталоге и нажмите «В корзину».</div></div></div>
+      <div class="step-item"><div class="step-n">2</div><div><div class="step-title">Выберите способ оплаты</div><div class="step-text">На странице оформления заказа выберите «Рассрочка» и нужный банк.</div></div></div>
+      <div class="step-item"><div class="step-n">3</div><div><div class="step-title">Заполните анкету банка</div><div class="step-text">Это занимает 2–5 минут. Нужен только паспорт и телефон.</div></div></div>
+      <div class="step-item"><div class="step-n">4</div><div><div class="step-title">Получите одобрение и оформите</div><div class="step-text">Большинство заявок одобряется автоматически. Коляска отправляется после подтверждения.</div></div></div>
     </div>
-  </section>
+  </div>
+  <div class="card" style="background:#F0FDF4;border-color:#BBF7D0">
+    <h2 style="color:#15803D">Пример расчёта</h2>
+    <p>Bugaboo Fox 3 за <strong>68 900 ₽</strong> в рассрочку на 12 месяцев:</p>
+    <p style="font-size:1.3rem;font-weight:800;color:var(--ink);margin:12px 0">5 742 ₽ / месяц</p>
+    <p>Без переплат. Итоговая сумма — 68 900 ₽. Ни рубля сверху.</p>
+  </div>
+  <div class="card" style="margin-bottom:80px">
+    <h2>Часто задаваемые вопросы</h2>
+    <p><strong>Есть ли скрытые комиссии?</strong><br>Нет. Рассрочка 0% — значит 0%. Платите ровно столько, сколько стоит коляска.</p>
+    <p><strong>Могу ли я погасить досрочно?</strong><br>Да, без штрафов и комиссий.</p>
+    <p><strong>Нужна ли хорошая кредитная история?</strong><br>Не обязательно. Каждый банк решает самостоятельно, но большинство заявок одобряются.</p>
+    <p><strong>Что если мне откажут?</strong><br>Попробуйте другой банк — у каждого свои критерии. Или оплатите картой/СБП.</p>
+  </div>
+</div>
 
-  <div class="divider" style="margin-top:0"></div>
-
-  <!-- PAYMENT METHODS -->
-  <section class="reveal">
-    <div class="sec-head">
-      <div class="sec-eyebrow">Способы оплаты</div>
-      <h2 class="sec-title">Выбери <em>удобный</em> вариант</h2>
-    </div>
-
-    <div class="methods-grid">
-
-      <div class="method-card featured">
-        <div class="method-icon green-bg">
-          <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-        </div>
-        <div>
-          <div class="method-name">Рассрочка</div>
-          <span class="method-badge mb-green">Рекомендуем</span>
-        </div>
-        <div class="method-desc">Тинькофф, СберПэй, Яндекс Pay. От 3 до 24 месяцев без переплат. Одобрение за 2 минуты.</div>
-      </div>
-
-      <div class="method-card">
-        <div class="method-icon" style="font-size:15px;font-weight:600;letter-spacing:-.5px">СБП</div>
-        <div>
-          <div class="method-name">Система быстрых платежей</div>
-          <span class="method-badge mb-green">Без комиссии</span>
-        </div>
-        <div class="method-desc">Мгновенный перевод по номеру телефона из любого банка. Бесплатно, без лимитов.</div>
-      </div>
-
-      <div class="method-card">
-        <div class="method-icon">
-          <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/><line x1="5" y1="15" x2="9" y2="15"/></svg>
-        </div>
-        <div>
-          <div class="method-name">Банковская карта</div>
-          <span class="method-badge mb-gray">Visa · МИР · UnionPay</span>
-        </div>
-        <div class="method-desc">Оплата картой онлайн через защищённый шлюз. Данные карты не хранятся на сайте.</div>
-      </div>
-
-      <div class="method-card">
-        <div class="method-icon" style="font-size:13px;font-weight:700;color:var(--green)">T—</div>
-        <div>
-          <div class="method-name">Тинькофф Pay</div>
-          <span class="method-badge mb-sand">До 24 мес.</span>
-        </div>
-        <div class="method-desc">Рассрочка и оплата через приложение Тинькофф. Одобрение без визита в банк.</div>
-      </div>
-
-      <div class="method-card">
-        <div class="method-icon" style="font-size:13px;font-weight:700;color:#21a038">С</div>
-        <div>
-          <div class="method-name">СберПэй</div>
-          <span class="method-badge mb-sand">До 12 мес.</span>
-        </div>
-        <div class="method-desc">Оплата и рассрочка через СберБанк Онлайн. Доступна клиентам Сбербанка.</div>
-      </div>
-
-      <div class="method-card">
-        <div class="method-icon" style="font-size:13px;font-weight:700;color:#fc3f1d">Я</div>
-        <div>
-          <div class="method-name">Яндекс Pay</div>
-          <span class="method-badge mb-gray">Кошелёк · Сплит</span>
-        </div>
-        <div class="method-desc">Оплата через Яндекс ID. Также доступен Яндекс Сплит — покупка частями без банка.</div>
-      </div>
-
-    </div>
-
-    <!-- COMPARISON TABLE -->
-    <div style="overflow-x:auto;margin-top:4px">
-      <table class="cmp-table">
-        <thead>
-          <tr>
-            <th>Способ</th>
-            <th>Рассрочка</th>
-            <th>Комиссия</th>
-            <th>Срок зачисления</th>
-            <th>Особенности</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>СБП</td>
-            <td><span class="cross">—</span></td>
-            <td><span class="badge-sm bs-green">0%</span></td>
-            <td>Мгновенно</td>
-            <td>Лучший выбор для разовой оплаты</td>
-          </tr>
-          <tr>
-            <td>Карта (МИР/Visa)</td>
-            <td><span class="cross">—</span></td>
-            <td><span class="badge-sm bs-green">0%</span></td>
-            <td>Мгновенно</td>
-            <td>Кешбэк банка на ваш счёт</td>
-          </tr>
-          <tr>
-            <td>Тинькофф Pay</td>
-            <td><span class="check">✓</span> до 24 мес.</td>
-            <td><span class="badge-sm bs-green">0%</span></td>
-            <td>2–5 мин</td>
-            <td>Одобрение онлайн без справок</td>
-          </tr>
-          <tr>
-            <td>СберПэй</td>
-            <td><span class="check">✓</span> до 12 мес.</td>
-            <td><span class="badge-sm bs-green">0%</span></td>
-            <td>5–10 мин</td>
-            <td>Только для клиентов Сбербанка</td>
-          </tr>
-          <tr>
-            <td>Яндекс Pay / Сплит</td>
-            <td><span class="check">✓</span> до 6 мес.</td>
-            <td><span class="badge-sm bs-green">0%</span></td>
-            <td>Мгновенно</td>
-            <td>Без одобрения банка для Сплита</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- CALCULATOR -->
-  <section id="calc" class="reveal">
-    <div class="sec-head">
-      <div class="sec-eyebrow">Калькулятор рассрочки</div>
-      <h2 class="sec-title">Считай <em>сам</em></h2>
-    </div>
-
-    <div class="calc-section">
-      <div class="calc-inner">
-
-        <!-- CONTROLS -->
-        <div class="calc-controls">
-
-          <div class="slider-group">
-            <div class="slider-label">
-              <span class="sl-name">Стоимость коляски</span>
-              <span class="sl-val" id="dispPrice">68 900 ₽</span>
-            </div>
-            <input type="range" id="sliderPrice" min="5000" max="150000" step="1000" value="68900"
-              oninput="updateCalc()" style="--pct:42%">
-            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--ink3);margin-top:6px">
-              <span>5 000 ₽</span><span>150 000 ₽</span>
-            </div>
-          </div>
-
-          <div class="slider-group">
-            <div class="slider-label">
-              <span class="sl-name">Первоначальный взнос</span>
-              <span class="sl-val" id="dispDown">0 ₽</span>
-            </div>
-            <input type="range" id="sliderDown" min="0" max="50" step="5" value="0"
-              oninput="updateCalc()" style="--pct:0%">
-            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--ink3);margin-top:6px">
-              <span>0%</span><span>50%</span>
-            </div>
-          </div>
-
-          <div class="slider-group" style="margin-bottom:0">
-            <div class="slider-label">
-              <span class="sl-name">Срок рассрочки</span>
-              <span class="sl-val" id="dispMonths">12 месяцев</span>
-            </div>
-            <div class="months-grid">
-              <button class="mo-btn" onclick="setMonths(this,3)">3 мес.</button>
-              <button class="mo-btn" onclick="setMonths(this,6)">6 мес.</button>
-              <button class="mo-btn active" onclick="setMonths(this,12)">12 мес.</button>
-              <button class="mo-btn" onclick="setMonths(this,18)">18 мес.</button>
-              <button class="mo-btn" onclick="setMonths(this,24)">24 мес.</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- RESULT -->
-        <div class="calc-result">
-          <div>
-            <div class="calc-result-label">Ежемесячный платёж</div>
-            <div class="calc-monthly" id="resultMonthly">4 908 ₽</div>
-            <div class="calc-monthly-sub" id="resultSub">в месяц · 12 платежей · переплата 0 ₽</div>
-          </div>
-
-          <div>
-            <div class="calc-breakdown">
-              <div class="cb-row">
-                <span class="cb-lbl">Стоимость коляски</span>
-                <span class="cb-val" id="bPrice">68 900 ₽</span>
-              </div>
-              <div class="cb-row" id="downRow">
-                <span class="cb-lbl">Первый взнос</span>
-                <span class="cb-val" id="bDown">0 ₽</span>
-              </div>
-              <div class="cb-divider"></div>
-              <div class="cb-row">
-                <span class="cb-lbl">Сумма рассрочки</span>
-                <span class="cb-val" id="bBody">68 900 ₽</span>
-              </div>
-              <div class="cb-row">
-                <span class="cb-lbl">Срок</span>
-                <span class="cb-val" id="bTerm">12 мес.</span>
-              </div>
-              <div class="cb-row">
-                <span class="cb-lbl">Переплата</span>
-                <span class="cb-val">0 ₽</span>
-              </div>
-              <div class="cb-divider"></div>
-              <div class="cb-row total">
-                <span class="cb-lbl">Итого</span>
-                <span class="cb-val" id="bTotal">68 900 ₽</span>
-              </div>
-            </div>
-
-            <div class="calc-cta">
-              <button class="btn-calc-cta btn-calc-primary" onclick="window.location='catalog.html'">Выбрать коляску →</button>
-              <button class="btn-calc-cta btn-calc-ghost">Оформить рассрочку</button>
-            </div>
-            <div class="calc-providers">
-              <span class="cp">Тинькофф</span>
-              <span class="cp">СберПэй</span>
-              <span class="cp">Яндекс Pay</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- HOW IT WORKS -->
-  <section class="reveal">
-    <div class="sec-head">
-      <div class="sec-eyebrow">Оформление рассрочки</div>
-      <h2 class="sec-title">Как получить <em>рассрочку</em></h2>
-    </div>
-    <div class="steps-list">
-      <div class="step-item">
-        <div class="step-num">01</div>
-        <div class="step-title">Выбери коляску</div>
-        <div class="step-desc">Найди нужную модель в каталоге и добавь в корзину. Любой товар доступен в рассрочку.</div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">02</div>
-        <div class="step-title">Выбери способ рассрочки</div>
-        <div class="step-desc">На странице оформления выбери Тинькофф, СберПэй или Яндекс Pay. Укажи срок.</div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">03</div>
-        <div class="step-title">Получи одобрение</div>
-        <div class="step-desc">Банк рассматривает заявку за 2–5 минут. Справки и поручители не нужны.</div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">04</div>
-        <div class="step-title">Получи коляску</div>
-        <div class="step-desc">Мы отправляем сразу после одобрения. Трек-номер приходит в SMS в день отправки.</div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- TRUST STRIP -->
-  <section class="reveal">
-    <div class="trust-strip">
-      <div class="trust-card">
-        <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <div>
-          <div class="trust-title">Безопасная оплата</div>
-          <div class="trust-sub">Данные карты передаются по протоколу TLS 1.3. Мы не храним платёжные данные.</div>
-        </div>
-      </div>
-      <div class="trust-card">
-        <div class="trust-icon"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg></div>
-        <div>
-          <div class="trust-title">Возврат 14 дней</div>
-          <div class="trust-sub">Не подошла — вернём деньги или досрочно закроем рассрочку без штрафов.</div>
-        </div>
-      </div>
-      <div class="trust-card">
-        <div class="trust-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
-        <div>
-          <div class="trust-title">Переплата 0 ₽</div>
-          <div class="trust-sub">Рассрочка без процентов. Платёж в месяц — ровно сумма / срок, не больше.</div>
-        </div>
-      </div>
-      <div class="trust-card">
-        <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.68 11 19.79 19.79 0 0 1 1.6 2.38 2 2 0 0 1 3.58.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 7.91a16 16 0 0 0 6.08 6.08l1.28-.88a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-        <div>
-          <div class="trust-title">Поддержка 7 дней</div>
-          <div class="trust-sub">Телефон, Telegram и VK — поможем с оформлением рассрочки в любой день недели.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- FAQ -->
-  <section id="faq" class="reveal">
-    <div class="sec-head">
-      <div class="sec-eyebrow">Частые вопросы</div>
-      <h2 class="sec-title">Вопросы об <em>оплате</em></h2>
-    </div>
-    <div class="faq-list">
-
-      <div class="faq-item open">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Есть ли переплата по рассрочке?</span>
-          <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        </div>
-        <div class="faq-a">Нет никакой переплаты. Рассрочка — это не кредит: вы платите ровно столько, сколько стоит коляска, просто частями. Например, коляска за 60 000 ₽ в рассрочку на 12 месяцев — это ровно 5 000 ₽ в месяц. Ни копейки сверху.</div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Нужна ли справка о доходах для рассрочки?</span>
-          <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        </div>
-        <div class="faq-a">Нет. Тинькофф и Яндекс Сплит оформляют рассрочку онлайн за 2–5 минут только по паспорту. Для СберПэй нужно быть клиентом Сбербанка — банк проверяет вас автоматически по своей базе без дополнительных документов.</div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Что произойдёт, если коляска не понравится и я захочу её вернуть?</span>
-          <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        </div>
-        <div class="faq-a">Вернуть можно в течение 14 дней после получения. Мы сообщаем в банк о возврате, рассрочка закрывается автоматически без штрафов. Если вы уже внесли несколько платежей — банк вернёт их на вашу карту в течение 3–10 рабочих дней.</div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Можно ли погасить рассрочку досрочно?</span>
-          <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        </div>
-        <div class="faq-a">Да, в любой момент и без комиссий. Досрочное погашение доступно в приложении банка, который оформил рассрочку. Переплаты при досрочном закрытии нет — вы просто платите оставшуюся сумму.</div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Могу ли я оплатить СБП — это безопасно?</span>
-          <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        </div>
-        <div class="faq-a">Да, абсолютно безопасно. СБП — система Центрального банка России, платёж проходит между банками напрямую. Мы используем официальный QR-код или ссылку, ваши данные нигде не сохраняются. Деньги зачисляются мгновенно, заказ подтверждается сразу.</div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Что если банк откажет в рассрочке?</span>
-          <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        </div>
-        <div class="faq-a">Попробуйте другой банк — у нас подключено несколько партнёров, одобрение в одном не зависит от другого. Если и там отказ — напишите нам в Telegram, мы найдём решение: разобьём оплату вручную или договоримся об индивидуальных условиях.</div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Когда отправляется коляска при рассрочке?</span>
-          <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        </div>
-        <div class="faq-a">Сразу после одобрения банком — в тот же или следующий рабочий день. Ждать первого платежа не нужно: банк оплачивает нам полную сумму сразу, а вы погашаете долг перед банком частями.</div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Есть ли минимальная сумма для рассрочки?</span>
-          <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        </div>
-        <div class="faq-a">Минимальная сумма зависит от банка: Тинькофф — от 3 000 ₽, Сбербанк — от 5 000 ₽, Яндекс Сплит — от 2 000 ₽. Большинство колясок в нашем каталоге начинаются от 8 000 ₽, поэтому рассрочка доступна практически на весь ассортимент.</div>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- CTA BOTTOM -->
-  <section class="reveal">
-    <div class="cta-bottom">
-      <div>
-        <h2 class="cta-title">Готовы выбрать <em>коляску?</em></h2>
-        <p class="cta-sub">Перейдите в каталог — каждый товар доступен в рассрочку. Оформление займёт 5 минут.</p>
-      </div>
-      <button class="btn-cta" onclick="window.location='catalog.html'">Перейти в каталог</button>
-    </div>
-  </section>
-
-</div><!-- /wrap -->
-
-<script>
-let calcMonths = 12;
-
-function fmt(n){ return Math.round(n).toLocaleString('ru-RU'); }
-
-function pct(val, min, max){ return Math.round((val-min)/(max-min)*100); }
-
-function updateCalc(){
-  const price   = parseInt(document.getElementById('sliderPrice').value);
-  const downPct = parseInt(document.getElementById('sliderDown').value);
-  const downAmt = Math.round(price * downPct / 100);
-  const body    = price - downAmt;
-  const monthly = Math.round(body / calcMonths);
-
-  document.getElementById('dispPrice').textContent   = fmt(price)+' ₽';
-  document.getElementById('dispDown').textContent    = downPct===0 ? '0 ₽' : fmt(downAmt)+' ₽ ('+downPct+'%)';
-  document.getElementById('dispMonths').textContent  = calcMonths+' '+(calcMonths===1?'месяц':calcMonths<5?'месяца':'месяцев');
-  document.getElementById('resultMonthly').textContent = fmt(monthly)+' ₽';
-  document.getElementById('resultSub').textContent   = 'в месяц · '+calcMonths+' платежей · переплата 0 ₽';
-  document.getElementById('bPrice').textContent      = fmt(price)+' ₽';
-  document.getElementById('bDown').textContent       = downAmt===0 ? '0 ₽' : fmt(downAmt)+' ₽';
-  document.getElementById('bBody').textContent       = fmt(body)+' ₽';
-  document.getElementById('bTerm').textContent       = calcMonths+' мес.';
-  document.getElementById('bTotal').textContent      = fmt(price)+' ₽';
-  document.getElementById('downRow').style.opacity   = downAmt===0?'0.4':'1';
-
-  const sp = document.getElementById('sliderPrice');
-  const sd = document.getElementById('sliderDown');
-  sp.style.setProperty('--pct', pct(price,5000,150000)+'%');
-  sd.style.setProperty('--pct', pct(downPct,0,50)+'%');
-}
-
-function setMonths(btn, mo){
-  calcMonths = mo;
-  document.querySelectorAll('.mo-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  updateCalc();
-}
-
-function toggleFaq(q){
-  const item = q.closest('.faq-item');
-  item.classList.toggle('open');
-}
-
-const io = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
-},{threshold:0.08});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-updateCalc();
-</script>
+<footer><div class="footer-inner">
+  <div class="footer-top">
+    <div class="footer-col"><div class="footer-logo">Кроха<span>Круг</span></div><p class="footer-desc">Проверенные б/у коляски от 3 900 ₽. Доставка по всей России.</p></div>
+    <div class="footer-col"><h4>Каталог</h4><ul><li><a href="catalog.html">Все коляски</a></li><li><a href="catalog.html?type=stroller">Прогулочные</a></li><li><a href="catalog.html?type=transformer">Трансформеры</a></li></ul></div>
+    <div class="footer-col"><h4>Покупателям</h4><ul><li><a href="checkout.html">Как купить</a></li><li><a href="payment.html">Рассрочка</a></li><li><a href="delivery.html">Доставка</a></li><li><a href="returns.html">Возврат</a></li></ul></div>
+    <div class="footer-col"><h4>Компания</h4><ul><li><a href="index.html#contact">Контакты</a></li><li><a href="#">Telegram</a></li><li><a href="oferta.html">Оферта</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 КрохаКруг</span><span><a href="privacy.html">Политика</a> · <a href="oferta.html">Оферта</a></span></div>
+</div></footer>
 <script src="/bu-kolyasochka/js/products.js"></script>
 <script src="/bu-kolyasochka/js/cart.js"></script>
 <script src="/bu-kolyasochka/js/main.js"></script>
+
 <script src="/bu-kolyasochka/js/assistant.js"></script>
+<script src="/bu-kolyasochka/js/site-ui.js"></script>
 </body>
 </html>

@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<script src="/bu-kolyasochka/js/site.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Доставка и возврат — КолясочкаPRO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#f5f0e8;--cream2:#ede7d9;--cream3:#e5dece;
+  --ink:#1c1a16;--ink2:#4a4640;--ink3:#8a847a;
+  --surface:#ffffff;--border:rgba(28,26,22,.1);--border2:rgba(28,26,22,.06);
+  --green:#2d5a3d;--gl:#e8f2eb;--gm:#4a8c62;
+  --sand:#c8a96e;--sl:#f7f0e2;
+  --warn:#b5451b;--wl:#fde8e0;
+  --r:14px;--r-sm:8px;--nav-h:65px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(245,240,232,.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:var(--nav-h)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:0 20px;max-width:1100px;margin:0 auto;height:100%}
+.logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600}
+.logo span{color:var(--green)}
+.nav-links{display:flex;gap:28px;list-style:none;font-size:14px;color:var(--ink2)}
+.nav-links a:hover{color:var(--green)}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.burger span{display:block;width:22px;height:1.5px;background:var(--ink);border-radius:2px}
+
+/* LAYOUT */
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px 80px}
+.breadcrumb{display:flex;gap:6px;font-size:12px;color:var(--ink3);padding:24px 0 0;margin-bottom:18px;flex-wrap:wrap}
+.breadcrumb a{color:var(--ink3)}.breadcrumb a:hover{color:var(--ink)}
+.divider{height:1px;background:var(--border);margin:52px 0}
+
+/* SECTION HEADERS */
+.sec-eyebrow{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3.5vw,40px);font-weight:500;line-height:1.15;letter-spacing:-.01em;margin-bottom:24px}
+.sec-title em{font-style:italic;color:var(--green)}
+
+/* HERO */
+.hero{padding:0 0 0}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:16px}
+.hero-eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--green)}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5.5vw,64px);font-weight:500;line-height:1.08;letter-spacing:-.02em;margin-bottom:16px}
+.hero h1 em{font-style:italic;color:var(--green)}
+.hero-sub{font-size:15px;line-height:1.7;color:var(--ink2);max-width:500px;margin-bottom:28px}
+.hero-stats{display:flex;gap:0;flex-wrap:wrap;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:var(--surface);max-width:560px}
+.hs{flex:1;min-width:120px;padding:18px 20px;border-right:1px solid var(--border)}
+.hs:last-child{border-right:none}
+.hs-val{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;color:var(--ink);line-height:1;margin-bottom:4px}
+.hs-lbl{font-size:11px;color:var(--ink3)}
+
+/* DELIVERY CARDS */
+.delivery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.del-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:border-color .2s,transform .2s}
+.del-card:hover{border-color:var(--gm);transform:translateY(-3px)}
+.del-card.featured{border-color:var(--gm);border-width:1.5px}
+.del-card-head{padding:20px 20px 0}
+.del-logo{width:48px;height:48px;border-radius:10px;background:var(--cream2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--ink);margin-bottom:12px;letter-spacing:-.5px}
+.del-logo.green{background:var(--green);color:#fff}
+.del-logo svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.5}
+.del-name{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.del-tagline{font-size:12px;color:var(--ink3);margin-bottom:16px;line-height:1.5}
+.del-card-body{padding:0 20px 18px}
+.del-rows{display:flex;flex-direction:column;gap:8px}
+.del-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:12px}
+.dl{color:var(--ink3)}
+.dv{color:var(--ink);font-weight:500;text-align:right}
+.dv.green{color:var(--green)}
+.del-card-foot{padding:14px 20px;border-top:1px solid var(--border2);background:var(--cream)}
+.del-badge{font-size:10px;font-weight:500;padding:3px 9px;border-radius:20px}
+.db-green{background:var(--gl);color:#1b4332}
+.db-sand{background:var(--sl);color:#7a5010}
+.db-gray{background:var(--cream2);color:var(--ink3)}
+
+/* REGIONS TABLE */
+.regions-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--border)}
+.regions-table{width:100%;border-collapse:collapse;min-width:560px}
+.regions-table th{background:var(--ink);color:#fff;font-size:12px;font-weight:500;padding:12px 16px;text-align:left;letter-spacing:.03em;white-space:nowrap}
+.regions-table td{font-size:13px;padding:11px 16px;border-bottom:1px solid var(--border2);color:var(--ink2);vertical-align:middle}
+.regions-table tr:last-child td{border-bottom:none}
+.regions-table tr:hover td{background:var(--cream)}
+.regions-table td:first-child{font-weight:500;color:var(--ink)}
+.tag-sm{font-size:10px;padding:2px 7px;border-radius:10px;display:inline-block}
+.tg{background:var(--gl);color:#1b4332}
+.ts{background:var(--sl);color:#7a5010}
+.tr{background:var(--wl);color:#8b2a10}
+
+/* PACKAGING */
+.pack-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pack-big{grid-column:1/-1;background:var(--green);border-radius:var(--r);padding:36px 40px;color:#fff;position:relative;overflow:hidden}
+.pack-big::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 110% 110%,rgba(255,255,255,.07),transparent 60%)}
+.pack-big-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;color:#fff;margin-bottom:10px}
+.pack-big-title em{font-style:italic;opacity:.8}
+.pack-big-desc{font-size:14px;color:rgba(255,255,255,.75);line-height:1.7;max-width:560px}
+.pack-step-list{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.pack-step{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15);border-radius:var(--r-sm);padding:8px 14px;font-size:12px;color:rgba(255,255,255,.9)}
+.pack-step-num{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:rgba(255,255,255,.5)}
+.pack-tile{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px}
+.pack-icon{width:40px;height:40px;border-radius:10px;background:var(--gl);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.pack-icon svg{width:18px;height:18px;stroke:var(--green);fill:none;stroke-width:1.8}
+.pack-title{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:6px}
+.pack-desc{font-size:12px;color:var(--ink3);line-height:1.6}
+
+/* RETURNS TIMELINE */
+.returns-section{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+.returns-info{display:flex;flex-direction:column;gap:14px}
+.ri-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px 20px}
+.ri-label{font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.ri-val{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.ri-sub{font-size:12px;color:var(--ink3);line-height:1.5}
+.ri-card.accent{background:var(--gl);border-color:rgba(45,90,61,.2)}
+.ri-card.accent .ri-val{color:var(--green)}
+.ri-conditions{font-size:13px;color:var(--ink2);line-height:1.7}
+.ri-conditions li{margin-bottom:8px;padding-left:16px;position:relative;list-style:none}
+.ri-conditions li::before{content:'✓';position:absolute;left:0;color:var(--green);font-size:12px}
+.ri-nope{font-size:13px;color:var(--ink2);line-height:1.7}
+.ri-nope li{margin-bottom:8px;padding-left:16px;position:relative;list-style:none}
+.ri-nope li::before{content:'×';position:absolute;left:0;color:var(--warn)}
+
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-item{display:flex;gap:16px;position:relative}
+.tl-left{display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+.tl-num{width:36px;height:36px;border-radius:50%;background:var(--ink);color:#fff;font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1}
+.tl-item.green .tl-num{background:var(--green)}
+.tl-line{width:2px;background:var(--border);flex:1;margin:4px 0;min-height:24px}
+.tl-item:last-child .tl-line{display:none}
+.tl-body{padding:4px 0 28px;flex:1}
+.tl-title{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:5px}
+.tl-desc{font-size:12px;color:var(--ink3);line-height:1.6}
+.tl-tag{font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;display:inline-block;margin-top:6px}
+.tl-tag.green{background:var(--gl);color:#1b4332}
+.tl-tag.sand{background:var(--sl);color:#7a5010}
+.tl-tag.gray{background:var(--cream2);color:var(--ink3)}
+
+/* FAQ */
+.faq-list{border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-item:last-child{border-bottom:none}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:17px 22px;cursor:pointer;background:var(--surface);transition:background .15s;user-select:none}
+.faq-q:hover{background:var(--cream)}
+.faq-item.open .faq-q{background:var(--gl)}
+.faq-q-text{font-size:14px;font-weight:500;color:var(--ink);line-height:1.4}
+.faq-icon svg{width:15px;height:15px;stroke:var(--ink3);fill:none;stroke-width:2;transition:transform .25s;display:block}
+.faq-item.open .faq-icon svg{transform:rotate(45deg);stroke:var(--green)}
+.faq-a{display:none;padding:0 22px 17px;font-size:13px;color:var(--ink2);line-height:1.7;background:var(--surface)}
+.faq-item.open .faq-a{display:block}
+
+/* TRUST BAR */
+.trust-bar{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+.trust-item{padding:20px 18px;border-right:1px solid var(--border2);display:flex;align-items:flex-start;gap:12px}
+.trust-item:last-child{border-right:none}
+.ti-icon{width:36px;height:36px;border-radius:8px;background:var(--gl);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ti-icon svg{width:17px;height:17px;stroke:var(--green);fill:none;stroke-width:1.8}
+.ti-title{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px}
+.ti-sub{font-size:11px;color:var(--ink3);line-height:1.5}
+
+/* CTA */
+.cta-block{background:var(--ink);border-radius:var(--r);padding:48px 44px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
+.cta-title{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,36px);font-weight:500;color:#fff;margin-bottom:8px;line-height:1.2}
+.cta-title em{font-style:italic;color:rgba(200,169,110,.9)}
+.cta-sub{font-size:13px;color:rgba(255,255,255,.55);line-height:1.6}
+.cta-btns{display:flex;flex-direction:column;gap:8px;align-items:center}
+.btn-cta{padding:13px 26px;border-radius:40px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap;border:none}
+.btn-cta.primary{background:#fff;color:var(--ink)}
+.btn-cta.primary:hover{background:var(--cream)}
+.btn-cta.ghost{background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.2)}
+.btn-cta.ghost:hover{border-color:rgba(255,255,255,.4);color:#fff}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* MOBILE */
+@media(max-width:900px){
+  .nav-links{display:none}.burger{display:flex}
+  .pack-grid{grid-template-columns:1fr}
+  .pack-big{grid-column:auto}
+  .returns-section{grid-template-columns:1fr}
+  .cta-block{grid-template-columns:1fr;gap:20px}
+  .trust-bar{grid-template-columns:1fr 1fr}
+  .trust-item:nth-child(2n){border-right:none}
+  .trust-item{border-bottom:1px solid var(--border2)}
+  .trust-item:nth-last-child(-n+2){border-bottom:none}
+}
+@media(max-width:560px){
+  .delivery-grid{grid-template-columns:1fr}
+  .hero-stats{flex-direction:column}
+  .hs{border-right:none;border-bottom:1px solid var(--border)}
+  .hs:last-child{border-bottom:none}
+  .trust-bar{grid-template-columns:1fr}
+  .trust-item{border-right:none!important;border-bottom:1px solid var(--border2)!important}
+  .trust-item:last-child{border-bottom:none!important}
+  .pack-step-list{flex-direction:column}
+}
+</style>
+<link rel="stylesheet" href="/bu-kolyasochka/css/assistant.css">
+</head>
+<body data-page="delivery">
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Колясочки<span>PRO</span></a>
+    <ul class="nav-links">
+      <li><a href="catalog.html">Каталог</a></li>
+      <li><a href="stroller-payment.html">Оплата</a></li>
+      <li><a href="#returns">Возврат</a></li>
+      <li><a href="#">Контакты</a></li>
+    </ul>
+    <button class="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <nav class="breadcrumb">
+    <a href="index.html">Главная</a>
+    <span>›</span>
+    <span style="color:var(--ink2)">Доставка и возврат</span>
+  </nav>
+
+  <!-- HERO -->
+  <section class="reveal" style="padding:0 0 48px">
+    <div class="hero-eyebrow">Быстро и бережно</div>
+    <h1>Доставка<br>и <em>возврат</em></h1>
+    <p class="hero-sub">Отправляем по всей России. Каждую коляску упаковываем так, чтобы она доехала в том же состоянии, в котором вы её выбрали.</p>
+    <div class="hero-stats">
+      <div class="hs">
+        <div class="hs-val">2–7</div>
+        <div class="hs-lbl">дней по России</div>
+      </div>
+      <div class="hs">
+        <div class="hs-val">14</div>
+        <div class="hs-lbl">дней на возврат</div>
+      </div>
+      <div class="hs">
+        <div class="hs-val">0 ₽</div>
+        <div class="hs-lbl">упаковка</div>
+      </div>
+      <div class="hs">
+        <div class="hs-val">4 000+</div>
+        <div class="hs-lbl">пунктов выдачи</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" style="margin-top:0"></div>
+
+  <!-- DELIVERY METHODS -->
+  <section class="reveal">
+    <div class="sec-eyebrow">Способы доставки</div>
+    <h2 class="sec-title">Выбери <em>удобный</em> вариант</h2>
+    <div class="delivery-grid">
+
+      <div class="del-card featured">
+        <div class="del-card-head">
+          <div class="del-logo" style="font-size:13px;font-weight:700;background:#009fde;color:#fff">СДЭК</div>
+          <div class="del-name">СДЭК — до пункта выдачи</div>
+          <div class="del-tagline">Более 4 000 пунктов по всей России. Удобно — выбираешь сам когда забрать.</div>
+        </div>
+        <div class="del-card-body">
+          <div class="del-rows">
+            <div class="del-row"><span class="dl">Стоимость</span><span class="dv">от 290 ₽</span></div>
+            <div class="del-row"><span class="dl">Срок</span><span class="dv">2–5 дней</span></div>
+            <div class="del-row"><span class="dl">Хранение в ПВЗ</span><span class="dv">7 дней бесплатно</span></div>
+            <div class="del-row"><span class="dl">Отслеживание</span><span class="dv green">Онлайн в реальном времени</span></div>
+          </div>
+        </div>
+        <div class="del-card-foot">
+          <span class="del-badge db-green">Рекомендуем</span>
+        </div>
+      </div>
+
+      <div class="del-card">
+        <div class="del-card-head">
+          <div class="del-logo" style="font-size:13px;font-weight:700;background:#009fde;color:#fff">СДЭК</div>
+          <div class="del-name">СДЭК — курьером до двери</div>
+          <div class="del-tagline">Курьер привезёт в удобное время. Не нужно никуда ехать.</div>
+        </div>
+        <div class="del-card-body">
+          <div class="del-rows">
+            <div class="del-row"><span class="dl">Стоимость</span><span class="dv">от 490 ₽</span></div>
+            <div class="del-row"><span class="dl">Срок</span><span class="dv">2–5 дней</span></div>
+            <div class="del-row"><span class="dl">Интервал</span><span class="dv">с 9:00 до 21:00</span></div>
+            <div class="del-row"><span class="dl">Звонок</span><span class="dv green">За час до приезда</span></div>
+          </div>
+        </div>
+        <div class="del-card-foot">
+          <span class="del-badge db-sand">Удобно для крупных</span>
+        </div>
+      </div>
+
+      <div class="del-card">
+        <div class="del-card-head">
+          <div class="del-logo" style="font-size:13px;font-weight:700;background:#f15a24;color:#fff">ББ</div>
+          <div class="del-name">Боксберри</div>
+          <div class="del-tagline">Более 7 000 пунктов выдачи, часто ближе к дому чем СДЭК.</div>
+        </div>
+        <div class="del-card-body">
+          <div class="del-rows">
+            <div class="del-row"><span class="dl">Стоимость</span><span class="dv">от 240 ₽</span></div>
+            <div class="del-row"><span class="dl">Срок</span><span class="dv">3–7 дней</span></div>
+            <div class="del-row"><span class="dl">Хранение</span><span class="dv">10 дней бесплатно</span></div>
+            <div class="del-row"><span class="dl">Примерка</span><span class="dv green">Перед оплатой</span></div>
+          </div>
+        </div>
+        <div class="del-card-foot">
+          <span class="del-badge db-gray">Экономично</span>
+        </div>
+      </div>
+
+      <div class="del-card">
+        <div class="del-card-head">
+          <div class="del-logo" style="font-size:11px;font-weight:700;background:#003087;color:#fff;letter-spacing:0">Почта</div>
+          <div class="del-name">Почта России</div>
+          <div class="del-tagline">Доставка в любую точку страны, включая отдалённые регионы и сёла.</div>
+        </div>
+        <div class="del-card-body">
+          <div class="del-rows">
+            <div class="del-row"><span class="dl">Стоимость</span><span class="dv">от 190 ₽</span></div>
+            <div class="del-row"><span class="dl">Срок</span><span class="dv">5–14 дней</span></div>
+            <div class="del-row"><span class="dl">Хранение</span><span class="dv">30 дней</span></div>
+            <div class="del-row"><span class="dl">Покрытие</span><span class="dv green">Вся Россия</span></div>
+          </div>
+        </div>
+        <div class="del-card-foot">
+          <span class="del-badge db-gray">Доступна везде</span>
+        </div>
+      </div>
+
+      <div class="del-card" style="grid-column:span 2">
+        <div class="del-card-head">
+          <div class="del-logo green">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="del-name">Самовывоз — Москва</div>
+          <div class="del-tagline">Приезжайте, осмотрите коляску вживую и забирайте сразу. Адрес: м. Тимирязевская, пн–вс 10:00–20:00.</div>
+        </div>
+        <div class="del-card-body">
+          <div class="del-rows" style="grid-template-columns:1fr 1fr;display:grid;gap:8px">
+            <div class="del-row"><span class="dl">Стоимость</span><span class="dv green">Бесплатно</span></div>
+            <div class="del-row"><span class="dl">Осмотр</span><span class="dv green">Перед оплатой</span></div>
+            <div class="del-row"><span class="dl">Режим работы</span><span class="dv">10:00 – 20:00</span></div>
+            <div class="del-row"><span class="dl">Запись</span><span class="dv">Желательна</span></div>
+          </div>
+        </div>
+        <div class="del-card-foot" style="background:var(--gl)">
+          <span class="del-badge db-green">Можно потрогать до покупки</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- REGIONS TABLE -->
+  <section class="reveal">
+    <div class="sec-eyebrow">Сроки и стоимость</div>
+    <h2 class="sec-title">По <em>регионам</em></h2>
+    <div class="regions-wrap">
+      <table class="regions-table">
+        <thead>
+          <tr>
+            <th>Регион</th>
+            <th>СДЭК ПВЗ</th>
+            <th>СДЭК курьер</th>
+            <th>Боксберри</th>
+            <th>Почта</th>
+            <th>Срок</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Москва и МО</td><td>290 ₽</td><td>490 ₽</td><td>240 ₽</td><td>190 ₽</td><td><span class="tag-sm tg">1–2 дня</span></td></tr>
+          <tr><td>Санкт-Петербург</td><td>320 ₽</td><td>520 ₽</td><td>270 ₽</td><td>200 ₽</td><td><span class="tag-sm tg">2–3 дня</span></td></tr>
+          <tr><td>Краснодар, Ростов, Воронеж</td><td>350 ₽</td><td>550 ₽</td><td>290 ₽</td><td>210 ₽</td><td><span class="tag-sm tg">2–4 дня</span></td></tr>
+          <tr><td>Казань, Уфа, Самара, Нижний Новгород</td><td>360 ₽</td><td>560 ₽</td><td>300 ₽</td><td>220 ₽</td><td><span class="tag-sm tg">2–4 дня</span></td></tr>
+          <tr><td>Екатеринбург, Челябинск, Пермь</td><td>390 ₽</td><td>590 ₽</td><td>320 ₽</td><td>230 ₽</td><td><span class="tag-sm ts">3–5 дней</span></td></tr>
+          <tr><td>Новосибирск, Омск, Красноярск</td><td>420 ₽</td><td>620 ₽</td><td>350 ₽</td><td>250 ₽</td><td><span class="tag-sm ts">4–6 дней</span></td></tr>
+          <tr><td>Иркутск, Улан-Удэ, Чита</td><td>460 ₽</td><td>660 ₽</td><td>390 ₽</td><td>270 ₽</td><td><span class="tag-sm ts">5–7 дней</span></td></tr>
+          <tr><td>Владивосток, Хабаровск, Якутск</td><td>510 ₽</td><td>710 ₽</td><td>—</td><td>290 ₽</td><td><span class="tag-sm tr">6–10 дней</span></td></tr>
+          <tr><td>Отдалённые регионы (острова, север)</td><td>—</td><td>—</td><td>—</td><td>от 350 ₽</td><td><span class="tag-sm tr">10–14 дней</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12px;color:var(--ink3);margin-top:10px">Точная стоимость рассчитывается при оформлении заказа по вашему адресу. Указаны минимальные тарифы без учёта объёмного веса.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PACKAGING -->
+  <section class="reveal">
+    <div class="sec-eyebrow">Упаковка</div>
+    <h2 class="sec-title">Как мы <em>упаковываем</em></h2>
+    <div class="pack-grid">
+      <div class="pack-big">
+        <div class="pack-big-title">Каждая коляска упакована<br><em>как хрупкий груз</em></div>
+        <p class="pack-big-desc">Коляска — дорогостоящая вещь, и мы относимся к упаковке серьёзно. Никаких мусорных пакетов и скотча поверх. Только профессиональная упаковка, которая переживёт любую сортировку на складе.</p>
+        <div class="pack-step-list">
+          <div class="pack-step"><span class="pack-step-num">1</span> Разборка и очистка</div>
+          <div class="pack-step"><span class="pack-step-num">2</span> Пузырчатая плёнка</div>
+          <div class="pack-step"><span class="pack-step-num">3</span> Пенопластовые вставки</div>
+          <div class="pack-step"><span class="pack-step-num">4</span> Усиленная коробка</div>
+          <div class="pack-step"><span class="pack-step-num">5</span> Стяжки и скотч</div>
+          <div class="pack-step"><span class="pack-step-num">6</span> Фото перед отправкой</div>
+        </div>
+      </div>
+
+      <div class="pack-tile">
+        <div class="pack-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+        <div class="pack-title">Собственная коробка</div>
+        <div class="pack-desc">Используем новые усиленные коробки под размер каждой коляски. Ни одной лишней щели — груз не болтается внутри.</div>
+      </div>
+
+      <div class="pack-tile">
+        <div class="pack-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="pack-title">Маркировка «Хрупко»</div>
+        <div class="pack-desc">На каждой посылке — наклейки «Хрупко» и «Верх». Это обязывает перевозчика соблюдать правила обращения.</div>
+      </div>
+
+      <div class="pack-tile">
+        <div class="pack-icon"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+        <div class="pack-title">Фото перед отправкой</div>
+        <div class="pack-desc">Фотографируем коляску и упаковку перед сдачей в транспортную компанию. Пришлём фото в чат по запросу.</div>
+      </div>
+
+      <div class="pack-tile">
+        <div class="pack-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <div class="pack-title">Страхование груза</div>
+        <div class="pack-desc">Каждая посылка застрахована на полную стоимость товара. Если что-то случится при доставке — компенсируем без лишних вопросов.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- RETURNS -->
+  <section id="returns" class="reveal">
+    <div class="sec-eyebrow">Возврат</div>
+    <h2 class="sec-title">14 дней на <em>возврат</em></h2>
+    <div class="returns-section">
+
+      <div class="returns-info">
+        <div class="ri-card accent">
+          <div class="ri-label">Срок возврата</div>
+          <div class="ri-val">14 дней</div>
+          <div class="ri-sub">с момента получения заказа. Без вопросов и объяснений причин.</div>
+        </div>
+        <div class="ri-card">
+          <div class="ri-label">Возврат денег</div>
+          <div class="ri-val">3–10 дней</div>
+          <div class="ri-sub">после получения коляски обратно. Возвращаем тем же способом, которым оплатили.</div>
+        </div>
+
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px 20px">
+          <div class="ri-label" style="margin-bottom:10px">Возврат возможен если</div>
+          <ul class="ri-conditions">
+            <li>Коляска не подошла по размеру, цвету или функционалу</li>
+            <li>Состояние не соответствует описанию на сайте</li>
+            <li>При получении обнаружен скрытый дефект</li>
+            <li>Коляска сломана при доставке (даже частично)</li>
+            <li>Просто передумали — без объяснений</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px 20px">
+          <div class="ri-label" style="margin-bottom:10px">Возврат невозможен если</div>
+          <ul class="ri-nope">
+            <li>Прошло более 14 дней с момента получения</li>
+            <li>Коляска была использована и имеет следы эксплуатации сверх осмотра</li>
+            <li>Утрачены или повреждены комплектующие из описания</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <p style="font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);margin-bottom:18px">Как оформить возврат — пошагово</p>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-left"><div class="tl-num">1</div><div class="tl-line"></div></div>
+            <div class="tl-body">
+              <div class="tl-title">Напишите нам</div>
+              <div class="tl-desc">Сообщите в Telegram, VK или по телефону о желании вернуть коляску. Укажите номер заказа и причину.</div>
+              <span class="tl-tag green">Срок: в течение 14 дней</span>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-left"><div class="tl-num">2</div><div class="tl-line"></div></div>
+            <div class="tl-body">
+              <div class="tl-title">Получите инструкции</div>
+              <div class="tl-desc">Мы подтвердим возврат и пришлём адрес для отправки. Это занимает 1–2 часа в рабочее время.</div>
+              <span class="tl-tag sand">Срок: 1–2 часа</span>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-left"><div class="tl-num">3</div><div class="tl-line"></div></div>
+            <div class="tl-body">
+              <div class="tl-title">Упакуйте и отправьте</div>
+              <div class="tl-desc">Упакуйте коляску так же бережно, как она приехала к вам. Отправьте любой транспортной компанией — стоимость пересылки при обоснованном возврате мы компенсируем.</div>
+              <span class="tl-tag sand">СДЭК, Боксберри, Почта</span>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-left"><div class="tl-num">4</div><div class="tl-line"></div></div>
+            <div class="tl-body">
+              <div class="tl-title">Пришлите трек-номер</div>
+              <div class="tl-desc">Отправьте нам трек-номер посылки — мы будем отслеживать и сообщим как только она придёт.</div>
+              <span class="tl-tag gray">В чат или по телефону</span>
+            </div>
+          </div>
+          <div class="tl-item green">
+            <div class="tl-left"><div class="tl-num" style="font-size:14px">✓</div><div class="tl-line"></div></div>
+            <div class="tl-body">
+              <div class="tl-title">Деньги вернутся на счёт</div>
+              <div class="tl-desc">После осмотра коляски (1 рабочий день) вернём полную сумму тем же способом, которым вы платили.</div>
+              <span class="tl-tag green">Срок: 3–10 рабочих дней</span>
+            </div>
+          </div>
+          <div class="tl-item" style="opacity:0;pointer-events:none"><div class="tl-left"><div class="tl-num"></div></div><div class="tl-body"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- FAQ -->
+  <section class="reveal">
+    <div class="sec-eyebrow">Частые вопросы</div>
+    <h2 class="sec-title">Вопросы о <em>доставке</em></h2>
+    <div class="faq-list">
+
+      <div class="faq-item open">
+        <div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')">
+          <span class="faq-q-text">Как узнать стоимость доставки именно в мой город?</span>
+          <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </div>
+        <div class="faq-a">Точная стоимость рассчитывается автоматически на этапе оформления заказа — введите адрес, и система покажет варианты для всех доступных служб. Таблица выше содержит ориентировочные цены; финальная зависит от адреса и объёмного веса коляски.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')">
+          <span class="faq-q-text">Когда вы отправляете заказ после оплаты?</span>
+          <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </div>
+        <div class="faq-a">Заказы, оплаченные до 14:00 по московскому времени, отправляем в тот же день. Оплаченные после 14:00 — на следующий рабочий день. Трек-номер пришлём в SMS и на email сразу после сдачи посылки.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')">
+          <span class="faq-q-text">Что делать если коляска пришла повреждённой?</span>
+          <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </div>
+        <div class="faq-a">Важно: при получении вскрывайте посылку при курьере или сотруднике ПВЗ. Если есть повреждения — составьте акт на месте и сфотографируйте. Напишите нам в тот же день с фото — мы разберёмся с перевозчиком и компенсируем ущерб или организуем замену.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')">
+          <span class="faq-q-text">Можно ли поменять адрес доставки после оформления?</span>
+          <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </div>
+        <div class="faq-a">Да, до момента передачи посылки в службу доставки — пишите нам как можно скорее. После отправки изменение адреса возможно через службу доставки напрямую (обычно платно). Изменение на ПВЗ того же города — бесплатно.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')">
+          <span class="faq-q-text">Кто оплачивает обратную доставку при возврате?</span>
+          <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </div>
+        <div class="faq-a">Если коляска не соответствует описанию или повреждена при доставке — мы оплачиваем обратную пересылку полностью. Если причина возврата — «не понравилась» или «передумали» — стоимость обратной доставки берёт на себя покупатель.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')">
+          <span class="faq-q-text">Можно ли забрать заказ в тот же день?</span>
+          <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </div>
+        <div class="faq-a">Да, если вы в Москве — выбирайте самовывоз. Запишитесь заранее, оплатите заказ онлайн, и приезжайте в удобное время с 10:00 до 20:00. Адрес: м. Тимирязевская — точный адрес пришлём после оформления.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- TRUST BAR -->
+  <section class="reveal">
+    <div class="trust-bar">
+      <div class="trust-item">
+        <div class="ti-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div><div class="ti-title">Страхование 100%</div><div class="ti-sub">Каждая посылка застрахована на полную стоимость товара</div></div>
+      </div>
+      <div class="trust-item">
+        <div class="ti-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.68 11 19.79 19.79 0 0 1 1.6 2.38 2 2 0 0 1 3.58.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 7.91a16 16 0 0 0 6.08 6.08l1.28-.88a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div><div class="ti-title">Трек в SMS и email</div><div class="ti-sub">Номер отслеживания сразу после отправки</div></div>
+      </div>
+      <div class="trust-item">
+        <div class="ti-icon"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg></div>
+        <div><div class="ti-title">Возврат 14 дней</div><div class="ti-sub">Без вопросов и без бюрократии</div></div>
+      </div>
+      <div class="trust-item">
+        <div class="ti-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <div><div class="ti-title">4 000+ пунктов выдачи</div><div class="ti-sub">СДЭК и Боксберри по всей России</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CTA -->
+  <section class="reveal">
+    <div class="cta-block">
+      <div>
+        <h2 class="cta-title">Готовы выбрать <em>коляску?</em></h2>
+        <p class="cta-sub">Доставим быстро, упакуем бережно. Если не подойдёт — вернём деньги.</p>
+      </div>
+      <div class="cta-btns">
+        <button class="btn-cta primary" onclick="window.location='catalog.html'">Перейти в каталог</button>
+        <button class="btn-cta ghost">Написать в Telegram</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+<script src="/bu-kolyasochka/js/products.js"></script>
+<script src="/bu-kolyasochka/js/cart.js"></script>
+<script src="/bu-kolyasochka/js/main.js"></script>
+<script src="/bu-kolyasochka/js/assistant.js"></script>
+</body>
+</html>

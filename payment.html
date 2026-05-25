@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<script src="/bu-kolyasochka/js/site.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Оплата и рассрочка — КолясочкаPRO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#f5f0e8;--cream2:#ede7d9;--cream3:#e5dece;
+  --ink:#1c1a16;--ink2:#4a4640;--ink3:#8a847a;
+  --surface:#ffffff;--border:rgba(28,26,22,.1);--border2:rgba(28,26,22,.06);
+  --green:#2d5a3d;--gl:#e8f2eb;--gm:#4a8c62;
+  --sand:#c8a96e;--sl:#f7f0e2;
+  --r:14px;--r-sm:8px;--nav-h:65px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(245,240,232,.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:var(--nav-h)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:0 20px;max-width:1100px;margin:0 auto;height:100%}
+.logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600}
+.logo span{color:var(--green)}
+.nav-links{display:flex;gap:28px;list-style:none;font-size:14px;color:var(--ink2)}
+.nav-links a:hover{color:var(--green)}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.burger span{display:block;width:22px;height:1.5px;background:var(--ink);border-radius:2px}
+
+/* PAGE */
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px 80px}
+.breadcrumb{display:flex;gap:6px;font-size:12px;color:var(--ink3);padding:24px 0 0;margin-bottom:18px;flex-wrap:wrap}
+.breadcrumb a{color:var(--ink3)}
+.breadcrumb a:hover{color:var(--ink)}
+.breadcrumb sep{color:var(--border)}
+
+/* HERO */
+.hero{padding:0 0 48px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:16px}
+.hero-eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--green)}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,5vw,60px);font-weight:500;line-height:1.1;letter-spacing:-.02em;margin-bottom:16px}
+.hero h1 em{font-style:italic;color:var(--green)}
+.hero-sub{font-size:15px;line-height:1.7;color:var(--ink2);max-width:520px}
+.hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.hero-pill{display:flex;align-items:center;gap:6px;font-size:12px;padding:6px 14px;border-radius:20px;border:1px solid var(--border);color:var(--ink2);background:var(--surface)}
+.hero-pill svg{width:13px;height:13px;stroke:var(--green);fill:none;stroke-width:2}
+
+/* SECTION HEADER */
+.sec-head{margin-bottom:28px}
+.sec-eyebrow{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3.5vw,38px);font-weight:500;line-height:1.15;letter-spacing:-.01em}
+.sec-title em{font-style:italic;color:var(--green)}
+.divider{height:1px;background:var(--border);margin:52px 0}
+
+/* PAYMENT METHODS GRID */
+.methods-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:20px}
+.method-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px 18px;display:flex;flex-direction:column;gap:12px;transition:border-color .2s,transform .2s;cursor:default}
+.method-card:hover{border-color:var(--gm);transform:translateY(-2px)}
+.method-card.featured{border-color:var(--gm);border-width:1.5px;background:var(--gl)}
+.method-icon{width:44px;height:44px;border-radius:10px;background:var(--cream2);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:var(--ink);font-family:'Cormorant Garamond',serif}
+.method-icon.green-bg{background:var(--green);color:#fff}
+.method-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.5}
+.method-name{font-size:14px;font-weight:500;color:var(--ink)}
+.method-desc{font-size:12px;color:var(--ink3);line-height:1.55;flex:1}
+.method-badge{font-size:10px;font-weight:500;padding:3px 9px;border-radius:20px;width:fit-content}
+.mb-green{background:var(--gl);color:#1b4332}
+.mb-sand{background:var(--sl);color:#7a5010}
+.mb-gray{background:var(--cream2);color:var(--ink3)}
+
+/* COMPARISON TABLE */
+.cmp-table{width:100%;border-collapse:collapse;border-radius:var(--r);overflow:hidden;border:1px solid var(--border)}
+.cmp-table th{background:var(--ink);color:#fff;font-size:12px;font-weight:500;padding:12px 14px;text-align:left;letter-spacing:.03em}
+.cmp-table th:first-child{border-radius:0}
+.cmp-table td{font-size:13px;padding:11px 14px;border-bottom:1px solid var(--border2);color:var(--ink2);vertical-align:middle}
+.cmp-table tr:last-child td{border-bottom:none}
+.cmp-table tr:hover td{background:var(--cream)}
+.cmp-table td:first-child{font-weight:500;color:var(--ink)}
+.check{color:var(--green);font-size:15px}
+.cross{color:var(--ink3);font-size:15px}
+.badge-sm{font-size:10px;padding:2px 7px;border-radius:10px}
+.bs-green{background:var(--gl);color:#1b4332}
+.bs-sand{background:var(--sl);color:#7a5010}
+
+/* ═══ CALCULATOR ═══ */
+.calc-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.calc-inner{display:grid;grid-template-columns:1fr 1fr;min-height:380px}
+.calc-controls{padding:36px 40px;border-right:1px solid var(--border)}
+.calc-result{padding:36px 40px;background:var(--green);display:flex;flex-direction:column;justify-content:space-between}
+
+.slider-group{margin-bottom:28px}
+.slider-label{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.sl-name{font-size:12px;font-weight:500;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em}
+.sl-val{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;color:var(--ink)}
+
+input[type=range]{
+  -webkit-appearance:none;appearance:none;
+  width:100%;height:4px;border-radius:2px;outline:none;cursor:pointer;
+  background:linear-gradient(to right,var(--green) var(--pct,40%),var(--cream3) var(--pct,40%));
+}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--surface);border:2px solid var(--green);cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--surface);border:2px solid var(--green);cursor:pointer}
+
+.months-grid{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.mo-btn{padding:7px 14px;border-radius:var(--r-sm);border:1px solid var(--border);background:transparent;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink2);cursor:pointer;transition:all .15s}
+.mo-btn.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.mo-btn:hover:not(.active){border-color:var(--ink3);background:var(--cream2)}
+
+.calc-result-label{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:8px}
+.calc-monthly{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,54px);font-weight:500;color:#fff;line-height:1;margin-bottom:4px}
+.calc-monthly-sub{font-size:13px;color:rgba(255,255,255,.65);margin-bottom:24px}
+.calc-breakdown{display:flex;flex-direction:column;gap:8px;padding:16px;background:rgba(255,255,255,.1);border-radius:var(--r-sm);margin-bottom:20px}
+.cb-row{display:flex;justify-content:space-between;font-size:13px}
+.cb-lbl{color:rgba(255,255,255,.7)}
+.cb-val{color:#fff;font-weight:500}
+.cb-row.total .cb-lbl,.cb-row.total .cb-val{color:#fff;font-weight:500}
+.cb-divider{height:1px;background:rgba(255,255,255,.15);margin:4px 0}
+.calc-cta{display:flex;flex-direction:column;gap:8px}
+.btn-calc-cta{padding:12px;border-radius:var(--r-sm);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;border:none;transition:all .2s;text-align:center}
+.btn-calc-primary{background:#fff;color:var(--green)}
+.btn-calc-primary:hover{background:var(--cream)}
+.btn-calc-ghost{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.25)!important;border:none}
+.btn-calc-ghost:hover{background:rgba(255,255,255,.25)}
+.calc-providers{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.cp{font-size:11px;padding:4px 9px;border-radius:6px;background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.2)}
+
+/* STEPS */
+.steps-section{margin-top:0}
+.steps-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.step-item{padding:24px 22px;border-right:1px solid var(--border);position:relative}
+.step-item:last-child{border-right:none}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:600;color:var(--cream3);line-height:1;margin-bottom:12px}
+.step-title{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:6px}
+.step-desc{font-size:12px;color:var(--ink3);line-height:1.6}
+
+/* FAQ */
+.faq-list{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-item:last-child{border-bottom:none}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;cursor:pointer;user-select:none;transition:background .15s;background:var(--surface)}
+.faq-q:hover{background:var(--cream)}
+.faq-item.open .faq-q{background:var(--gl)}
+.faq-q-text{font-size:14px;font-weight:500;color:var(--ink);line-height:1.4}
+.faq-icon{width:20px;height:20px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.faq-icon svg{width:16px;height:16px;stroke:var(--ink3);fill:none;stroke-width:2;transition:transform .25s}
+.faq-item.open .faq-icon svg{transform:rotate(45deg);stroke:var(--green)}
+.faq-a{display:none;padding:0 22px 18px;font-size:13px;color:var(--ink2);line-height:1.7;background:var(--surface)}
+.faq-item.open .faq-a{display:block}
+
+/* TRUST STRIP */
+.trust-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:0}
+.trust-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px 18px;display:flex;gap:14px;align-items:flex-start}
+.trust-icon{width:36px;height:36px;border-radius:8px;background:var(--gl);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.trust-icon svg{width:17px;height:17px;stroke:var(--green);fill:none;stroke-width:1.8}
+.trust-title{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px}
+.trust-sub{font-size:11px;color:var(--ink3);line-height:1.5}
+
+/* CTA BOTTOM */
+.cta-bottom{background:var(--ink);border-radius:var(--r);padding:48px 44px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;margin-top:0}
+.cta-title{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,36px);font-weight:500;color:#fff;line-height:1.2;margin-bottom:8px}
+.cta-title em{font-style:italic;color:rgba(200,169,110,.9)}
+.cta-sub{font-size:13px;color:rgba(255,255,255,.55);line-height:1.6}
+.btn-cta{padding:14px 28px;background:#fff;color:var(--ink);border:none;border-radius:40px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:background .2s;white-space:nowrap}
+.btn-cta:hover{background:var(--cream)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* MOBILE */
+@media(max-width:900px){
+  .nav-links{display:none}
+  .burger{display:flex}
+  .calc-inner{grid-template-columns:1fr}
+  .calc-controls{border-right:none;border-bottom:1px solid var(--border);padding:24px}
+  .calc-result{padding:24px}
+  .cta-bottom{grid-template-columns:1fr;gap:20px}
+  .steps-list{grid-template-columns:1fr 1fr}
+  .step-item:nth-child(2){border-right:none}
+  .step-item:nth-child(3){border-top:1px solid var(--border);border-right:1px solid var(--border)}
+  .step-item:nth-child(4){border-top:1px solid var(--border)}
+}
+@media(max-width:560px){
+  .methods-grid{grid-template-columns:1fr 1fr}
+  .steps-list{grid-template-columns:1fr}
+  .step-item{border-right:none!important;border-top:1px solid var(--border)}
+  .step-item:first-child{border-top:none}
+  .cmp-table{font-size:12px}
+  .cmp-table td,.cmp-table th{padding:9px 10px}
+}
+</style>
+<link rel="stylesheet" href="/bu-kolyasochka/css/assistant.css">
+</head>
+<body data-page="payment">
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Колясочки<span>PRO</span></a>
+    <ul class="nav-links">
+      <li><a href="catalog.html">Каталог</a></li>
+      <li><a href="#calc">Рассрочка</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#">Контакты</a></li>
+    </ul>
+    <button class="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- BREADCRUMB -->
+  <nav class="breadcrumb">
+    <a href="index.html">Главная</a>
+    <sep>›</sep>
+    <span style="color:var(--ink2)">Оплата и рассрочка</span>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero reveal">
+    <div class="hero-eyebrow">Без переплат и скрытых комиссий</div>
+    <h1>Оплата и <em>рассрочка</em></h1>
+    <p class="hero-sub">Платите удобным способом — картой, через СБП или оформите рассрочку на срок до 24 месяцев. Никаких процентов, никаких переплат.</p>
+    <div class="hero-pills">
+      <span class="hero-pill"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Рассрочка 0%</span>
+      <span class="hero-pill"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>5 способов оплаты</span>
+      <span class="hero-pill"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Оплата при получении</span>
+      <span class="hero-pill"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Безопасная транзакция</span>
+    </div>
+  </section>
+
+  <div class="divider" style="margin-top:0"></div>
+
+  <!-- PAYMENT METHODS -->
+  <section class="reveal">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Способы оплаты</div>
+      <h2 class="sec-title">Выбери <em>удобный</em> вариант</h2>
+    </div>
+
+    <div class="methods-grid">
+
+      <div class="method-card featured">
+        <div class="method-icon green-bg">
+          <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        </div>
+        <div>
+          <div class="method-name">Рассрочка</div>
+          <span class="method-badge mb-green">Рекомендуем</span>
+        </div>
+        <div class="method-desc">Тинькофф, СберПэй, Яндекс Pay. От 3 до 24 месяцев без переплат. Одобрение за 2 минуты.</div>
+      </div>
+
+      <div class="method-card">
+        <div class="method-icon" style="font-size:15px;font-weight:600;letter-spacing:-.5px">СБП</div>
+        <div>
+          <div class="method-name">Система быстрых платежей</div>
+          <span class="method-badge mb-green">Без комиссии</span>
+        </div>
+        <div class="method-desc">Мгновенный перевод по номеру телефона из любого банка. Бесплатно, без лимитов.</div>
+      </div>
+
+      <div class="method-card">
+        <div class="method-icon">
+          <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/><line x1="5" y1="15" x2="9" y2="15"/></svg>
+        </div>
+        <div>
+          <div class="method-name">Банковская карта</div>
+          <span class="method-badge mb-gray">Visa · МИР · UnionPay</span>
+        </div>
+        <div class="method-desc">Оплата картой онлайн через защищённый шлюз. Данные карты не хранятся на сайте.</div>
+      </div>
+
+      <div class="method-card">
+        <div class="method-icon" style="font-size:13px;font-weight:700;color:var(--green)">T—</div>
+        <div>
+          <div class="method-name">Тинькофф Pay</div>
+          <span class="method-badge mb-sand">До 24 мес.</span>
+        </div>
+        <div class="method-desc">Рассрочка и оплата через приложение Тинькофф. Одобрение без визита в банк.</div>
+      </div>
+
+      <div class="method-card">
+        <div class="method-icon" style="font-size:13px;font-weight:700;color:#21a038">С</div>
+        <div>
+          <div class="method-name">СберПэй</div>
+          <span class="method-badge mb-sand">До 12 мес.</span>
+        </div>
+        <div class="method-desc">Оплата и рассрочка через СберБанк Онлайн. Доступна клиентам Сбербанка.</div>
+      </div>
+
+      <div class="method-card">
+        <div class="method-icon" style="font-size:13px;font-weight:700;color:#fc3f1d">Я</div>
+        <div>
+          <div class="method-name">Яндекс Pay</div>
+          <span class="method-badge mb-gray">Кошелёк · Сплит</span>
+        </div>
+        <div class="method-desc">Оплата через Яндекс ID. Также доступен Яндекс Сплит — покупка частями без банка.</div>
+      </div>
+
+    </div>
+
+    <!-- COMPARISON TABLE -->
+    <div style="overflow-x:auto;margin-top:4px">
+      <table class="cmp-table">
+        <thead>
+          <tr>
+            <th>Способ</th>
+            <th>Рассрочка</th>
+            <th>Комиссия</th>
+            <th>Срок зачисления</th>
+            <th>Особенности</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>СБП</td>
+            <td><span class="cross">—</span></td>
+            <td><span class="badge-sm bs-green">0%</span></td>
+            <td>Мгновенно</td>
+            <td>Лучший выбор для разовой оплаты</td>
+          </tr>
+          <tr>
+            <td>Карта (МИР/Visa)</td>
+            <td><span class="cross">—</span></td>
+            <td><span class="badge-sm bs-green">0%</span></td>
+            <td>Мгновенно</td>
+            <td>Кешбэк банка на ваш счёт</td>
+          </tr>
+          <tr>
+            <td>Тинькофф Pay</td>
+            <td><span class="check">✓</span> до 24 мес.</td>
+            <td><span class="badge-sm bs-green">0%</span></td>
+            <td>2–5 мин</td>
+            <td>Одобрение онлайн без справок</td>
+          </tr>
+          <tr>
+            <td>СберПэй</td>
+            <td><span class="check">✓</span> до 12 мес.</td>
+            <td><span class="badge-sm bs-green">0%</span></td>
+            <td>5–10 мин</td>
+            <td>Только для клиентов Сбербанка</td>
+          </tr>
+          <tr>
+            <td>Яндекс Pay / Сплит</td>
+            <td><span class="check">✓</span> до 6 мес.</td>
+            <td><span class="badge-sm bs-green">0%</span></td>
+            <td>Мгновенно</td>
+            <td>Без одобрения банка для Сплита</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CALCULATOR -->
+  <section id="calc" class="reveal">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Калькулятор рассрочки</div>
+      <h2 class="sec-title">Считай <em>сам</em></h2>
+    </div>
+
+    <div class="calc-section">
+      <div class="calc-inner">
+
+        <!-- CONTROLS -->
+        <div class="calc-controls">
+
+          <div class="slider-group">
+            <div class="slider-label">
+              <span class="sl-name">Стоимость коляски</span>
+              <span class="sl-val" id="dispPrice">68 900 ₽</span>
+            </div>
+            <input type="range" id="sliderPrice" min="5000" max="150000" step="1000" value="68900"
+              oninput="updateCalc()" style="--pct:42%">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--ink3);margin-top:6px">
+              <span>5 000 ₽</span><span>150 000 ₽</span>
+            </div>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-label">
+              <span class="sl-name">Первоначальный взнос</span>
+              <span class="sl-val" id="dispDown">0 ₽</span>
+            </div>
+            <input type="range" id="sliderDown" min="0" max="50" step="5" value="0"
+              oninput="updateCalc()" style="--pct:0%">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--ink3);margin-top:6px">
+              <span>0%</span><span>50%</span>
+            </div>
+          </div>
+
+          <div class="slider-group" style="margin-bottom:0">
+            <div class="slider-label">
+              <span class="sl-name">Срок рассрочки</span>
+              <span class="sl-val" id="dispMonths">12 месяцев</span>
+            </div>
+            <div class="months-grid">
+              <button class="mo-btn" onclick="setMonths(this,3)">3 мес.</button>
+              <button class="mo-btn" onclick="setMonths(this,6)">6 мес.</button>
+              <button class="mo-btn active" onclick="setMonths(this,12)">12 мес.</button>
+              <button class="mo-btn" onclick="setMonths(this,18)">18 мес.</button>
+              <button class="mo-btn" onclick="setMonths(this,24)">24 мес.</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- RESULT -->
+        <div class="calc-result">
+          <div>
+            <div class="calc-result-label">Ежемесячный платёж</div>
+            <div class="calc-monthly" id="resultMonthly">4 908 ₽</div>
+            <div class="calc-monthly-sub" id="resultSub">в месяц · 12 платежей · переплата 0 ₽</div>
+          </div>
+
+          <div>
+            <div class="calc-breakdown">
+              <div class="cb-row">
+                <span class="cb-lbl">Стоимость коляски</span>
+                <span class="cb-val" id="bPrice">68 900 ₽</span>
+              </div>
+              <div class="cb-row" id="downRow">
+                <span class="cb-lbl">Первый взнос</span>
+                <span class="cb-val" id="bDown">0 ₽</span>
+              </div>
+              <div class="cb-divider"></div>
+              <div class="cb-row">
+                <span class="cb-lbl">Сумма рассрочки</span>
+                <span class="cb-val" id="bBody">68 900 ₽</span>
+              </div>
+              <div class="cb-row">
+                <span class="cb-lbl">Срок</span>
+                <span class="cb-val" id="bTerm">12 мес.</span>
+              </div>
+              <div class="cb-row">
+                <span class="cb-lbl">Переплата</span>
+                <span class="cb-val">0 ₽</span>
+              </div>
+              <div class="cb-divider"></div>
+              <div class="cb-row total">
+                <span class="cb-lbl">Итого</span>
+                <span class="cb-val" id="bTotal">68 900 ₽</span>
+              </div>
+            </div>
+
+            <div class="calc-cta">
+              <button class="btn-calc-cta btn-calc-primary" onclick="window.location='catalog.html'">Выбрать коляску →</button>
+              <button class="btn-calc-cta btn-calc-ghost">Оформить рассрочку</button>
+            </div>
+            <div class="calc-providers">
+              <span class="cp">Тинькофф</span>
+              <span class="cp">СберПэй</span>
+              <span class="cp">Яндекс Pay</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- HOW IT WORKS -->
+  <section class="reveal">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Оформление рассрочки</div>
+      <h2 class="sec-title">Как получить <em>рассрочку</em></h2>
+    </div>
+    <div class="steps-list">
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <div class="step-title">Выбери коляску</div>
+        <div class="step-desc">Найди нужную модель в каталоге и добавь в корзину. Любой товар доступен в рассрочку.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <div class="step-title">Выбери способ рассрочки</div>
+        <div class="step-desc">На странице оформления выбери Тинькофф, СберПэй или Яндекс Pay. Укажи срок.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <div class="step-title">Получи одобрение</div>
+        <div class="step-desc">Банк рассматривает заявку за 2–5 минут. Справки и поручители не нужны.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">04</div>
+        <div class="step-title">Получи коляску</div>
+        <div class="step-desc">Мы отправляем сразу после одобрения. Трек-номер приходит в SMS в день отправки.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- TRUST STRIP -->
+  <section class="reveal">
+    <div class="trust-strip">
+      <div class="trust-card">
+        <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div>
+          <div class="trust-title">Безопасная оплата</div>
+          <div class="trust-sub">Данные карты передаются по протоколу TLS 1.3. Мы не храним платёжные данные.</div>
+        </div>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg></div>
+        <div>
+          <div class="trust-title">Возврат 14 дней</div>
+          <div class="trust-sub">Не подошла — вернём деньги или досрочно закроем рассрочку без штрафов.</div>
+        </div>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+        <div>
+          <div class="trust-title">Переплата 0 ₽</div>
+          <div class="trust-sub">Рассрочка без процентов. Платёж в месяц — ровно сумма / срок, не больше.</div>
+        </div>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.68 11 19.79 19.79 0 0 1 1.6 2.38 2 2 0 0 1 3.58.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 7.91a16 16 0 0 0 6.08 6.08l1.28-.88a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div>
+          <div class="trust-title">Поддержка 7 дней</div>
+          <div class="trust-sub">Телефон, Telegram и VK — поможем с оформлением рассрочки в любой день недели.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- FAQ -->
+  <section id="faq" class="reveal">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Частые вопросы</div>
+      <h2 class="sec-title">Вопросы об <em>оплате</em></h2>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item open">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Есть ли переплата по рассрочке?</span>
+          <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </div>
+        <div class="faq-a">Нет никакой переплаты. Рассрочка — это не кредит: вы платите ровно столько, сколько стоит коляска, просто частями. Например, коляска за 60 000 ₽ в рассрочку на 12 месяцев — это ровно 5 000 ₽ в месяц. Ни копейки сверху.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Нужна ли справка о доходах для рассрочки?</span>
+          <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </div>
+        <div class="faq-a">Нет. Тинькофф и Яндекс Сплит оформляют рассрочку онлайн за 2–5 минут только по паспорту. Для СберПэй нужно быть клиентом Сбербанка — банк проверяет вас автоматически по своей базе без дополнительных документов.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Что произойдёт, если коляска не понравится и я захочу её вернуть?</span>
+          <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </div>
+        <div class="faq-a">Вернуть можно в течение 14 дней после получения. Мы сообщаем в банк о возврате, рассрочка закрывается автоматически без штрафов. Если вы уже внесли несколько платежей — банк вернёт их на вашу карту в течение 3–10 рабочих дней.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Можно ли погасить рассрочку досрочно?</span>
+          <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </div>
+        <div class="faq-a">Да, в любой момент и без комиссий. Досрочное погашение доступно в приложении банка, который оформил рассрочку. Переплаты при досрочном закрытии нет — вы просто платите оставшуюся сумму.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Могу ли я оплатить СБП — это безопасно?</span>
+          <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </div>
+        <div class="faq-a">Да, абсолютно безопасно. СБП — система Центрального банка России, платёж проходит между банками напрямую. Мы используем официальный QR-код или ссылку, ваши данные нигде не сохраняются. Деньги зачисляются мгновенно, заказ подтверждается сразу.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Что если банк откажет в рассрочке?</span>
+          <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </div>
+        <div class="faq-a">Попробуйте другой банк — у нас подключено несколько партнёров, одобрение в одном не зависит от другого. Если и там отказ — напишите нам в Telegram, мы найдём решение: разобьём оплату вручную или договоримся об индивидуальных условиях.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Когда отправляется коляска при рассрочке?</span>
+          <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </div>
+        <div class="faq-a">Сразу после одобрения банком — в тот же или следующий рабочий день. Ждать первого платежа не нужно: банк оплачивает нам полную сумму сразу, а вы погашаете долг перед банком частями.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Есть ли минимальная сумма для рассрочки?</span>
+          <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </div>
+        <div class="faq-a">Минимальная сумма зависит от банка: Тинькофф — от 3 000 ₽, Сбербанк — от 5 000 ₽, Яндекс Сплит — от 2 000 ₽. Большинство колясок в нашем каталоге начинаются от 8 000 ₽, поэтому рассрочка доступна практически на весь ассортимент.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CTA BOTTOM -->
+  <section class="reveal">
+    <div class="cta-bottom">
+      <div>
+        <h2 class="cta-title">Готовы выбрать <em>коляску?</em></h2>
+        <p class="cta-sub">Перейдите в каталог — каждый товар доступен в рассрочку. Оформление займёт 5 минут.</p>
+      </div>
+      <button class="btn-cta" onclick="window.location='catalog.html'">Перейти в каталог</button>
+    </div>
+  </section>
+
+</div><!-- /wrap -->
+
+<script>
+let calcMonths = 12;
+
+function fmt(n){ return Math.round(n).toLocaleString('ru-RU'); }
+
+function pct(val, min, max){ return Math.round((val-min)/(max-min)*100); }
+
+function updateCalc(){
+  const price   = parseInt(document.getElementById('sliderPrice').value);
+  const downPct = parseInt(document.getElementById('sliderDown').value);
+  const downAmt = Math.round(price * downPct / 100);
+  const body    = price - downAmt;
+  const monthly = Math.round(body / calcMonths);
+
+  document.getElementById('dispPrice').textContent   = fmt(price)+' ₽';
+  document.getElementById('dispDown').textContent    = downPct===0 ? '0 ₽' : fmt(downAmt)+' ₽ ('+downPct+'%)';
+  document.getElementById('dispMonths').textContent  = calcMonths+' '+(calcMonths===1?'месяц':calcMonths<5?'месяца':'месяцев');
+  document.getElementById('resultMonthly').textContent = fmt(monthly)+' ₽';
+  document.getElementById('resultSub').textContent   = 'в месяц · '+calcMonths+' платежей · переплата 0 ₽';
+  document.getElementById('bPrice').textContent      = fmt(price)+' ₽';
+  document.getElementById('bDown').textContent       = downAmt===0 ? '0 ₽' : fmt(downAmt)+' ₽';
+  document.getElementById('bBody').textContent       = fmt(body)+' ₽';
+  document.getElementById('bTerm').textContent       = calcMonths+' мес.';
+  document.getElementById('bTotal').textContent      = fmt(price)+' ₽';
+  document.getElementById('downRow').style.opacity   = downAmt===0?'0.4':'1';
+
+  const sp = document.getElementById('sliderPrice');
+  const sd = document.getElementById('sliderDown');
+  sp.style.setProperty('--pct', pct(price,5000,150000)+'%');
+  sd.style.setProperty('--pct', pct(downPct,0,50)+'%');
+}
+
+function setMonths(btn, mo){
+  calcMonths = mo;
+  document.querySelectorAll('.mo-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  updateCalc();
+}
+
+function toggleFaq(q){
+  const item = q.closest('.faq-item');
+  item.classList.toggle('open');
+}
+
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+updateCalc();
+</script>
+<script src="/bu-kolyasochka/js/products.js"></script>
+<script src="/bu-kolyasochka/js/cart.js"></script>
+<script src="/bu-kolyasochka/js/main.js"></script>
+<script src="/bu-kolyasochka/js/assistant.js"></script>
+</body>
+</html>

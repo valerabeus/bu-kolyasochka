@@ -1,0 +1,14 @@
+---
+description: Применять skill frontend-design для UI, CSS и визуальных правок магазина
+alwaysApply: true
+---
+
+# Frontend Design (проект)
+
+При любой задаче, связанной с внешним видом сайта, версткой, CSS, компонентами, главной, каталогом или карточкой товара:
+
+1. Прочитай и следуй `.cursor/skills/frontend-design-1-0-0/SKILL.md` (skill `frontend-design`).
+2. Сохраняй стек проекта: только статические HTML/CSS/JS, без сборщиков и фреймворков.
+3. Не ломай `window.SITE_BASE` (`/bu-kolyasochka/`), корзину (`localStorage`), ID товаров и существующую логику в `js/`.
+4. Для магазина детских колясок выбирай тёплый, доверительный, семейный визуальный стиль; интерфейс и тексты — на русском.
+5. После правок проверяй: `index.html`, `catalog.html`, `product.html`, `kak-vybrat.html`.

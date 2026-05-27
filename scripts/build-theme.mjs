@@ -6,7 +6,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 const fontLink = `<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">`;
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;500;600;700&family=Commissioner:wght@400;500;600;700&display=swap" rel="stylesheet">`;
 
 const themeLinks = `${fontLink}
 <link rel="stylesheet" href="/bu-kolyasochka/css/theme.css">
@@ -29,107 +29,144 @@ const catalogExtra = loadPageCss('catalog.html', 'css/sources/catalog.css');
 
 const productExtra = loadPageCss('product.html', 'css/sources/product.css');
 
-const tokens = `/* ===== КрохаКруг — unified theme ===== */
+const tokens = `/* ===== КрохаКруг — семейный винтаж-каталог ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #F9F8F6;
-  --white: #FFFFFF;
-  --cream: #F9F8F6;
-  --cream2: #F4F4F5;
-  --cream3: #E4E4E7;
-  --ink: #18181B;
-  --ink2: #71717A;
-  --ink3: #A1A1AA;
-  --mid: #71717A;
-  --surface: #FFFFFF;
-  --green: #22C55E;
-  --green-light: #DCFCE7;
-  --green-mid: #15803D;
-  --accent: #E05C3A;
-  --blush: #E05C3A;
-  --blush-light: #FFF5F3;
-  --sand: #F59E0B;
-  --sand-light: #FEF3C7;
-  --border: #E4E4E7;
-  --border2: #F4F4F5;
-  --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 8px 28px rgba(0, 0, 0, 0.09);
-  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.12);
-  --r: 12px;
-  --r-sm: 8px;
-  --sidebar: 230px;
-  --nav-h: 62px;
-  --font-display: 'Manrope', system-ui, sans-serif;
-  --font-body: 'Manrope', system-ui, sans-serif;
+  --bg: #E6DDD0;
+  --cream: #F3EBDD;
+  --cream2: #E4D9C8;
+  --cream3: #D4C8B6;
+  --surface: #FBF7F0;
+  --white: var(--surface);
+  --ink: #1A1510;
+  --ink2: #5C5248;
+  --ink3: #8E8378;
+  --mid: var(--ink2);
+  --sage: #2F5544;
+  --sage-mid: #244436;
+  --sage-light: #DDE8E1;
+  --green: var(--sage);
+  --green-light: var(--sage-light);
+  --green-mid: var(--sage-mid);
+  --accent: #9E3F2F;
+  --accent-glow: rgba(158, 63, 47, 0.2);
+  --blush: var(--accent);
+  --blush-light: #F4E4DE;
+  --honey: #B07A18;
+  --honey-light: #F0E2C4;
+  --sand: var(--honey);
+  --sand-light: var(--honey-light);
+  --border: #CEC4B4;
+  --border-strong: #B5A999;
+  --border2: var(--cream2);
+  --shadow-sm: 0 4px 18px rgba(26, 21, 16, 0.07);
+  --shadow-md: 0 10px 32px rgba(26, 21, 16, 0.1);
+  --shadow-lg: 0 18px 48px rgba(26, 21, 16, 0.14);
+  --r: 6px;
+  --r-sm: 4px;
+  --r-lg: 12px;
+  --sidebar: 240px;
+  --nav-h: 68px;
+  --max: 1180px;
+  --pad: clamp(18px, 3vw, 28px);
+  --font-display: 'Literata', 'Times New Roman', Georgia, serif;
+  --font-body: 'Commissioner', system-ui, sans-serif;
   --radius: var(--r);
   --radius-sm: var(--r-sm);
   --radius-md: var(--r);
-  --radius-lg: var(--r);
-  --bg: var(--cream2);
+  --radius-lg: var(--r-lg);
   --warn: var(--blush);
   --warn-light: var(--blush-light);
-  --gold-light: var(--sand-light);
-  --accent-light: var(--green-light);
-  --accent-text: var(--green);
+  --gold-light: var(--honey-light);
+  --accent-light: var(--sage-light);
+  --accent-text: var(--sage);
 }
 
 html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--font-body);
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 90% 55% at 100% -5%, rgba(176, 122, 24, 0.11), transparent 55%),
+    radial-gradient(ellipse 70% 50% at -5% 100%, rgba(47, 85, 68, 0.08), transparent 50%);
   color: var(--ink);
   font-size: 15px;
-  line-height: 1.55;
+  line-height: 1.62;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-.wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
 a { text-decoration: none; color: inherit; }
 img { display: block; max-width: 100%; }
 .pcard-link { color: inherit; }
 
 nav {
   position: sticky; top: 0; z-index: 100;
-  background: rgba(255, 255, 255, 0.93);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  border-bottom: 2px solid var(--ink);
+  box-shadow: 0 1px 0 var(--border);
 }
 .nav-inner {
-  max-width: 1200px; margin: 0 auto;
+  max-width: var(--max); margin: 0 auto;
   display: flex; align-items: center; height: var(--nav-h);
   padding: 0 24px; gap: 8px;
 }
 .logo {
-  font-size: 1.2rem; font-weight: 800; color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.28rem; font-weight: 600; color: var(--ink);
   margin-right: auto; letter-spacing: -0.02em;
 }
-.logo span { color: var(--accent); }
+.logo span { color: var(--honey); font-style: normal; font-weight: 700; }
 .nav-links { display: flex; gap: 2px; list-style: none; flex-wrap: wrap; }
 .nav-links a, .nav-links li a {
-  padding: 7px 14px; border-radius: 8px;
-  font-size: 0.83rem; font-weight: 600; color: var(--mid);
-  transition: 0.15s;
+  padding: 8px 12px 10px;
+  border-radius: 0;
+  font-size: 0.82rem; font-weight: 600; color: var(--ink2);
+  letter-spacing: 0.02em;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
 }
-.nav-links a:hover, .nav-links a.active { background: #F4F4F5; color: var(--ink); }
+.nav-links a:hover, .nav-links a.active {
+  background: transparent;
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
+.nav-actions .icon-btn--ghost { display: none; }
 .nav-actions { display: flex; gap: 6px; margin-left: 16px; align-items: center; }
 .nav-icon-btn, .nav-btn, .icon-btn {
-  width: 38px; height: 38px; border-radius: 10px;
-  border: 1px solid var(--border); background: var(--white);
+  width: 38px; height: 38px; border-radius: var(--r-sm);
+  border: 1.5px solid var(--ink); background: var(--surface);
   cursor: pointer; display: flex; align-items: center; justify-content: center;
   transition: 0.15s; position: relative; color: var(--ink);
 }
 .nav-icon-btn:hover, .nav-btn:hover, .icon-btn:hover { border-color: var(--ink); }
 .nav-icon-btn svg, .nav-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
 .btn-primary {
-  padding: 0 20px; height: 38px; border-radius: 10px;
-  background: var(--ink); color: #fff; border: none;
+  padding: 0 20px; height: 38px; border-radius: var(--r-sm);
+  background: var(--accent); color: var(--cream); border: 2px solid var(--ink);
   font-family: inherit; font-size: 0.83rem; font-weight: 700; cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
 }
-.btn-primary:hover { background: var(--accent); }
+.btn-primary:hover {
+  background: var(--ink);
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
 .cart-badge, .cart-dot {
   position: absolute; top: 6px; right: 6px;
   min-width: 8px; height: 8px; border-radius: 50%;
@@ -155,69 +192,53 @@ body[data-page="catalog"] nav { height: var(--nav-h); }
 body[data-page="catalog"] .nav-inner { height: 100%; padding: 0 20px; max-width: 1200px; }
 body[data-page="catalog"] .page-wrap { max-width: 1200px; }
 
-.hero-right {
-  background: linear-gradient(145deg, var(--green) 0%, #1a3d2c 55%, #2a5c42 100%);
+/* Content / guide pages */
+.page-header {
+  padding: 32px 0 24px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--surface) 0%, transparent 100%);
 }
-
-.hero-right::before {
-  content: '';
-  position: absolute;
-  width: 320px;
-  height: 320px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(212, 132, 122, 0.25), transparent 70%);
-  top: -80px;
-  right: -60px;
-  pointer-events: none;
+.page-header .page-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.35rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
 }
-
-.hero-right::after {
-  content: '';
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  bottom: 20%;
-  left: 10%;
-  pointer-events: none;
+.page-sub, .page-header .page-sub {
+  color: var(--ink2);
+  max-width: 36rem;
+  line-height: 1.7;
 }
-
-.btn-fill {
-  background: linear-gradient(135deg, var(--ink), var(--green));
+.wrap .card, .card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg) var(--r-sm) var(--r-lg) var(--r-sm);
+  padding: 28px;
+  margin-bottom: 16px;
   box-shadow: var(--shadow-sm);
 }
-
-.btn-fill:hover {
-  background: linear-gradient(135deg, var(--green), var(--green-mid));
-  box-shadow: var(--shadow-md);
+.wrap .card h2, .card h2 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: var(--ink);
 }
-
-.product-card:hover, .prod-card:hover {
-  box-shadow: var(--shadow-md);
+.wrap .card p, .wrap .card li, .card p, .card li {
+  color: var(--ink2);
+  line-height: 1.75;
+  margin-bottom: 10px;
 }
-
-.cat-tile:hover {
-  box-shadow: var(--shadow-sm);
-}
-
-.hero-title em, .section-title em, .catalog-title em {
-  color: var(--green);
-  font-style: italic;
-}
-
-.cta-bottom {
-  background: linear-gradient(135deg, var(--ink) 0%, #2a2824 50%, var(--green) 120%);
-}
+.wrap .card ul { margin: 12px 0 0 20px; }
 
 /* Guide & compare (legacy markup) */
 .header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(248, 243, 234, 0.94);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  border-bottom: 2px solid var(--ink);
 }
 .header-inner {
   max-width: 1140px;
@@ -650,8 +671,15 @@ fs.writeFileSync(path.join(root, 'css', 'theme.css'), theme, 'utf8');
 
 const htmlFiles = fs.readdirSync(root).filter((f) => f.endsWith('.html'));
 
+const fontBlockRe = /<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">[\s\S]*?fonts\.googleapis\.com\/css2[^>]+>\s*/i;
+
 for (const file of htmlFiles) {
   let html = fs.readFileSync(path.join(root, file), 'utf8');
+  if (fontBlockRe.test(html)) {
+    html = html.replace(fontBlockRe, fontLink + '\n');
+  } else if (!html.includes('Literata')) {
+    html = html.replace('</head>', fontLink + '\n</head>');
+  }
   const hadStyle = /<style>[\s\S]*?<\/style>/.test(html);
 
   if (hadStyle) {

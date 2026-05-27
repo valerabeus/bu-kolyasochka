@@ -1,14 +1,28 @@
 ---
-description: Применять skill frontend-design для UI, CSS и визуальных правок магазина
+description: Обязательно применять skill frontend-design (anthropics) при UI, CSS и вёрстке
 alwaysApply: true
+globs: "**/*.{html,css,js}"
 ---
 
 # Frontend Design (проект)
 
-При любой задаче, связанной с внешним видом сайта, версткой, CSS, компонентами, главной, каталогом или карточкой товара:
+Это правило **всегда активно** (`alwaysApply: true`). В каждом запросе, где затрагиваются UI, вёрстка, CSS, страницы магазина или визуал — **сначала** прочитай skill и следуй ему полностью.
 
-1. Прочитай и следуй `.cursor/skills/frontend-design-1-0-0/SKILL.md` (skill `frontend-design`).
-2. Сохраняй стек проекта: только статические HTML/CSS/JS, без сборщиков и фреймворков.
-3. Не ломай `window.SITE_BASE` (`/bu-kolyasochka/`), корзину (`localStorage`), ID товаров и существующую логику в `js/`.
-4. Для магазина детских колясок выбирай тёплый, доверительный, семейный визуальный стиль; интерфейс и тексты — на русском.
-5. После правок проверяй: `index.html`, `catalog.html`, `product.html`, `kak-vybrat.html`.
+## Skill (обязательный)
+
+- **Имя:** `frontend-design`
+- **Источник:** [anthropics/skills](https://github.com/anthropics/skills)
+- **Файл в проекте:** `.agents/skills/frontend-design/SKILL.md`
+
+Перед любой визуальной правкой выполни чтение этого файла (инструмент Read). Не опирайся на память — используй актуальный текст skill.
+
+## Ограничения проекта
+
+1. Стек: только статические HTML/CSS/JS, без сборщиков и фреймворков.
+2. Не ломай `window.SITE_BASE` (`/bu-kolyasochka/`), корзину (`localStorage`), ID товаров и логику в `js/`.
+3. Бренд: **КрохаКруг**; тёплый, доверительный, семейный стиль; интерфейс и тексты — на русском.
+4. После правок проверяй: `index.html`, `catalog.html`, `product.html`, `kak-vybrat.html`.
+
+## Повторный импорт дизайна
+
+При обновлении макетов из zip: `node scripts/import-krohakrug.mjs`, затем `node scripts/build-theme.mjs`.

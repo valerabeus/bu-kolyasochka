@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>КрохаКруг — проверенные б/у коляски</title>
+<meta name="description" content="Минималистичный каталог б/у колясок премиум-брендов. Bugaboo, Stokke, Cybex — проверка, доставка, рассрочка.">
+<script src="/bu-kolyasochka/js/site.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/bu-kolyasochka/css/minimalista.css">
+</head>
+<body class="min-theme" data-page="min-home">
+<a class="min-skip" href="#main">К содержимому</a>
+
+<div class="min-announce">Рассрочка 0% · Доставка по России · Возврат 14 дней без вопросов</div>
+
+<header class="min-header min-header--hero" id="minHeader">
+  <div class="min-header-inner">
+    <button type="button" class="min-burger" id="minBurger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
+    <a href="index.html" class="min-logo">КрохаКруг</a>
+    <nav class="min-nav" aria-label="Основное меню">
+      <a href="catalog.html">Каталог</a>
+      <a href="catalog.html?type=stroller">Прогулочные</a>
+      <a href="catalog.html?type=newborn">Новорождённые</a>
+      <a href="catalog.html?type=transformer">Трансформеры</a>
+      <a href="../kak-vybrat.html">Как выбрать</a>
+    </nav>
+    <div class="min-header-actions">
+      <button type="button" class="min-icon-btn" aria-label="Поиск" onclick="location.href='catalog.html'">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m17 17 4 4"/></svg>
+      </button>
+      <button type="button" class="min-icon-btn" data-cart-open aria-label="Корзина">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="min-cart-count cart-dot" data-cart-count style="display:none">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="min-overlay" id="minOverlay"></div>
+<aside class="min-drawer" id="minDrawer" aria-label="Мобильное меню">
+  <div class="min-drawer-head">
+    <span class="min-drawer-title">КрохаКруг</span>
+    <button type="button" class="min-drawer-close" id="minDrawerClose" aria-label="Закрыть">×</button>
+  </div>
+  <nav class="min-drawer-nav">
+    <a href="catalog.html">Каталог</a>
+    <a href="catalog.html?type=stroller">Прогулочные</a>
+    <a href="catalog.html?type=newborn">Для новорождённых</a>
+    <a href="catalog.html?type=transformer">Трансформеры</a>
+    <a href="catalog.html?type=twin">Для двойни</a>
+    <a href="../delivery.html">Доставка</a>
+    <a href="../payment.html">Рассрочка</a>
+    <a href="../index.html#contact">Контакты (классика)</a>
+  </nav>
+  <div class="min-drawer-cta">
+    <a href="catalog.html" class="min-btn min-btn--dark min-btn--block">Весь каталог</a>
+  </div>
+</aside>
+
+<main id="main">
+  <div class="min-hero-wrap">
+    <!-- Desktop: double grid -->
+    <div class="min-hero-grid" aria-label="Главные подборки">
+      <article class="min-hero-cell min-hero-cell--main">
+        <div class="min-hero-media">
+          <img src="https://placehold.co/1200x1400/2a2a2a/e8e4dc?text=Bugaboo" alt="Премиальные коляски в каталоге КрохаКруг">
+        </div>
+        <div class="min-hero-content">
+          <h2>Проверенные коляски — честно и просто</h2>
+          <a href="catalog.html" class="min-btn">Весь каталог</a>
+        </div>
+      </article>
+      <article class="min-hero-cell min-hero-cell--top">
+        <div class="min-hero-media">
+          <img src="https://placehold.co/900x700/3d3a36/d4cfc4?text=Stokke" alt="Новые поступления колясок">
+        </div>
+        <div class="min-hero-content">
+          <h2>Свежие поступления каждую неделю</h2>
+          <a href="catalog.html" class="min-btn">Смотреть новинки</a>
+        </div>
+      </article>
+      <article class="min-hero-cell min-hero-cell--bottom">
+        <div class="min-hero-media">
+          <img src="https://placehold.co/900x700/4a4540/c9c4bc?text=Cybex" alt="Выгодные предложения">
+        </div>
+        <div class="min-hero-content">
+          <h2>До −54% от цены новой</h2>
+          <a href="catalog.html?type=transformer" class="min-btn">Трансформеры</a>
+        </div>
+      </article>
+    </div>
+
+    <!-- Mobile: slider -->
+    <div class="min-hero-slider" aria-label="Слайдер главной">
+      <div class="min-hero-track" id="minHeroTrack">
+        <article class="min-hero-slide">
+          <div class="min-hero-media">
+            <img src="https://placehold.co/800x1200/2a2a2a/e8e4dc?text=Bugaboo" alt="">
+          </div>
+          <div class="min-hero-content">
+            <h2>Проверенные коляски — честно и просто</h2>
+            <a href="catalog.html" class="min-btn">Весь каталог</a>
+          </div>
+        </article>
+        <article class="min-hero-slide">
+          <div class="min-hero-media">
+            <img src="https://placehold.co/800x1200/3d3a36/d4cfc4?text=Stokke" alt="">
+          </div>
+          <div class="min-hero-content">
+            <h2>Свежие поступления каждую неделю</h2>
+            <a href="catalog.html" class="min-btn">Смотреть новинки</a>
+          </div>
+        </article>
+        <article class="min-hero-slide">
+          <div class="min-hero-media">
+            <img src="https://placehold.co/800x1200/4a4540/c9c4bc?text=Cybex" alt="">
+          </div>
+          <div class="min-hero-content">
+            <h2>До −54% от цены новой</h2>
+            <a href="catalog.html" class="min-btn">Трансформеры</a>
+          </div>
+        </article>
+      </div>
+      <div class="min-hero-dots" role="tablist">
+        <button type="button" class="min-hero-dot is-active" aria-label="Слайд 1"></button>
+        <button type="button" class="min-hero-dot" aria-label="Слайд 2"></button>
+        <button type="button" class="min-hero-dot" aria-label="Слайд 3"></button>
+      </div>
+    </div>
+  </div>
+
+  <section class="min-section" aria-labelledby="bestsellers-title">
+    <div class="min-section-head">
+      <h2 id="bestsellers-title">Хиты продаж</h2>
+      <a href="catalog.html" class="min-link">Весь каталог</a>
+    </div>
+    <div class="min-products" id="minBestsellers"></div>
+  </section>
+
+  <section class="min-section" style="padding-top:0" aria-labelledby="collections-title">
+    <div class="min-section-head">
+      <h2 id="collections-title">Коллекции</h2>
+    </div>
+    <div class="min-collections">
+      <a href="catalog.html?type=stroller" class="min-collection">
+        <img src="https://placehold.co/600x800/f2f2f2/888?text=Прогулочные" alt="Прогулочные коляски">
+        <div class="min-collection-body">
+          <h3>Прогулочные</h3>
+          <span class="min-btn">Смотреть</span>
+        </div>
+      </a>
+      <a href="catalog.html?type=newborn" class="min-collection">
+        <img src="https://placehold.co/600x800/eaeaea/888?text=Новорождённые" alt="Для новорождённых">
+        <div class="min-collection-body">
+          <h3>Для новорождённых</h3>
+          <span class="min-btn">Смотреть</span>
+        </div>
+      </a>
+      <a href="catalog.html?type=sport" class="min-collection">
+        <img src="https://placehold.co/600x800/e2e2e2/888?text=Спорт" alt="Спортивные коляски">
+        <div class="min-collection-body">
+          <h3>Спорт и активный отдых</h3>
+          <span class="min-btn">Смотреть</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="min-promo" aria-label="Рассрочка">
+    <img src="https://placehold.co/1600x600/1a1a1a/c9a96e?text=КрохаКруг" alt="">
+    <div class="min-promo-inner">
+      <h2>12-точечная проверка перед продажей</h2>
+      <a href="../kak-vybrat.html" class="min-btn">Как мы проверяем</a>
+    </div>
+  </section>
+
+  <section class="min-section" aria-labelledby="new-title">
+    <div class="min-section-head">
+      <h2 id="new-title">Новые поступления</h2>
+      <a href="catalog.html" class="min-link">Все товары</a>
+    </div>
+    <div class="min-products" id="minFeatured"></div>
+  </section>
+
+  <div class="min-features">
+    <div class="min-feature"><strong>Доставка 2–7 дней</strong><span>СДЭК и Boxberry по всей России</span></div>
+    <div class="min-feature"><strong>Рассрочка 0%</strong><span>До 12 месяцев без переплат</span></div>
+    <div class="min-feature"><strong>Возврат 14 дней</strong><span>Без лишних вопросов</span></div>
+    <div class="min-feature"><strong>WhatsApp-заказ</strong><span>Оформление за пару минут</span></div>
+  </div>
+</main>
+
+<footer class="min-footer">
+  <div class="min-footer-grid">
+    <div>
+      <div class="min-footer-logo">КрохаКруг</div>
+      <p class="min-footer-desc">Семейный магазин проверенных б/у колясок премиум-брендов. Минималистичная витрина в стиле Minimalista.</p>
+      <p style="margin-top:16px;font-size:12px"><a href="../index.html" class="min-link">← Классическая версия сайта</a></p>
+    </div>
+    <div class="min-footer-col">
+      <h4>Каталог</h4>
+      <ul>
+        <li><a href="catalog.html?type=stroller">Прогулочные</a></li>
+        <li><a href="catalog.html?type=newborn">Новорождённые</a></li>
+        <li><a href="catalog.html?type=transformer">Трансформеры</a></li>
+        <li><a href="catalog.html?type=twin">Для двойни</a></li>
+      </ul>
+    </div>
+    <div class="min-footer-col">
+      <h4>Покупателям</h4>
+      <ul>
+        <li><a href="../checkout.html">Как купить</a></li>
+        <li><a href="../payment.html">Рассрочка</a></li>
+        <li><a href="../delivery.html">Доставка</a></li>
+        <li><a href="../returns.html">Возврат</a></li>
+      </ul>
+    </div>
+    <div class="min-footer-col">
+      <h4>Компания</h4>
+      <ul>
+        <li><a href="../index.html#contact">Контакты</a></li>
+        <li><a href="../oferta.html">Оферта</a></li>
+        <li><a href="../privacy.html">Конфиденциальность</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="min-footer-bottom">
+    <span>© 2025 КрохаКруг</span>
+    <span><a href="../privacy.html">Политика</a> · <a href="../oferta.html">Оферта</a></span>
+  </div>
+</footer>
+
+<script src="/bu-kolyasochka/js/products.js"></script>
+<script src="/bu-kolyasochka/js/cart.js"></script>
+<script src="/bu-kolyasochka/js/main.js"></script>
+<script src="/bu-kolyasochka/js/minimalista.js"></script>
+</body>
+</html>

@@ -12,7 +12,7 @@ function productCard(product, index = 0) {
   const d = discount(product);
   const badge = product.condition === 'likenew' ? 'pb-green' : d ? 'pb-red' : 'pb-orange';
   const badgeText = d ? '−' + d + '%' : getConditionLabel(product.condition);
-  return '<article class="pcard" style="animation-delay:' + (index * 0.04) + 's"><a href="' + pageUrl('product.html?id=' + product.id) + '" class="pcard-link"><div class="pcard-img">' + strollerIcon() + '<img src="' + product.img + '" alt="' + escAttr(product.name) + '" onerror="fixProductImg(this,\'' + escAttr(product.name) + '\')"><span class="p-badge ' + badge + '">' + badgeText + '</span></div><div class="pcard-body"><div class="p-brand">' + product.brand + '</div><div class="p-name">' + product.name + '</div><div class="p-cond">' + getConditionLabel(product.condition) + '</div></a><div class="pcard-foot"><div><div class="p-price">' + formatPrice(product.price) + '</div>' + (product.newPrice ? '<div class="p-old">' + formatPrice(product.newPrice) + '</div>' : '') + '</div><button class="add-btn add-to-cart-btn" data-id="' + product.id + '" aria-label="В корзину">+</button></div></article>';
+  return '<article class="pcard reveal" style="animation-delay:' + (index * 0.04) + 's"><a href="' + pageUrl('product.html?id=' + product.id) + '" class="pcard-link"><div class="pcard-img">' + strollerIcon() + '<img src="' + product.img + '" alt="' + escAttr(product.name) + '" onerror="fixProductImg(this,\'' + escAttr(product.name) + '\')"><span class="p-badge ' + badge + '">' + badgeText + '</span></div><div class="pcard-body"><div class="p-brand">' + product.brand + '</div><div class="p-name">' + product.name + '</div><div class="p-cond">' + getConditionLabel(product.condition) + '</div></a><div class="pcard-foot"><div><div class="p-price">' + formatPrice(product.price) + '</div>' + (product.newPrice ? '<div class="p-old">' + formatPrice(product.newPrice) + '</div>' : '') + '</div><button class="add-btn add-to-cart-btn" data-id="' + product.id + '" aria-label="В корзину">+</button></div></article>';
 }
 function bindAddToCart(root = document) {
   root.querySelectorAll('.add-to-cart-btn').forEach(btn => {
@@ -27,12 +27,32 @@ function initReveal() {
   const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } }), { threshold: 0.1 });
   els.forEach(el => io.observe(el));
 }
+function countLabel(n) {
+  const mod10 = n % 10;
+  const mod100 = n % 100;
+  if (mod10 === 1 && mod100 !== 11) return n + ' товар';
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) return n + ' товара';
+  return n + ' товаров';
+}
+function initCategoryCounts() {
+  document.querySelectorAll('[data-cat-type]').forEach(el => {
+    const type = el.getAttribute('data-cat-type');
+    const n = PRODUCTS.filter(p => p.type === type).length;
+    el.textContent = countLabel(n);
+  });
+  document.querySelectorAll('[data-cat-price="budget"]').forEach(el => {
+    const n = PRODUCTS.filter(p => p.price <= 15000).length;
+    el.textContent = countLabel(n);
+  });
+}
 function initHome() {
   const featured = document.getElementById('featuredGrid');
   if (!featured) return;
   const newest = [...PRODUCTS].sort((a, b) => b.id - a.id).slice(0, 8);
   featured.innerHTML = newest.map((p, i) => productCard(p, i)).join('');
   bindAddToCart(featured);
+  initReveal();
+  initCategoryCounts();
   const count = document.querySelector('[data-products-count]');
   if (count) count.textContent = PRODUCTS.length + '+';
 }

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Карточка товара — КрохаКруг</title>
+<meta name="description" content="Карточка б/у коляски: галерея, цена, рассрочка, быстрый заказ.">
+<script src="/bu-kolyasochka/js/site.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/bu-kolyasochka/css/minimalista.css">
+</head>
+<body class="min-theme" data-page="min-product">
+<a class="min-skip" href="#main">К содержимому</a>
+
+<div class="min-announce">Рассрочка 0% · Доставка по России · Возврат 14 дней</div>
+
+<header class="min-header is-solid" id="minHeader">
+  <div class="min-header-inner">
+    <button type="button" class="min-burger" id="minBurger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
+    <a href="index.html" class="min-logo">КрохаКруг</a>
+    <nav class="min-nav" aria-label="Основное меню">
+      <a href="catalog.html">Каталог</a>
+      <a href="catalog.html?type=stroller">Прогулочные</a>
+      <a href="catalog.html?type=newborn">Новорождённые</a>
+      <a href="../kak-vybrat.html">Как выбрать</a>
+    </nav>
+    <div class="min-header-actions">
+      <button type="button" class="min-icon-btn" data-cart-open aria-label="Корзина">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="min-cart-count cart-dot" data-cart-count style="display:none">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="min-overlay" id="minOverlay"></div>
+<aside class="min-drawer" id="minDrawer" aria-label="Мобильное меню">
+  <div class="min-drawer-head">
+    <span class="min-drawer-title">КрохаКруг</span>
+    <button type="button" class="min-drawer-close" id="minDrawerClose" aria-label="Закрыть">×</button>
+  </div>
+  <nav class="min-drawer-nav">
+    <a href="catalog.html">Каталог</a>
+    <a href="index.html">Главная</a>
+    <a href="../index.html">Классическая версия</a>
+  </nav>
+</aside>
+
+<main id="main" class="min-page">
+  <div id="minProductMount"></div>
+</main>
+
+<footer class="min-footer">
+  <div class="min-footer-bottom" style="margin-top:0;border:none;padding-top:0">
+    <span>© 2025 КрохаКруг</span>
+    <span><a href="catalog.html">← Каталог</a></span>
+  </div>
+</footer>
+
+<script src="/bu-kolyasochka/js/products.js"></script>
+<script src="/bu-kolyasochka/js/cart.js"></script>
+<script src="/bu-kolyasochka/js/main.js"></script>
+<script src="/bu-kolyasochka/js/minimalista.js"></script>
+</body>
+</html>

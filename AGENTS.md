@@ -8,6 +8,18 @@ This is a **purely static HTML/CSS/JS website** with no build tools, no package 
 
 All HTML pages reference assets under the `/bu-kolyasochka/` base path (designed for GitHub Pages). To serve locally:
 
+**Windows / macOS / Linux (Node — рекомендуется):**
+
+```bash
+node scripts/serve.mjs
+```
+
+Then open `http://127.0.0.1:8765/bu-kolyasochka/index.html`.
+
+Не открывайте `index.html` двойным щелчком (`file://`) — пути `/bu-kolyasochka/...` не сработают.
+
+**Linux / Cloud (Python):**
+
 ```bash
 mkdir -p /tmp/serve-root
 ln -sfn /workspace /tmp/serve-root/bu-kolyasochka
